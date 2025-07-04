@@ -67,8 +67,11 @@
 
 <script src="{{ asset("assets/js/jquery.js") }}"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script src="{{ asset("assets/js/bootstrap.bundle.min.js") }}"></script>
+{{-- <script src="{{ asset("assets/js/bootstrap.bundle.min.js") }}"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTbMcgGot8-R7Rmn7ks6u7PuAeHa-qdB8&amp;libraries=places"></script>
 <script src="{{ asset("assets/js/index.js") }}"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.20.0/js/mdb.min.js" integrity="sha512-XFd1m0eHgU1F05yOmuzEklFHtiacLVbtdBufAyZwFR0zfcq7vc6iJuxerGPyVFOXlPGgM8Uhem9gwzMI8SJ5uw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+
 
 

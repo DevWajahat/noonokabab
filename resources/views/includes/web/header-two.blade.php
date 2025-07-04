@@ -1,12 +1,11 @@
-
-
 <header id="header-two">
     <div class="container-two">
         <div class="row justify-content-between align-items-center">
             <div class="col-3 col-xl-2 col-lg-2">
                 <div class="logo-area">
                     <a href="{{ route('index') }}">
-                        <img class="img-fluid header-logo" src="{{ asset("assets/images/noon-o-kabab-logo.png") }}" alt="">
+                        <img class="img-fluid header-logo" src="{{ asset('assets/images/noon-o-kabab-logo.png') }}"
+                            alt="">
                     </a>
                 </div>
             </div>
@@ -26,7 +25,7 @@
                         </li>
                         <li class="link-area">
                             <a class="link" href="{{ route('menu.delivery') }}">
-                                Menu
+                                O rder
                             </a>
                         </li>
                         <li class="link-area">
@@ -57,10 +56,12 @@
                                     <a class="dropdown-item link-active" href="{{ route('gallery') }}">Photo Gallery</a>
                                 </li>
                                 <li class="drop-li main-li">
-                                    <a class="dropdown-item link-active" href="{{ route('reviews.media') }}">Media Reviews</a>
+                                    <a class="dropdown-item link-active" href="{{ route('reviews.media') }}">Media
+                                        Reviews</a>
                                 </li>
                                 <li class="drop-li main-li">
-                                    <a class="dropdown-item link-active" href="{{ route('reviews.guest') }}">Guest Reviews</a>
+                                    <a class="dropdown-item link-active" href="{{ route('reviews.guest') }}">Guest
+                                        Reviews</a>
                                 </li>
                             </ul>
                         </li>
@@ -85,9 +86,19 @@
                             </div>
                         </button>
                     </div>
-                    <div class="header-links ">
-                        <a href="{{ route('login') }}"><i class="fa-solid fa-user"></i></a>
-                    </div>
+                    @auth
+                        <div class="header-links ">
+                            <a href="#"><i class="fa-solid fa-user"></i>{{ auth()->user()->first_name }}</a>
+                        </div>
+
+                        <div class="header-links ">
+                            <a href="{{ route('logout') }}">Logout</a>
+                        </div>
+                    @else
+                        <div class="header-links ">
+                            <a href="{{ route('login') }}"><i class="fa-solid fa-user"></i></a>
+                        </div>
+                    @endauth
                     <div class="header-links ">
                         <a href="{{ route('checkout') }}"><i class="fa-solid fa-basket-shopping"></i></a>
                         <span>0</span>
@@ -102,27 +113,27 @@
 </header>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    var currentUrl = window.location.pathname;
+    document.addEventListener("DOMContentLoaded", function() {
+        var currentUrl = window.location.pathname;
 
-    // Select all anchor elements inside list items in the header navigation
-    var navLinks = document.querySelectorAll('.header-two-nav li a');
+        // Select all anchor elements inside list items in the header navigation
+        var navLinks = document.querySelectorAll('.header-two-nav li a');
 
-    // Loop through each anchor element
-    navLinks.forEach(function(navLink) {
-        var navHref = navLink.getAttribute('href');
+        // Loop through each anchor element
+        navLinks.forEach(function(navLink) {
+            var navHref = navLink.getAttribute('href');
 
-        // Check if the current URL includes the anchor's href attribute
-        if (currentUrl.includes(navHref)) {
-            // Add 'active' class to the parent <li> of the anchor
-            navLink.parentElement.classList.add('active');
-        }
+            // Check if the current URL includes the anchor's href attribute
+            if (currentUrl.includes(navHref)) {
+                // Add 'active' class to the parent <li> of the anchor
+                navLink.parentElement.classList.add('active');
+            }
+        });
     });
-});
 </script>
 
 
-<script src="{{ asset("assets/js/jquery.js") }}"></script>
+<script src="{{ asset('assets/js/jquery.js') }}"></script>
 
 
 <script>

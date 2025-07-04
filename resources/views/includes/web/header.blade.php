@@ -37,7 +37,7 @@
                                                             class="fa-solid fa-circle-xmark"></i></button>
                                                     <li><a href="index.php">Home</a></li>
                                                     <li><a href="{{ route('specials') }}">Specials</a></li>
-                                                    <li><a href="{{ route('menu.delivery') }}">Menu</a></li>
+                                                    <li><a href="{{ route('menu.delivery') }}">Order</a></li>
                                                     <li><a href="{{ route('dine') }}">Dine-In</a></li>
                                                     <li><a href="{{ route('catering') }}">Catering</a></li>
                                                     <li class="link-area link-area-hover position-relative">
@@ -61,11 +61,13 @@
                                                             </li>
                                                             <li class="drop-li main-li">
                                                                 <a class="dropdown-item link-active"
-                                                                    href="{{ route('reviews.media') }}">Media Reviews</a>
+                                                                    href="{{ route('reviews.media') }}">Media
+                                                                    Reviews</a>
                                                             </li>
                                                             <li class="drop-li main-li">
                                                                 <a class="dropdown-item link-active"
-                                                                    href="{{ route('reviews.guest') }}">Guest Reviews</a>
+                                                                    href="{{ route('reviews.guest') }}">Guest
+                                                                    Reviews</a>
                                                             </li>
                                                         </ul>
                                                     </li>
@@ -85,9 +87,20 @@
                                                             </div>
                                                         </button>
                                                     </div>
-                                                    <div class="header-links ">
-                                                        <a href="{{ route('login') }}"><i class="fa-solid fa-user"></i></a>
-                                                    </div>
+                                                    @auth
+                                                        <div class="header-links ">
+                                                            <a href="#"><i
+                                                                    class="fa-solid fa-user"></i>{{ auth()->user()->first_name }}</a>
+                                                        </div>
+                                                        <div class="header-links ">
+                                                            <a href="{{ route('logout') }}">Logout</a>
+                                                        </div>
+                                                    @else
+                                                        <div class="header-links ">
+                                                            <a href="{{ route('login') }}"><i
+                                                                    class="fa-solid fa-user"></i></a>
+                                                        </div>
+                                                    @endauth
                                                     <div class="header-links ">
                                                         <a href="{{ route('checkout') }}"><i
                                                                 class="fa-solid fa-basket-shopping"></i></a>
