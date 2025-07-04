@@ -35,4 +35,5 @@ Route::controller(AboutController::class)->group(function () {
 Route::get('checkout',[CheckoutController::class,'index'])->name('checkout');
 
 
-Route::get('login',[AuthController::class,'login'])->name('login');
+Route::get('login',[AuthController::class,'login_view'])->name('login');
+Route::post('login',[AuthController::class,'login']);
