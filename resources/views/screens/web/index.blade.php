@@ -15,7 +15,7 @@
                                     Call (773) 279 8899 to inquire.</p>
                             </div>
                             <div class="w-c-button ">
-                                <a class="primary-a" href="{{ route('menu.delivery') }}">ORDER NOW</a>
+                                <a class="primary-a orderRoute" href="#">ORDER NOW</a>
                             </div>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                             </div>
                             <div class="d-btn">
                                 <p class="myDIV">Appertizer Package</p>
-                                <a href="{{ route('menu.delivery') }}" class="hide">ORDER NOW</a>
+                                <a href="#" class="hide orderRoute">ORDER NOW</a>
                                 <!-- <button class="hide primary-a"></button> -->
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                             </div>
                             <div class="d-btn">
                                 <p class="myDIV">Dessert Package</p>
-                                <a href="{{ route('menu.delivery') }}" class="hide">ORDER NOW</a>
+                                <a href="#" class="hide orderRoute">ORDER NOW</a>
                             </div>
                         </div>
                     </div>

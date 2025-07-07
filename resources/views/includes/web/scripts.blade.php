@@ -4,32 +4,38 @@
 
     locationSelects.forEach((locationSelect) => {
         locationSelect.addEventListener('change', () => {
-            console.log(locationSelect.value, "hello");
+
+            const selectedOption = locationSelect.options[locationSelect.selectedIndex];
+
+            const selectedText = selectedOption.textContent;
+
+            console.log(selectedText, "hello");
             locateValues.forEach((locateValue) => {
-                locateValue.textContent = locationSelect.value
-            })
+                locateValue.textContent = selectedText;
+            });
         });
     });
 
     const joinPopup = document.querySelector(".location-popup-wrap");
-    const locationForm = document.querySelector('#location-form')
+    const locationForm = document.querySelector('#location-form');
 
 
-    setTimeout(() => {
-        joinPopup.classList.add("active");
-    }, 5000);
+    @if (empty(session('location')['branch']))
+        setTimeout(() => {
+            joinPopup.classList.add("active");
+        }, 1000);
+    @endif
 
     locationForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        joinPopup.classList.remove("active");
-        console.log("hello");
-    })
+     
+
+    });
+
 
     $('.head-location-btn').click(function() {
-        $('.location-popup-wrap').addClass('active')
-    })
-
-
+        $('.location-popup-wrap').addClass('active');
+    });
 
     const detailTabs = document.querySelectorAll("[data-view]");
     const detailTabContents = document.querySelectorAll("[data-content]");
@@ -69,36 +75,36 @@
 
     const autoCompleteInput = document.querySelector('#autocomplete')
 
-    function geolocate() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var geolocation = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                var geocoder = new google.maps.Geocoder();
-                geocoder.geocode({
-                    'location': geolocation
-                }, function(results, status) {
-                    if (status === 'OK') {
-                        if (results[0]) {
-                            autoCompleteInput.value = results[0].formatted_address;
-                        } else {
-                            window.alert('No results found');
-                        }
-                    } else {
-                        window.alert('Geocoder failed due to: ' + status);
-                    }
-                });
-            });
-        } else {
-            window.alert('Geolocation is not supported by this browser.');
-        }
-    }
+    // function geolocate() {
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(function(position) {
+    //             var geolocation = {
+    //                 lat: position.coords.latitude,
+    //                 lng: position.coords.longitude
+    //             };
+    //             var geocoder = new google.maps.Geocoder();
+    //             geocoder.geocode({
+    //                 'location': geolocation
+    //             }, function(results, status) {
+    //                 if (status === 'OK') {
+    //                     if (results[0]) {
+    //                         autoCompleteInput.value = results[0].formatted_address;
+    //                     } else {
+    //                         window.alert('No results found');
+    //                     }
+    //                 } else {
+    //                     window.alert('Geocoder failed due to: ' + status);
+    //                 }
+    //             });
+    //         });
+    //     } else {
+    //         window.alert('Geolocation is not supported by this browser.');
+    //     }
+    // }
 
     google.maps.event.addDomListener(window, 'load', initAutocomplete);
 </script>
-@stack('scripts')
+
 
 </body>
 

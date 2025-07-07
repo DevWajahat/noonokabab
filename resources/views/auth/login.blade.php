@@ -608,19 +608,33 @@
                 <button class="ghost black black-color" id="signUp">SIGN UP</button>
             </div>
             <div class="form-container sign-up-container">
-                <form action="#">
+                <form action="{{ route('register') }}" method="post">
+                    @csrf
                     <h1 class="explorer-margin">Sign Up</h1>
                     <div class="social-container">
                         <a href="#" class="social"><i class="fa-brands fa-facebook-f"></i></a>
                         <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
                     </div>
                     <p class="emailregistration text-black mb-3">or Create Account</p>
-                    <input class="input-fields-form" type="text" placeholder="Name" />
-                    <input class="input-fields-form" type="email" placeholder="Email" />
+                    <input class="input-fields-form" type="text" name="name" placeholder="Name" />
+                    @error('name')
+                        <span class="text-danger mb-3" style="font-size: 14px">{{ $message }}</span>
+                    @enderror
+                     <input class="input-fields-form" type="text" name="phone" placeholder="phone" />
+                    @error('phone')
+                        <span class="text-danger mb-3" style="font-size: 14px">{{ $message }}</span>
+                    @enderror
+                    <input class="input-fields-form" type="email" name="email" placeholder="Email" />
+                    @error('email')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                     <div class="input-container">
-                        <input class="input-fields-form mb-0" type="password" id="passwordInput1"
+                        <input class="input-fields-form mb-0" name="password" type="password" id="passwordInput1"
                             placeholder="Password" />
                         <i class="toggle-password fas fa-eye" onclick="togglePasswordVisibility('passwordInput1')"></i>
+                        @error('password')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <button class="submit-color">Sign Up</button>
                 </form>

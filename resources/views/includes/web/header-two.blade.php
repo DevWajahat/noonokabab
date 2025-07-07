@@ -23,11 +23,11 @@
                                 Specials
                             </a>
                         </li>
-                        <li class="link-area">
-                            <a class="link" href="{{ route('menu.delivery') }}">
-                                O rder
-                            </a>
-                        </li>
+                        @if (isset(session('location')['route']))
+                            <li class="link-area"><a  class="orderRoute" style="color:#fff !important" href="{{ session('location')['route'] }}">Order</a></li>
+                        @else
+                            <li class="link-area"><a href="#" class="link orderRoute" style="color:#fff !important">Order</a></li>
+                        @endif
                         <li class="link-area">
                             <a class="link" href="{{ route('dine') }}">
                                 Dine-In
@@ -82,7 +82,13 @@
                             </div>
                             <div class="">
                                 <span class="spn-1">Change Location</span>
-                                <span class="spn-2 locate-value">Change Location</span>
+                                @if (!empty(session('location')['branch']))
+                                    <span
+                                        class="spn-2 locate-value">{{ session('location')['branch']['0']['name'] }}</span>
+                                @else
+                                    <span class="spn-2 locate-value">Change
+                                        Location</span>
+                                @endif
                             </div>
                         </button>
                     </div>
@@ -92,7 +98,7 @@
                         </div>
 
                         <div class="header-links ">
-                            <a href="{{ route('logout') }}">Logout</a>
+                            <a href="{{ route('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                         </div>
                     @else
                         <div class="header-links ">

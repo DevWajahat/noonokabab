@@ -9,6 +9,7 @@ class IndexController extends Controller
 {
     public function index()
     {
+        // dd(session('location'));
         return view('screens.web.index');
     }
 }

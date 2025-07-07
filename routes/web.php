@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\CheckoutController;
 use App\Http\Controllers\Web\ContactController;
 use App\Http\Controllers\Web\DineController;
 use App\Http\Controllers\Web\IndexController;
+use App\Http\Controllers\Web\LocationController;
 use App\Http\Controllers\Web\MenuController;
 use App\Http\Controllers\Web\StoryController;
 use Illuminate\Support\Facades\Route;
@@ -21,9 +22,11 @@ Route::get('dine-in',[DineController::class,'index'])->name('dine');
 Route::controller(StoryController::class)->group(function() {
     Route::get('story','index')->name('story');
 });
-Route::prefix('menu/')->controller(MenuController::class)->name('menu.')->group(function () {
-    Route::get('delivery','delivery')->name('delivery');
-    Route::get('takeout','takeout')->name('takeout');
+Route::prefix('menu/')->controller(MenuController::class)->middleware('CheckLocation')->name('menu.')->group(function () {
+    Route::get('delivery/{branchId}','delivery')->name('delivery');
+    Route::post('delivery/{branchId}','delivery');
+    Route::get('takeout/{branchId}','takeout')->name('takeout');
+    Route::post('takeout/{branchId}','takeout');
 });
 Route::controller(AboutController::class)->group(function () {
     Route::get('story','index')->name('story');
@@ -35,7 +38,11 @@ Route::controller(AboutController::class)->group(function () {
 Route::get('checkout',[CheckoutController::class,'index'])->name('checkout');
 
 
-Route::get('login',[AuthController::class,'login_view'])->name('login')->middleware('guest');
-Route::post('login',[AuthController::class,'login']);
-Route::get('logout',[AuthController::class,'logout'])->name('logout');
+Route::controller(AuthController::class)->group(function () {
+    Route::get('login','login_view')->name('login')->middleware('guest');
+    Route::post('login','login');
+    Route::get('logout','logout')->name('logout');
+    Route::post('register','register')->name('register')->middleware('guest');
+});
 
+Route::post('location',[LocationController::class,'index'])->name('location');

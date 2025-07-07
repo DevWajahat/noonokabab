@@ -15,7 +15,7 @@
                                 <span>Perfectly Persian</span>
                                 <p>Casual eatery serving a Persian menu inspired by family recipes including grilled
                                     kebabs & wraps.</p>
-                                <a class="primary-a start-order-btn" href="{{ route('menu.delivery') }}">START ORDER</a>
+                                <a class="primary-a start-order-btn orderRoute" href="#">START ORDER</a>
                             </div>
                         </div>
                     </div>
@@ -37,7 +37,12 @@
                                                             class="fa-solid fa-circle-xmark"></i></button>
                                                     <li><a href="index.php">Home</a></li>
                                                     <li><a href="{{ route('specials') }}">Specials</a></li>
-                                                    <li><a href="{{ route('menu.delivery') }}">Order</a></li>
+                                                    @if (isset(session('location')['route']))
+                                                        <li><a href="{{ session('location')['route'] }}"
+                                                                class="orderRoute">Order</a></li>
+                                                    @else
+                                                        <li><a href="#" class="orderRoute">Order</a></li>
+                                                    @endif
                                                     <li><a href="{{ route('dine') }}">Dine-In</a></li>
                                                     <li><a href="{{ route('catering') }}">Catering</a></li>
                                                     <li class="link-area link-area-hover position-relative">
@@ -82,18 +87,23 @@
                                                                 <i class="fa-solid fa-location-dot"></i>
                                                             </div>
                                                             <div class="">
+                                                                {{-- @dd(session('location')) --}}
                                                                 <span class="spn-1">Change Location</span>
-                                                                <span class="spn-2 locate-value">Change Location</span>
+                                                                @if (isset(session('location')['branch'][0]['name']))
+                                                                    <span class="spn-2 locate-value">{{ session('location')['branch']['0']['name'] }}</span>
+                                                                @else
+                                                                    <span class="spn-2 locate-value">Change Location</span>
+                                                                @endif
                                                             </div>
                                                         </button>
                                                     </div>
                                                     @auth
                                                         <div class="header-links ">
-                                                            <a href="#"><i
-                                                                    class="fa-solid fa-user"></i>{{ auth()->user()->first_name }}</a>
+                                                            <a href="#"><i class="fa-solid fa-user"></i>{{ auth()->user()->first_name }}</a>
                                                         </div>
                                                         <div class="header-links ">
-                                                            <a href="{{ route('logout') }}">Logout</a>
+                                                            <a href="{{ route('logout') }}"><i class="fa fa-sign-out"
+                                                                    aria-hidden="true"></i></a>
                                                         </div>
                                                     @else
                                                         <div class="header-links ">
