@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="col-xxl-5 col-lg-3 col-12 pos-res-1">
-                    <div class="menu-card-area" width="1000" height="750">
+                    <div class=" menu-card-area" width="1000" height="750">
                         <div class="menu-card-logo">
                             <img src="{{ asset('assets/images/menu-card-logo.png') }}" alt="">
                         </div>
@@ -106,7 +106,8 @@
                                                     <p class="dish-p">{{ $menu->description }}</p>
                                                     <div class="dish-plus type.lunch_time">
                                                         <span class="dish-price">${{ $menu->price }}</span>
-                                                        <button class="dish-cart" id="{{ $menu->id }}"
+                                                        <button class="dish-cart button-{{ $menu->id }}"
+                                                            id="{{ $menu->id }}"
                                                             {{ isset(session('cart')['items'][$menu->id]) ? 'disabled' : '' }}><i
                                                                 class="fa-solid fa-plus"></i></button>
                                                     </div>
@@ -119,6 +120,7 @@
                                 @endforelse
                             </div>
                         </div>
+
                         <div class="menu-card-d-area d-none " id="menuCardRegular" data-menuType="regular">
                             <div class="row ">
                                 @forelse ($branch->categories as $category)
@@ -137,7 +139,8 @@
                                                     <p class="dish-p">{{ $menu->description }}</p>
                                                     <div class="dish-plus type.lunch_time">
                                                         <span class="dish-price">${{ $menu->price }}</span>
-                                                        <button class="dish-cart" id="{{ $menu->id }}"
+                                                        <button class="dish-cart button-{{ $menu->id }}"
+                                                            id="{{ $menu->id }}"
                                                             {{ isset(session('cart')['items'][$menu->id]) ? 'disabled' : '' }}><i
                                                                 class="fa-solid fa-plus"></i></button>
                                                     </div>
@@ -190,10 +193,9 @@
             console.log(type);
 
             $('.menu-card-d-area').addClass('d-none');
-            if(type == 'lunch_time'){
+            if (type == 'lunch_time') {
                 $('#menuCardLunchTime').removeClass('d-none')
-            }
-            else{
+            } else {
                 $('#menuCardRegular').removeClass('d-none')
             }
         });
@@ -217,6 +219,8 @@
                         $("#cart-main-container").html(response.cartHtml)
                     }
                     console.log(response)
+                    var proId = response.button.split("-")[1]
+                    $('.button-' + proId).prop("disabled", true);
                 }
             })
         }
@@ -228,19 +232,16 @@
             console.log('dasf')
             var productId = $(this).attr("data-id");
             const buttons = $(".dish-card");
-            console.log('{{ url("cart/destroy").'/'   }}'+productId)
+            console.log('{{ url('cart/destroy') . '/' }}' + productId)
 
-          var selectCartArea =  $(this).parents(".select-cart-area")
+            var selectCartArea = $(this).parents(".select-cart-area")
             $.ajax({
                 type: 'GET',
-                url: '{{ url("cart/destroy").'/'  }}'+productId,
+                url: '{{ url('cart/destroy') . '/' }}' + productId,
                 success: function(response) {
                     console.log(response)
-                    $('.dish-cart').each(function() {
-                        if($(this).attr("id") == productId){
-                            $(this).prop("disabled",false)
-                        }
-                    });
+
+                    $('.button-' + productId).prop("disabled", false);
                 }
 
             })
@@ -251,9 +252,12 @@
 
         selectCartArea = $(".select-cart-area");
         $(document).on("click", ".dish-cart", function() {
+
+
             const dishCard = $(this).closest(".dish-card");
 
-            $(this).prop("disabled", true);
+
+
 
             const imgSrc = dishCard.find(".dish-img img").attr("src");
             const title = dishCard.find(".dish-title").text();
@@ -266,7 +270,13 @@
             cartStore(type, productId, 1)
 
 
+            $(`#${productId}`).find('.dish-cart')
 
+            // $('.menu-card-d-area').each(function() {
+            //     $('.dish-cart').each(function() {
+
+
+            // })
 
 
             // $(document).on("click", ".cart-s-close", function() {

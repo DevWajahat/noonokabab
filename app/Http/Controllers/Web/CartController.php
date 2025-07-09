@@ -37,6 +37,7 @@ class CartController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => "updated it successfully.",
+
                 ]);
             }
 
@@ -52,7 +53,8 @@ class CartController extends Controller
             return response()->json([
                 'status' =>  true,
                 'message' => "add to cart successfully",
-                'cartHtml' => $cartHtml
+                'cartHtml' => $cartHtml,
+                'button' => 'disabled-'.$menu->id
             ], 200);
         } catch (Exception $e) {
             return response()->json([
