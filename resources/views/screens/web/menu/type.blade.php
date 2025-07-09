@@ -88,7 +88,7 @@
                             @endforelse
 
                         </ul>
-                        <div class="menu-card-d-area " data-menuType="lunch_time">
+                        <div class="menu-card-d-area " id="menuCardLunchTime" data-menuType="lunch_time">
                             <div class="row">
                                 @forelse ($branch->categories as $category)
                                     <h2 class="menu-title menu-category-title menu-category-title-{{ $category->id }}">
@@ -119,7 +119,7 @@
                                 @endforelse
                             </div>
                         </div>
-                        <div class="menu-card-d-area d-none" data-menuType="regular">
+                        <div class="menu-card-d-area d-none " id="menuCardRegular" data-menuType="regular">
                             <div class="row ">
                                 @forelse ($branch->categories as $category)
                                     <h2 class="menu-title menu-category-title menu-category-title-{{ $category->id }}">
@@ -189,42 +189,13 @@
             var type = $(this).attr("id");
             console.log(type);
 
-
-
-            $('.menu-item').remove();
-
-            // $.ajax({
-            //     type: "POST",
-            //     url: "   ",
-            //     data: {
-            //         _token: "{{ csrf_token() }}",
-            //         type: type
-            //     },
-            //     success: function(response) {
-
-            //         console.log(response.menus);
-            //         $.each(response.menus, function(index, item) {
-            //             console.log(item);
-            //             var tag = `
-            //             <div class="col-xxl-6 col-lg-12 col-md-6 col-12 menu-item">
-            //                 <div class="dish-card">
-            //                     <div class="dish-img">
-            //                         <img src="" alt="${item.name}">
-            //                     </div>
-            //                     <div class="dish-detail">
-            //                         <h2 class="dish-title" id="${item.id}">${item.name}</h2>
-            //                         <p class="dish-p">${item.description}</p>
-            //                         <div class="dish-plus type.${type }" >
-            //                             <span class="dish-price">$${item.price}</span>
-            //                             <button class="dish-cart" id="${item.id}"><i class="fa-solid fa-plus"></i></button>
-            //                         </div>
-            //                     </div>
-            //                 </div>
-            //             </div>`;
-            //             $(`.menu-category-title-${item.category_id}`).after(tag);
-            //         });
-            //     }
-            // });
+            $('.menu-card-d-area').addClass('d-none');
+            if(type == 'lunch_time'){
+                $('#menuCardLunchTime').removeClass('d-none')
+            }
+            else{
+                $('#menuCardRegular').removeClass('d-none')
+            }
         });
 
         function cartStore(type, id, quantity) {
@@ -257,9 +228,6 @@
             console.log('dasf')
             var productId = $(this).attr("data-id");
             const buttons = $(".dish-card");
-
-            // var route = "{{ route('cart.destroy',2) }}"
-            // route = route.replace("2",productId);
             console.log('{{ url("cart/destroy").'/'   }}'+productId)
 
           var selectCartArea =  $(this).parents(".select-cart-area")

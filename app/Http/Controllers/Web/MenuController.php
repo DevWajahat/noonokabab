@@ -23,7 +23,8 @@ class MenuController extends Controller
 
             return response()->json([
                 'message' => 'get successfully',
-                'menus' => $menus
+                'menus' => $menus,
+                
 
             ]);
         }

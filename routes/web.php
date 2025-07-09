@@ -26,6 +26,7 @@ Route::controller(StoryController::class)->group(function () {
 // Route::prefix('menu/')->controller(MenuController::class)->middleware('CheckLocation')->name('menu.')->group(function () {});
 
 Route::get('menu/{type}/{branchId}',[MenuController::class,'type'])->middleware('CheckLocation')->name('menu.type');
+Route::post('menu/{type}/{branchId}',[MenuController::class,'type']);
 
 Route::prefix('cart')->controller(CartController::class)->name('cart.')->group(function () {
     Route::post('store','store')->name('store');
