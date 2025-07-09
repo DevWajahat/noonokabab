@@ -258,12 +258,14 @@
             var productId = $(this).attr("data-id");
             const buttons = $(".dish-card");
 
-            var route = "{{ route('cart.destroy',2) }}"
-            route = route.replace("2",productId);
+            // var route = "{{ route('cart.destroy',2) }}"
+            // route = route.replace("2",productId);
+            console.log('{{ url("cart/destroy").'/'   }}'+productId)
+
           var selectCartArea =  $(this).parents(".select-cart-area")
             $.ajax({
                 type: 'GET',
-                url: route,
+                url: '{{ url("cart/destroy").'/'  }}'+productId,
                 success: function(response) {
                     console.log(response)
                     $('.dish-cart').each(function() {
