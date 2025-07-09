@@ -960,7 +960,7 @@ button.dish-cart:disabled {
     border-radius: 7px;
 }
 
-input.quntity-input {
+input.quantity-input {
     text-align: center;
     width: fit-content !important;
     max-width: 61px;

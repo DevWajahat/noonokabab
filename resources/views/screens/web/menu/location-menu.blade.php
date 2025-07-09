@@ -27,8 +27,8 @@
                                     </div>
                                     <ul>
                                         <li data-tab-target="#location" class="locate-tab "><a
-                                                href="{{ route('menu.delivery') }}">DELIVERY</a></li>
-                                        <li class=""><a href="{{ route('menu.takeout') }}">TAKEOUT</a> </li>
+                                                href="">DELIVERY</a></li>
+                                        <li class=""><a href="">TAKEOUT</a> </li>
                                         <li class=""><button type="button" class="order-via-btn">ORDER VIA</button>
                                         </li>
                                         <li class="locate-tab active">LOCATIONS</li>

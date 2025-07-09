@@ -13,17 +13,20 @@ class LocationController extends Controller
         $location = [];
 
         $branch = Branch::find($request->location);
+        $route = url('menu').'/'.$request->type.'/'.$branch->id;
+
         $location = [
             'branch' => [$branch],
-            'type' => [$request->type],
-            'route' => $request->route
+            'type' => $request->type,
+            'route' => $route
         ];
 
 
-        session(['location' =>  $location]);
+        session()->put('location',$location);
 
         return response()->json([
-            'branch' => $location["branch"][0]
+            'branch' => $location["branch"][0],
+            'location' => $location
         ]);
     }
 }

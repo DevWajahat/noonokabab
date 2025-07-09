@@ -23,11 +23,10 @@
                                 Specials
                             </a>
                         </li>
-                        @if (isset(session('location')['route']))
-                            <li class="link-area"><a  class="orderRoute" style="color:#fff !important" href="{{ session('location')['route'] }}">Order</a></li>
-                        @else
+
+
                             <li class="link-area"><a href="#" class="link orderRoute" style="color:#fff !important">Order</a></li>
-                        @endif
+                       
                         <li class="link-area">
                             <a class="link" href="{{ route('dine') }}">
                                 Dine-In

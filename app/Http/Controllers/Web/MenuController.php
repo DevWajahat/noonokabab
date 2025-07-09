@@ -9,41 +9,13 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    public function delivery($branchId)
-    {
-
-
-
-        $branch = Branch::find($branchId);
-
-        if (request()->ajax()) {
-
-            $categories = $branch->categories;
-
-            $menus = $branch->menus->where(request('type'), 1);
-
-
-
-
-
-            return response()->json([
-                'message' => 'get successfully',
-                'menus' => $menus
-
-            ]);
-        }
-
-        return view('screens.web.menu.delivery', get_defined_vars());
-    }
-    public function takeout($branchId)
+    public function type($type,$branchId)
     {
 
         $branch = Branch::find($branchId);
 
+
         if (request()->ajax()) {
-
-            $categories = $branch->categories;
-
 
 
             $menus = $branch->menus->where(request('type'), 1);
@@ -56,6 +28,7 @@ class MenuController extends Controller
             ]);
         }
 
-        return view('screens.web.menu.takeout', get_defined_vars());
+        return view('screens.web.menu.type', get_defined_vars());
     }
+
 }

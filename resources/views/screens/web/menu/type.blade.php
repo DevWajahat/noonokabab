@@ -26,9 +26,8 @@
                                     <div class="menu-btn"><i class="fa-solid fa-bars"></i></div>
                                 </div>
                                 <ul>
-                                    <li class=""><a href="">DELIVERY</a>
-                                    </li>
-                                    <li class="locate-tab active">TAKEOUT</li>
+                                    <li class="locate-tab active">DELIVERY</li>
+                                    <li class=""><a href="">TAKEOUT</a></li>
                                     <li class=""><button type="button" class="order-via-btn">ORDER VIA</button>
                                     </li>
                                     <li class="locate-tab "><a href="location.php">LOCATIONS</a></li>
@@ -48,52 +47,9 @@
                                     <div class="no-select-cart-para">
                                         <p>Please select your desired dishes from the menu.</p>
                                     </div>
-                                    <div id="cart-container">
-                                        {{-- <div class="select-cart-area">
-                                            <div class="select-img">
-                                                <img src="{{ asset('assets/images/dish-1.png') }}" alt="">
-                                            </div>
-                                            <div class="select-cart-detail">
-                                                <h2 class="s-title">ONE SKEWER JOUJEH KOUBIDEH KABAB (A LA CARTE)</h2>
-                                                <p class="s-para">Large skewer of marinated and seasoned...</p>
-                                                <div class="sp-quantity">
-                                                    <div class="sp-minus fff"><button class="ddd"
-                                                            data-multi="-1">-</button></div>
-                                                    <div class="sp-input">
-                                                        <input type="text" class="quntity-input" value="1" />
-                                                    </div>
-                                                    <div class="sp-plus fff"><button class="ddd"
-                                                            data-multi="1">+</button></div>
-                                                </div>
-                                            </div>
-                                            <button type="button" class="cart-s-close">
-                                                <i class="fa-solid fa-x"></i>
-                                            </button>
-                                        </div>
-                                        <div class="select-cart-area">
-                                            <div class="select-img">
-                                                <img src="{{ asset('assets/images/dish-1.png') }}" alt="">
-                                            </div>
-                                            <div class="select-cart-detail">
-                                                <h2 class="s-title">ONE SKEWER JOUJEH KOUBIDEH KABAB (A LA CARTE)</h2>
-                                                <p class="s-para">Large skewer of marinated and seasoned...</p>
-                                                <div class="sp-quantity">
-                                                    <div class="sp-minus fff"><button class="ddd"
-                                                            data-multi="-1">-</button></div>
-                                                    <div class="sp-input">
-                                                        <input type="text" class="quntity-input" value="1" />
-                                                    </div>
-                                                    <div class="sp-plus fff"><button class="ddd"
-                                                            data-multi="1">+</button></div>
-                                                </div>
-                                            </div>
-                                            <button type="button" class="cart-s-close">
-                                                <i class="fa-solid fa-x"></i>
-                                            </button>
-                                        </div> --}}
-                                    </div>
-                                    <div class="cart-select-checkout-btn">
-                                        <a href="confirm-order.php">CHECK OUT</a>
+                                    <div id="cart-main-container">
+
+
                                     </div>
                                 </div>
 
@@ -132,8 +88,8 @@
                             @endforelse
 
                         </ul>
-                        <div class="menu-card-d-area">
-                            <div class="row ">
+                        <div class="menu-card-d-area " data-menuType="lunch_time">
+                            <div class="row">
                                 @forelse ($branch->categories as $category)
                                     <h2 class="menu-title menu-category-title menu-category-title-{{ $category->id }}">
                                         {{ $category->name }}
@@ -150,7 +106,8 @@
                                                     <p class="dish-p">{{ $menu->description }}</p>
                                                     <div class="dish-plus type.lunch_time">
                                                         <span class="dish-price">${{ $menu->price }}</span>
-                                                        <button class="dish-cart" id="{{ $menu->id }}"><i
+                                                        <button class="dish-cart" id="{{ $menu->id }}"
+                                                            {{ isset(session('cart')['items'][$menu->id]) ? 'disabled' : '' }}><i
                                                                 class="fa-solid fa-plus"></i></button>
                                                     </div>
                                                 </div>
@@ -160,8 +117,37 @@
                                     @endforelse
                                 @empty
                                 @endforelse
-
-
+                            </div>
+                        </div>
+                        <div class="menu-card-d-area d-none" data-menuType="regular">
+                            <div class="row ">
+                                @forelse ($branch->categories as $category)
+                                    <h2 class="menu-title menu-category-title menu-category-title-{{ $category->id }}">
+                                        {{ $category->name }}
+                                    </h2>
+                                    @forelse ($category->menus->where('branch_id',$branchId)->where('regular',1) as $menu)
+                                        <div class="col-xxl-6 col-lg-12 col-md-6 col-12 menu-item">
+                                            <div class="dish-card" data-id="{{ $menu->id }}">
+                                                <div class="dish-img">
+                                                    <img src="{{ asset('assets/images/dish-1.png') }}" alt="">
+                                                </div>
+                                                <div class="dish-detail">
+                                                    <h2 class="dish-title" id="{{ $menu->id }}">
+                                                        {{ $menu->name }}</h2>
+                                                    <p class="dish-p">{{ $menu->description }}</p>
+                                                    <div class="dish-plus type.lunch_time">
+                                                        <span class="dish-price">${{ $menu->price }}</span>
+                                                        <button class="dish-cart" id="{{ $menu->id }}"
+                                                            {{ isset(session('cart')['items'][$menu->id]) ? 'disabled' : '' }}><i
+                                                                class="fa-solid fa-plus"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @empty
+                                    @endforelse
+                                @empty
+                                @endforelse
                             </div>
                         </div>
                     </div>
@@ -177,17 +163,26 @@
 </main>
 @include('includes.web.footer-two')
 
-<script>
-    $(".ddd").on("click", function() {
-        var $button = $(this);
-        var $input = $button.closest('.sp-quantity').find("input.quntity-input");
-        $input.val((i, v) => Math.max(0, +v + 1 * $button.data('multi')));
-    });
-</script>
+<script></script>
 
 
 <script>
     $(document).ready(function() {
+
+        @if (isset(session('cart')['items']))
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('cart.index') }}",
+                success: function(response) {
+                    $("#cart-main-container").html(response.cartHtml)
+                }
+            })
+        @endif
+
+
+        var selectCartArea = $('.select-cart-area');
+        console.log(selectCartArea)
+
         $('.menu-tab-btn').on('click', function() {
             $('.menu-tab-btn').removeClass("active");
             $(this).addClass("active");
@@ -198,45 +193,45 @@
 
             $('.menu-item').remove();
 
-            $.ajax({
-                type: "POST",
-                url: "",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    type: type
-                },
-                success: function(response) {
+            // $.ajax({
+            //     type: "POST",
+            //     url: "   ",
+            //     data: {
+            //         _token: "{{ csrf_token() }}",
+            //         type: type
+            //     },
+            //     success: function(response) {
 
-                    console.log(response.menus);
-                    $.each(response.menus, function(index, item) {
-                        console.log(item);
-                        var tag = `
-                        <div class="col-xxl-6 col-lg-12 col-md-6 col-12 menu-item">
-                            <div class="dish-card">
-                                <div class="dish-img">
-                                    <img src="" alt="${item.name}">
-                                </div>
-                                <div class="dish-detail">
-                                    <h2 class="dish-title" id="${item.id}">${item.name}</h2>
-                                    <p class="dish-p">${item.description}</p>
-                                    <div class="dish-plus type.${type }" >
-                                        <span class="dish-price">$${item.price}</span>
-                                        <button class="dish-cart" id="${item.id}"><i class="fa-solid fa-plus"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
-                        $(`.menu-category-title-${item.category_id}`).after(tag);
-                    });
-
-
-                }
-
-
-            });
+            //         console.log(response.menus);
+            //         $.each(response.menus, function(index, item) {
+            //             console.log(item);
+            //             var tag = `
+            //             <div class="col-xxl-6 col-lg-12 col-md-6 col-12 menu-item">
+            //                 <div class="dish-card">
+            //                     <div class="dish-img">
+            //                         <img src="" alt="${item.name}">
+            //                     </div>
+            //                     <div class="dish-detail">
+            //                         <h2 class="dish-title" id="${item.id}">${item.name}</h2>
+            //                         <p class="dish-p">${item.description}</p>
+            //                         <div class="dish-plus type.${type }" >
+            //                             <span class="dish-price">$${item.price}</span>
+            //                             <button class="dish-cart" id="${item.id}"><i class="fa-solid fa-plus"></i></button>
+            //                         </div>
+            //                     </div>
+            //                 </div>
+            //             </div>`;
+            //             $(`.menu-category-title-${item.category_id}`).after(tag);
+            //         });
+            //     }
+            // });
         });
 
         function cartStore(type, id, quantity) {
+
+
+
+            console.log(id)
             $.ajax({
                 type: "POST",
                 url: "{{ route('cart.store') }}",
@@ -247,6 +242,9 @@
                     type: type
                 },
                 success: function(response) {
+                    if (response.status) {
+                        $("#cart-main-container").html(response.cartHtml)
+                    }
                     console.log(response)
                 }
             })
@@ -254,12 +252,38 @@
 
         const cartContainer = $("#cart-container");
 
+
+        $(document).on("click", ".cart-s-close", function() {
+            console.log('dasf')
+            var productId = $(this).attr("data-id");
+            const buttons = $(".dish-card");
+
+            var route = "{{ route('cart.destroy',2) }}"
+            route = route.replace("2",productId);
+          var selectCartArea =  $(this).parents(".select-cart-area")
+            $.ajax({
+                type: 'GET',
+                url: route,
+                success: function(response) {
+                    console.log(response)
+                    $('.dish-cart').each(function() {
+                        if($(this).attr("id") == productId){
+                            $(this).prop("disabled",false)
+                        }
+                    });
+                }
+
+            })
+            selectCartArea.remove();
+
+
+        })
+
+        selectCartArea = $(".select-cart-area");
         $(document).on("click", ".dish-cart", function() {
             const dishCard = $(this).closest(".dish-card");
 
             $(this).prop("disabled", true);
-
-
 
             const imgSrc = dishCard.find(".dish-img img").attr("src");
             const title = dishCard.find(".dish-title").text();
@@ -269,52 +293,57 @@
             type = type.split('.')[1]
             console.log(type)
 
-            const selectCartArea = $("<div>").addClass("select-cart-area");
-
-            selectCartArea.html(`
-                <div class="select-img">
-                    <img src="${imgSrc}" alt="">
-                </div>
-                <div class="select-cart-detail">
-                    <h2 class="s-title">${title}</h2>
-                    <p class="s-para">${description}</p>
-                    <div class="sp-quantity">
-                        <div class="sp-minus fff"><button class="ddd" data-multi="-1">-</button></div>
-                        <div class="sp-input">
-                            <input type="text" class="quntity-input" value="1" />
-                        </div>
-                        <div class="sp-plus fff"><button class="ddd" data-multi="1">+</button></div>
-                    </div>
-                </div>
-                <button type="button" class="cart-s-close">
-                    <i class="fa-solid fa-x"></i>
-                </button>
-            `);
-
-            cartContainer.prepend(selectCartArea);
-
             cartStore(type, productId, 1)
 
-            selectCartArea.on("click", ".cart-s-close", function() {
-                const buttons = $(".dish-card");
-                buttons.each(function() {
-                    const currentTitle = $(this).find(".dish-title").text();
-                    if (currentTitle === title) {
-                        $(this).find(".dish-cart").prop("disabled", false);
-                    }
-                });
-                selectCartArea.remove();
-            });
 
-            const quantityInput = selectCartArea.find(".quntity-input");
-            selectCartArea.on("click", ".ddd", function() {
-                let currentQuantity = parseInt(quantityInput.val(), 10);
-                const change = parseInt($(this).attr("data-multi"), 10);
-                currentQuantity += change;
-                if (currentQuantity > 0) {
-                    quantityInput.val(currentQuantity);
-                }
-            });
+
+
+
+            // $(document).on("click", ".cart-s-close", function() {
+            //     var productId = $(this).attr("id");
+            //     const buttons = $(".dish-card");
+            //     var route = "{{ route('cart.destroy', 434) }}"
+            //     route = route.replace('434', productId)
+            //     console.log(route + productId)
+            //     $.ajax({
+            //         type: 'GET',
+            //         url: route,
+            //         success: function(response) {
+            //             console.log(response)
+            //         }
+            //     })
+            //     buttons.each(function() {
+            //         const currentTitle = $(this).find(".dish-title").text();
+            //         if (currentTitle === title) {
+            //             $(this).find(".dish-cart").prop("disabled", false);
+            //         }
+            //     });
+
+            //     selectCartArea.remove();
+            // });
+
+
+        });
+        $(document).on("click", ".ddd", function() {
+            var quantityInput = $(this).parents(".sp-quantity").find("#quantityInput");
+
+
+            let currentQuantity = parseInt(quantityInput.val());
+            var change = parseInt($(this).attr("data-multi"));
+            console.log(change)
+            var productId = $(this).attr("id")
+
+
+            currentQuantity = currentQuantity + +change
+            quantityInput.val(currentQuantity)
+            cartStore(null, productId, currentQuantity);
+
+
+            console.log(currentQuantity)
+            if (currentQuantity > 0) {
+                quantityInput.val(currentQuantity);
+                cartStore(null, productId, currentQuantity)
+            }
         });
     });
 </script>

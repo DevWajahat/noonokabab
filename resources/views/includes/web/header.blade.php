@@ -37,12 +37,8 @@
                                                             class="fa-solid fa-circle-xmark"></i></button>
                                                     <li><a href="index.php">Home</a></li>
                                                     <li><a href="{{ route('specials') }}">Specials</a></li>
-                                                    @if (isset(session('location')['route']))
-                                                        <li><a href="{{ session('location')['route'] }}"
-                                                                class="orderRoute">Order</a></li>
-                                                    @else
                                                         <li><a href="#" class="orderRoute">Order</a></li>
-                                                    @endif
+
                                                     <li><a href="{{ route('dine') }}">Dine-In</a></li>
                                                     <li><a href="{{ route('catering') }}">Catering</a></li>
                                                     <li class="link-area link-area-hover position-relative">
