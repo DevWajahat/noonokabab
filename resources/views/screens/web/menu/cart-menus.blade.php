@@ -1,6 +1,7 @@
 <div id="cart-container">
     @php
         use App\Models\Menu;
+
     @endphp
 
     @forelse (session('cart')["items"] as $item)
@@ -24,39 +25,40 @@
                     </div>
                 </div>
             </div>
-
-
             @php
+            // dd($item['product']->sidelines);
                 $menu = Menu::find($item['product']['id']);
             @endphp
-            @forelse ($menu->sidelines as $sideline)
-            <hr>
-            <div class="select-cart-area-bottom mt-3">
-                <h2 class="popup-ingredients-sb-title text-black mb-3 mb-2">{{ $sideline->name }}</h2>
-            </div>
-            @forelse ($sideline->options as $option)
 
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-2">
-                <div class="ingredients-checkbox-area">
-
-                    <input type="{{ $option->sideline->option == 'Optional' ? 'checkbox' : 'radio'  }}"  {{ $option->name == $item['sidelines'][$sideline->name] ? 'checked' : ''}}  value="{{ $option->name }}"
-                        class="ingredients-checkbox sides-checkbox sides-checkbox-optional" name="side_{{ $option->sideline->id }}"
-                        id="side_{{ $option->sideline->id }}_{{ $option->id }}" data-id="{{ $menu->id }}" data-sideline="{{ $sideline->name }}" data-typeoption="{{ $sideline->option }}" >
-                    <label class="ingredient-name text-black" for="side_{{ $option->sideline->id }}_{{ $option->id }}">
-                        {{ $option->name }}
-                    </label>
+            @if(isset($item['product']))
+            @forelse ($item['product']->sidelines as $sideline)
+                <hr>
+                <div class="select-cart-area-bottom mt-3">
+                    <h2 class="popup-ingredients-sb-title text-black mb-3 mb-2">{{ $sideline->name }}</h2>
                 </div>
-            </div>
+                @forelse ($sideline->options as $option)
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-2">
+                        <div class="ingredients-checkbox-area">
+
+                            <input type="{{ $option->sideline->option == 'Optional' ? 'checkbox' : 'radio' }}"
+                                {{ (isset($item['sidelines'][$sideline->name]) && $option->name == $item['sidelines'][$sideline->name]) ? 'checked' : '' }}
+                                value="{{ $option->name }}"
+                                class="ingredients-checkbox sides-checkbox sides-checkbox-optional"
+                                name="side_{{ $option->sideline->id }}"
+                                id="side_{{ $option->sideline->id }}_{{ $option->id }}"
+                                data-id="{{ $menu->id }}" data-sideline="{{ $sideline->name }}"
+                                data-typeoption="{{ $sideline->option }}">
+                            <label class="ingredient-name text-black"
+                                for="side_{{ $option->sideline->id }}_{{ $option->id }}">
+                                {{ $option->name }}
+                            </label>
+                        </div>
+                    </div>
+                @empty
+                @endforelse
             @empty
             @endforelse
-            <div class="row sides-checkbox-area-row">
-
-
-            </div>
-
-            @empty
-
-            @endforelse
+            @endif
 
             <button type="button" class="cart-s-close" data-id="{{ $item['product']['id'] }}">
                 <i class="fa-solid fa-x"></i>
