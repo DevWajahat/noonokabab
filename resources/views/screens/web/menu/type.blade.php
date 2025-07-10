@@ -26,8 +26,12 @@
                                     <div class="menu-btn"><i class="fa-solid fa-bars"></i></div>
                                 </div>
                                 <ul>
-                                    <li class="locate-tab active">DELIVERY</li>
-                                    <li class=""><a href="">TAKEOUT</a></li>
+                                    <li class="locate-tab "><a
+                                            href="{{ route('menu.type', ['type' => 'delivery', 'branchId' => $branchId]) }}">DELIVERY</a>
+                                    </li>
+                                    <li class=""><a
+                                            href="{{ route('menu.type', ['type' => 'takeout', 'branchId' => $branchId]) }}">TAKEOUT</a>
+                                    </li>
                                     <li class=""><button type="button" class="order-via-btn">ORDER VIA</button>
                                     </li>
                                     <li class="locate-tab "><a href="location.php">LOCATIONS</a></li>
@@ -304,6 +308,49 @@
 
 
         });
+
+        $(document).on("change", ".ingredients-checkbox", function() {
+
+
+            if ($(this).is(':checked')) {
+
+                var sideline = $(this).attr("data-sideline");
+                var sidelineName = $(this).attr("name");
+
+                $(`.ingredients-checkbox[name=${sidelineName}]`).prop("checked",false)
+                $(this).prop("checked",true)
+
+
+                var checkedValue = $(this).val();
+                var productId = $(this).attr("data-id")
+                var optionType = $(this).attr("data-typeoption");
+                console.log(productId)
+                console.log(sideline)
+                console.log(checkedValue)
+                console.log(optionType)
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('cart.store') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        product_id: productId,
+                        option: checkedValue,
+                        sideline: sideline,
+                        optiontype: optionType
+                    },
+                })
+            }
+            else {
+                var uncheckedValue = $(this).val();
+                console.log(uncheckedValue)
+            }
+
+
+        })
+
+
+
         $(document).on("click", ".ddd", function() {
             var quantityInput = $(this).parents(".sp-quantity").find("#quantityInput");
 

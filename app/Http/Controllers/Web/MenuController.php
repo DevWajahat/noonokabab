@@ -17,15 +17,12 @@ class MenuController extends Controller
 
         if (request()->ajax()) {
 
-
             $menus = $branch->menus->where(request('type'), 1);
 
 
             return response()->json([
                 'message' => 'get successfully',
                 'menus' => $menus,
-                
-
             ]);
         }
 

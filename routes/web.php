@@ -28,6 +28,8 @@ Route::controller(StoryController::class)->group(function () {
 Route::get('menu/{type}/{branchId}',[MenuController::class,'type'])->middleware('CheckLocation')->name('menu.type');
 Route::post('menu/{type}/{branchId}',[MenuController::class,'type']);
 
+// Route::post('','');
+
 Route::prefix('cart')->controller(CartController::class)->name('cart.')->group(function () {
     Route::post('store','store')->name('store');
     Route::get('flush','flush')->name('flush');

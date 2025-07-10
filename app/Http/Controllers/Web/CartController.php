@@ -13,6 +13,10 @@ class CartController extends Controller
     {
         if (request()->ajax()) {
             $cart = session()->get('cart');
+
+            $menu = Menu::all();
+
+
             $cartHtml = view('screens.web.menu.cart-menus', get_defined_vars())->render();
             return response()->json([
                 'status' =>  true,
@@ -28,8 +32,16 @@ class CartController extends Controller
             $menu = Menu::find($request->product_id);
 
             if (isset($cart['items'][$menu->id])) {
-                $cart["items"][$request->product_id]["quantity"] = $request->quantity;
-                // dd($cart);
+
+                if ($request->has('sideline')) {
+                    $cart['items'][$request->product_id]["sidelines"][$request->sideline] = $request->option;
+
+                    if ($request->has('quantity')) {
+                        $cart["items"][$request->product_id]["quantity"] = $request->quantity;
+                    }
+                }
+
+
 
                 session()->put('cart', $cart);
 
@@ -54,7 +66,7 @@ class CartController extends Controller
                 'status' =>  true,
                 'message' => "add to cart successfully",
                 'cartHtml' => $cartHtml,
-                'button' => 'disabled-'.$menu->id
+                'button' => 'disabled-' . $menu->id
             ], 200);
         } catch (Exception $e) {
             return response()->json([
