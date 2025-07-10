@@ -38,7 +38,8 @@
 
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-2">
                 <div class="ingredients-checkbox-area">
-                    <input type="{{ $option->sideline->option == 'Optional' ? 'checkbox' : 'radio'  }}" value="{{ $option->name }}"
+
+                    <input type="{{ $option->sideline->option == 'Optional' ? 'checkbox' : 'radio'  }}"  {{ $option->name == $item['sidelines'][$sideline->name] ? 'checked' : ''}}  value="{{ $option->name }}"
                         class="ingredients-checkbox sides-checkbox sides-checkbox-optional" name="side_{{ $option->sideline->id }}"
                         id="side_{{ $option->sideline->id }}_{{ $option->id }}" data-id="{{ $menu->id }}" data-sideline="{{ $sideline->name }}" data-typeoption="{{ $sideline->option }}" >
                     <label class="ingredient-name text-black" for="side_{{ $option->sideline->id }}_{{ $option->id }}">
