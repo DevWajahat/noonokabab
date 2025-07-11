@@ -24,4 +24,9 @@ class Menu extends Model
     {
         return $this->belongsToMany(Sideline::class);
     }
+
+    public function ingredients(): BelongsToMany
+    {
+        return $this->belongsToMany(Ingredient::class);
+    }
 }

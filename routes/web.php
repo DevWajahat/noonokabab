@@ -27,6 +27,7 @@ Route::controller(StoryController::class)->group(function () {
 
 Route::get('menu/{type}/{branchId}',[MenuController::class,'type'])->middleware('CheckLocation')->name('menu.type');
 Route::post('menu/{type}/{branchId}',[MenuController::class,'type']);
+Route::get('menu/extra/ingredients/{menuId}',[MenuController::class,'ingredients'])->name('menu.ingredients');
 
 // Route::post('','');
 

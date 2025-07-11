@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
-use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Models\Menu;
+
 
 class MenuController extends Controller
 {
@@ -28,5 +28,18 @@ class MenuController extends Controller
 
         return view('screens.web.menu.type', get_defined_vars());
     }
+    public function ingredients($menuId){
+
+        $menu = Menu::find($menuId);
+        $ingredients = $menu->ingredients;
+        return response()->json([
+            'status' => true,
+            'message' => 'product fetched successfully.',
+            'menu' => $menu,
+            'ingredients' => $ingredients
+        ],200);
+    }
+
+
 
 }

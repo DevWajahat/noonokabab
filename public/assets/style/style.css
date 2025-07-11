@@ -937,6 +937,19 @@ hr {
     transform: scale(1);
 }
 
+.ingredients {
+    font-size: 12px;
+    font-family: var(--Poppins-Medium);
+    background-color: #af8a1b;
+    color: white;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 5px;
+}
+.pro-btn-area{
+    display: flex;
+     gap:10px
+}
 .ingredients-popup-wrap {
     height: 100vh;
     width: 100%;

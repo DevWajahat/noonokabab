@@ -31,14 +31,15 @@ class CartController extends Controller
             $cart = session()->get('cart');
             $menu = Menu::find($request->product_id);
 
-            if (isset($cart['items'][$menu->id])) {
+         
+            if (isset($cart['items'][$request->product_id])) {
 
                 if ($request->has('sideline')) {
                     $cart['items'][$request->product_id]["sidelines"][$request->sideline] = $request->option;
+                }
+                if ($request->has('quantity')) {
 
-                    if ($request->has('quantity')) {
-                        $cart["items"][$request->product_id]["quantity"] = $request->quantity;
-                    }
+                    $cart["items"][$request->product_id]["quantity"] = $request->quantity;
                 }
 
 
@@ -49,7 +50,7 @@ class CartController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => "updated it successfully.",
-
+                    'button' => $cart
                 ]);
             }
 
