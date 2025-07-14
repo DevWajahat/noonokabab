@@ -24,7 +24,12 @@
                             <div class="sp-plus fff"><button class="ddd" data-multi="1"
                                     id="{{ $item['product']['id'] }}">+</button></div>
                         </div>
+                        {{-- @dd($item['product']->ingredients) --}}
+                        @if(count($item['product']->ingredients) !=0)
+
+
                         <button type="button" class="ingredients" id="{{ $item['product']['id'] }}">EXTRA INGREDIENTS</button>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -39,7 +44,7 @@
                     @forelse ($sideline->options as $option)
                         <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-2">
                             <div class="ingredients-checkbox-area">
-
+                                
                                 <input type="{{ $option->sideline->option == 'Optional' ? 'checkbox' : 'radio' }}"
                                     {{ isset($item['sidelines'][$sideline->name]) && $option->name == $item['sidelines'][$sideline->name] ? 'checked' : '' }}
                                     value="{{ $option->name }}"

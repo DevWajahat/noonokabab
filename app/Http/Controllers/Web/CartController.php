@@ -26,12 +26,13 @@ class CartController extends Controller
     }
     public function store(Request $request)
     {
+        // dd($request->all());
         try {
 
             $cart = session()->get('cart');
             $menu = Menu::find($request->product_id);
 
-         
+
             if (isset($cart['items'][$request->product_id])) {
 
                 if ($request->has('sideline')) {
@@ -42,6 +43,14 @@ class CartController extends Controller
                     $cart["items"][$request->product_id]["quantity"] = $request->quantity;
                 }
 
+                if ($request->has("ingredients")) {
+                    unset($cart["items"][$request->product_id]["ingredients"]);
+                    $cart["items"][$request->product_id]["ingredients"] = $request->ingredients;
+                }
+                if ($request->has('special_request')){
+                    $cart["items"][$request->product_id]["special_request"] = $request->special_request;
+                }
+
 
 
                 session()->put('cart', $cart);
@@ -50,7 +59,7 @@ class CartController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => "updated it successfully.",
-                    'button' => $cart
+                    'button' => $cart,
                 ]);
             }
 
@@ -91,6 +100,21 @@ class CartController extends Controller
 
 
         return response()->json([]);
+    }
+
+    public function unsetIngredients(Request $request)
+    {
+
+        dd($request->all());
+
+
+
+
+        return response()->json([
+            'status' => true,
+            'message' => 'ingredient added successfully.',
+
+        ]);
     }
 
     public function flush()

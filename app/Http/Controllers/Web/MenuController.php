@@ -32,11 +32,23 @@ class MenuController extends Controller
 
         $menu = Menu::find($menuId);
         $ingredients = $menu->ingredients;
+
+        $cart = session()->get('cart');
+
+        $ingredientIds = [];
+        if(isset($cart["items"][$menuId]["ingredients"])){
+            foreach($cart["items"][$menuId]["ingredients"] as $ingredientId => $value){
+                $ingredientIds[] += $ingredientId;
+            }
+        }
+
+
         return response()->json([
             'status' => true,
             'message' => 'product fetched successfully.',
             'menu' => $menu,
-            'ingredients' => $ingredients
+            'ingredients' => $ingredients,
+            'ingredientId' => $ingredientIds,
         ],200);
     }
 

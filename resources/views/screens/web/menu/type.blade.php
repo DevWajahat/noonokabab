@@ -223,15 +223,17 @@
                     $('.popup-pro-title').html(response.menu.name)
                     $('.popup-sb-para').html(
                         `<strong>Price :</strong> $${response.menu.price}`)
-                        $('.ingredients-row').html('')
-                    $.each(response.ingredients,function(index, element) {
+                    $('.popup-sb-para').attr('data-price', response.menu.price)
+                    $('.ingredients-row').html('')
+
+
+                    $.each(response.ingredients, function(index, element) {
                         // console.log(element)
                         $('.ingredients-row').append(`
                         <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                             <div class="ingredients-checkbox-area">
-                                <input type="checkbox" value="${element.id}" class="ingredients-checkbox"
-                                    data-price="$${element.price}" name="extra_ingredients[]"
-                                    id="ingredient-${element.id}">
+                                <input type="checkbox" value="${element.id}" data-product-id="${response.menu.id}" class="extra-ingredients-box" data-price="${element.price}"   name="extra_ingredients[]"
+                                    id="ingredient-${element.id}" data-product-price="${response.menu.price}"  >
                                 <label class="ingredient-name"
                                     for="ingredient-${element.id}">
                                     ${element.name}<span> ($${element.price})</span>
@@ -239,7 +241,17 @@
                             </div>
                         </div>
                         `)
+
                     })
+
+                    $.each(response.ingredientId, function(index, element) {
+                        // console.log(element)
+                        $(`#ingredient-${element}`).prop("checked", true)
+                    })
+
+                    $('.ingredient-text-area').val(response.request_special)
+
+                    $('#IngredientSubmit').attr("data-product-id", response.menu.id);
                 }
             })
 
@@ -323,36 +335,6 @@
 
             $(`#${productId}`).find('.dish-cart')
 
-            // $('.menu-card-d-area').each(function() {
-            //     $('.dish-cart').each(function() {
-
-
-            // })
-
-
-            // $(document).on("click", ".cart-s-close", function() {
-            //     var productId = $(this).attr("id");
-            //     const buttons = $(".dish-card");
-            //     var route = "{{ route('cart.destroy', 434) }}"
-            //     route = route.replace('434', productId)
-            //     console.log(route + productId)
-            //     $.ajax({
-            //         type: 'GET',
-            //         url: route,
-            //         success: function(response) {
-            //             console.log(response)
-            //         }
-            //     })
-            //     buttons.each(function() {
-            //         const currentTitle = $(this).find(".dish-title").text();
-            //         if (currentTitle === title) {
-            //             $(this).find(".dish-cart").prop("disabled", false);
-            //         }
-            //     });
-
-            //     selectCartArea.remove();
-            // });
-
 
         });
 
@@ -371,6 +353,9 @@
                 var checkedValue = $(this).val();
                 var productId = $(this).attr("data-id")
                 var optionType = $(this).attr("data-typeoption");
+
+
+
                 // console.log(productId)
                 // console.log(sideline)
                 // console.log(checkedValue)
@@ -395,7 +380,75 @@
 
         })
 
+        $(document).on("change", ".extra-ingredients-box", function() {
 
+            var ingredients = $(this).val();
+            var price = $(this).attr("data-price")
+            var productPrice = $('#totalPrice').attr("data-price");
+            var productId = $(this).attr("data-product-id");
+
+            console.log(ingredients)
+            console.log(price)
+            console.log(productId)
+            console.log(productPrice)
+
+
+
+            if ($(this).is(":checked")) {
+                var totalPrice = parseFloat(price) + parseFloat(productPrice)
+                console.log(totalPrice)
+                $('#totalPrice').attr("data-price", totalPrice)
+                $('#totalPrice').html(`<strong>Total: </strong> ${totalPrice}`)
+
+            } else {
+                var totalPrice = parseFloat(productPrice) - parseFloat(price)
+                console.log(totalPrice)
+                $('#totalPrice').attr("data-price", totalPrice)
+                $('#totalPrice').html(`<strong>Total: </strong> ${totalPrice}`)
+            }
+        })
+
+
+        var checkedValues = {}
+        $(document).on("submit", "#extras-submit-form", function(e) {
+            e.preventDefault();
+            var productId = $('#IngredientSubmit').attr("data-product-id");
+            var specialRequest = $('.ingredient-text-area').val();
+            checkedValues = {}
+            $('input[class="extra-ingredients-box"]:checked').each(function() {
+                var key = $(this).val();
+                var price = $(this).attr("data-price");
+                checkedValues[key] = price
+
+
+                // $()
+            })
+
+
+            console.log(checkedValues)
+
+            $.ajax({
+                type: "POST",
+                url: "{{ route('cart.store') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    product_id: productId,
+                    ingredients: checkedValues,
+                    special_request: specialRequest
+                },
+                success: function(response) {
+                    console.log(response)
+
+                    $('.ingredients-popup-wrap').removeClass("active");
+
+                    Swal.fire({
+                        title: "Ingredients Added Successfully",
+                        icon: "success",
+                        draggable: false
+                    });
+                }
+            })
+        })
 
         $(document).on("click", ".ddd", function() {
             var quantityInput = $(this).parents(".sp-quantity").find("#quantityInput");

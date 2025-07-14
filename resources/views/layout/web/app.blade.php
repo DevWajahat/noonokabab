@@ -1,10 +1,9 @@
 @include('includes.web.head')
 
-@if(Route::currentRouteName() == 'index')
-@include('includes.web.header')
-
+@if (Route::currentRouteName() == 'index')
+    @include('includes.web.header')
 @else
-@include('includes.web.header-two')
+    @include('includes.web.header-two')
 @endif
 
 

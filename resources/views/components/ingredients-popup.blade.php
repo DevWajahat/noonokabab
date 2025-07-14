@@ -6,7 +6,7 @@
     <div class="ingredients-popup">
 
 
-        <form action="#" method="POST" id="extras-submit-form">
+        <form method="POST" id="extras-submit-form" >
             <input type="hidden" name="_token" value="q4XbfPCDHlveJuEMogYR6023xGprxxPVWRT90tPv" autocomplete="off">
             <div class="container-two">
                 <div class="row ">
@@ -41,7 +41,7 @@
                                 <div class="ingredients-row">
                                     <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                                         <div class="ingredients-checkbox-area">
-                                            <input type="checkbox" value="2" class="ingredients-checkbox"
+                                            <input type="checkbox" value="2" class="extra-ingredients-box"
                                                 data-price="$3.00" name="extra_ingredients[]"
                                                 id="ingredient-8 ounce Creamy Garlic Sauce-0">
                                             <label class="ingredient-name"
@@ -115,12 +115,12 @@
                         <hr class="border-popup mt-3">
                     </div>
                     <div class="col-12">
-                        <p class="popup-sb-para"><strong>Total :</strong> <span class="calculate-total"
-                                data-itemprice="$125.00"> $ 125.00 <span> </span></span></p>
+                        <p class="popup-sb-para" id="totalPrice" ><strong>Total :</strong>$<span class="calculate-total"
+                                data-itemprice="$125.00">125.00</p>
                     </div>
                     <div class="col-12">
                         <div class="text-center">
-                            <button type="button" data-uuid="fe6c3d5b-a6d5-4a9a-b127-a4b89ff3d0e6"
+                            <button type="submit" id="IngredientSubmit"
                                 class="add-ingredients ingredients-popup-btn mt-4">add ingredients</button>
                         </div>
                     </div>
