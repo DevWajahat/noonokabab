@@ -42,6 +42,10 @@ class MenuController extends Controller
             }
         }
 
+        $request_special = "";
+        if(isset($cart["items"][$menuId]["special_request"])){
+            $request_special = $cart["items"][$menuId]["special_request"];
+        }
 
         return response()->json([
             'status' => true,
@@ -49,6 +53,7 @@ class MenuController extends Controller
             'menu' => $menu,
             'ingredients' => $ingredients,
             'ingredientId' => $ingredientIds,
+            'request_special' => $request_special
         ],200);
     }
 

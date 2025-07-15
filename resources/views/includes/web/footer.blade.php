@@ -38,7 +38,7 @@
                         <button data-view="takeout" type="button" class="location-btns">Pickup</button>
                     </li>
                 </ul>
-                <div  class="locat-area active">
+                <div class="locat-area active">
                     <select class="restaurantSelect form-select location-select select-val"
                         aria-label="Default select example" data-content="delivery">
                         <option disabled selected>Select Restaurants</option>
@@ -57,15 +57,16 @@
                         </button>
                     </div>
                 </div>
-                <div  class="locat-area">
-                    <select data-content="takeout" class="form-select location-select select-val" id="pickupLocation"
-                        aria-label="Default select example">
-                        <option disabled selected>Select Pickup Location</option>
-                        @forelse ($branches as $branch)
-                            <option value="{{ $branch->id }}">{{ $branch->name }}</option>
-                        @empty
-                        @endforelse
-                    </select>
+                <div class="locat-area">
+                    <select data-content="takeout" class="form-select location-select select-val"
+                    id="pickupLocation" aria-label="Default select example">
+                    <option disabled>Select Pickup Location</option>
+                    @forelse ($branches as $branch)
+                            <option value="{{ $branch->id }}" {{ $branch->id  == session('location')["branch"][0]['id'] ? 'selected' : '' }}>{{ $branch->name }}
+                            </option>
+                            @empty
+                            @endforelse
+                        </select>
                 </div>
                 <button type="submit" id="locateSelectBtn" class="locate-select-btn">Select</button>
             </form>
@@ -75,7 +76,9 @@
 
 
 <script src="{{ asset('assets/js/jquery.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js" integrity="sha512-MSOo1aY+3pXCOCdGAYoBZ6YGI0aragoQsg1mKKBHXCYPIWxamwOE7Drh+N5CPgGI5SA9IEKJiPjdfqWFWmZtRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"
+    integrity="sha512-MSOo1aY+3pXCOCdGAYoBZ6YGI0aragoQsg1mKKBHXCYPIWxamwOE7Drh+N5CPgGI5SA9IEKJiPjdfqWFWmZtRA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 {{-- <script src="{{ asset("assets/js/bootstrap.bundle.min.js") }}"></script> --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
@@ -92,11 +95,11 @@
     $(document).ready(function() {
 
 
-        $('.orderRoute').on("click",function () {
-            @if(session('location') !== null)
-            var route = "{{ session('location')['route'] }}";
-            $(this).attr("href",route);
-            console.log(route)
+        $('.orderRoute').on("click", function() {
+            @if (session('location') !== null)
+                var route = "{{ session('location')['route'] }}";
+                $(this).attr("href", route);
+                console.log(route)
             @endif
 
         })
@@ -104,10 +107,12 @@
 
         $('#location-form').on("submit", function(e) {
 
+            e.preventDefault()
+
             var restaurantSelect = $('.restaurantSelect').find(':selected').val()
             var pickupSelect = $('.pickupSelect').find(':selected').val()
 
-            if(parseInt($('.location-select').val())){
+            if (parseInt($('.location-select').val())) {
                 var type = $('.location-select').attr("data-content")
                 console.log(type)
 
@@ -125,15 +130,14 @@
                         console.log(response)
 
 
-                            $('.orderRoute').attr("href", response.location.route)
-                            $('.location-popup-wrap').removeClass('active')
+                        $('.orderRoute').attr("href", response.location.route)
+                        $('.location-popup-wrap').removeClass('active')
 
 
 
                     }
                 })
-            }
-            else{
+            } else {
                 $('.errorRestaurant').html('Required Value');
             }
 

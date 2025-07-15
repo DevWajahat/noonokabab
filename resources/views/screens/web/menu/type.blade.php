@@ -1,4 +1,5 @@
 @include('includes.web.head')
+
 <main class="pickmain">
     <section class="">
         <div class="container-fluid">
@@ -39,6 +40,8 @@
                                         <div class="mob-log color-gray"><a href="{{ route('login') }}">LOGIN/SIGNUP</a>
                                         </div>
                                     </li>
+
+
                                 </ul>
                             </div>
                         </div>
@@ -62,6 +65,22 @@
                     </div>
                 </div>
                 <div class="col-xxl-5 col-lg-3 col-12 pos-res-1">
+                    {{-- <div class="header-links "> --}}
+                    <button type="button" class="head-location-btn mt-5">
+                        <div class="">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div class="">
+                            {{-- @dd(session('location')) --}}
+                            <span class="spn-1">Change Location</span>
+                            @if (isset(session('location')['branch'][0]['name']))
+                                <span class="spn-2 locate-value">{{ session('location')['branch']['0']['name'] }}</span>
+                            @else
+                                <span class="spn-2 locate-value">Change Location</span>
+                            @endif
+                        </div>
+                    </button>
+                    {{-- </div> --}}
                     <div class=" menu-card-area" width="1000" height="750">
                         <div class="menu-card-logo">
                             <img src="{{ asset('assets/images/menu-card-logo.png') }}" alt="">
@@ -135,7 +154,8 @@
                                         <div class="col-xxl-6 col-lg-12 col-md-6 col-12 menu-item">
                                             <div class="dish-card" data-id="{{ $menu->id }}">
                                                 <div class="dish-img">
-                                                    <img src="{{ asset('assets/images/dish-1.png') }}" alt="">
+                                                    <img src="{{ asset('assets/images/dish-1.png') }}"
+                                                        alt="">
                                                 </div>
                                                 <div class="dish-detail">
                                                     <h2 class="dish-title" id="{{ $menu->id }}">
@@ -159,14 +179,68 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-2 col-lg-2 col-3 ">
+                <div class=" col-lg-2 col-2 ">
                     <div class="login-btn">
                         <a href="{{ route('login') }}">LOGIN/SIGNUP</a>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
+
+    <div class="location-popup-wrap">
+        <div class="location-popup-area">
+            <div class="location-popup">
+                <img class="img-fluid select-location-logo" src="{{ asset('assets/images/noon-o-kabab-logo.png') }}"
+                    alt="">
+                <h4 class="branch-title">Please Select Location</h4>
+                <form id="location-form" action="">
+                    <ul class="select-area-list">
+                        <input class="location-tab-input" type="hidden" name="" value="delivery">
+                        <li class="">
+                            <button data-view="delivery" type="button"
+                                class="location-btns active">Delivery</button>
+                        </li>
+                        <li class="">
+                            <button data-view="takeout" type="button" class="location-btns">Pickup</button>
+                        </li>
+                    </ul>
+                    <div class="locat-area active">
+                        <select class="restaurantSelect form-select location-select select-val"
+                            aria-label="Default select example" data-content="delivery">
+                            <option disabled >Select Restaurants</option>
+                            @forelse ($branches as $branch)
+                                <option value="{{ $branch->id }}" {{ $branch->id == session('location')['branch'][0]['id'] ? 'selected' : '' }}>{{ $branch->name }}</option>
+                            @empty
+                            @endforelse
+
+                        </select>
+                        <span class="text-danger errorRestaurant" style="color:red"></span>
+                        <div class="location-input-area">
+                            <input placeholder="Enter your location" class="restaurantSelect location-select"
+                                type="text" name="" id="cordinate" data-location="takeout">
+                            <button id="getLocation" type="button" class="current-location-btn">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="locat-area">
+                        <select data-content="takeout" class="form-select location-select select-val"
+                            id="pickupLocation" aria-label="Default select example">
+                            <option disabled selected>Select Pickup Location</option>
+                            @forelse ($branches as $branch)
+                                <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                            @empty
+                            @endforelse
+                        </select>
+                    </div>
+                    <button type="submit" id="locateSelectBtn" class="locate-select-btn">Select</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </main>
 <x-ingredients-popup />
 
@@ -178,8 +252,48 @@
 <script>
     $(document).ready(function() {
 
+        $(document).on("click",".head-location-btn",function () {
+            $('.location-popup-wrap').addClass("active")
+        })
+
+        $('#location-form').on("submit", function(e) {
+
+            e.preventDefault()
+            var restaurantSelect = $('.restaurantSelect').find(":selected").val()
+            var locationType = $('.location-btns.active').attr("data-view");
+            console.log(locationType)
+            if (parseInt($('.location-select').val())) {
 
 
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('location') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        location: restaurantSelect,
+                        type: locationType,
+
+                    },
+                    success: function(response) {
+
+                        console.log(response)
+
+                            window.location.href = response.location.route
+                        $('.location-popup-wrap').removeClass('active')
+
+
+
+                    }
+                })
+            } else {
+                $('.errorRestaurant').html('Required Value');
+            }
+        })
+
+        $('.location-btns').on("click",function () {
+            $('.location-btns').removeClass("active")
+            $(this).addClass("active")
+        })
 
         @if (isset(session('cart')['items']))
             $.ajax({
@@ -197,7 +311,7 @@
 
 
 
-        $('.menu-tab-btn').on('click', function() {
+        $(document).on('click', ".menu-tab-btn",function() {
             $('.menu-tab-btn').removeClass("active");
             $(this).addClass("active");
             var type = $(this).attr("id");
@@ -210,6 +324,8 @@
                 $('#menuCardRegular').removeClass('d-none')
             }
         });
+
+
 
         $(document).on("click", ".ingredients", function() {
             $('.ingredients-popup-wrap').addClass("active")
