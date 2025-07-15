@@ -9,7 +9,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        dd(session('location'));
+        // dd(session()->get('cart'));
         return view('screens.web.index');
     }
 }

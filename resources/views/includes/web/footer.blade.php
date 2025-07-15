@@ -62,7 +62,7 @@
                     id="pickupLocation" aria-label="Default select example">
                     <option disabled>Select Pickup Location</option>
                     @forelse ($branches as $branch)
-                            <option value="{{ $branch->id }}" {{ $branch->id  == session('location')["branch"][0]['id'] ? 'selected' : '' }}>{{ $branch->name }}
+                            <option value="{{ $branch->id }}" {{ session('location') !== null && $branch->id  == session('location')["branch"][0]['id'] ? 'selected' : '' }}>{{ $branch->name }}
                             </option>
                             @empty
                             @endforelse

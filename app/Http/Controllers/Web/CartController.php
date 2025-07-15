@@ -41,11 +41,14 @@ class CartController extends Controller
                 if ($request->has('quantity')) {
 
                     $cart["items"][$request->product_id]["quantity"] = $request->quantity;
+
+                    $cart["items"][$request->product_id]["product_total"] = floatval($request->quantity) * floatval($cart["items"][$request->product_id]["product"]["price"]);
                 }
 
                 if ($request->has("ingredients")) {
                     unset($cart["items"][$request->product_id]["ingredients"]);
                     $cart["items"][$request->product_id]["ingredients"] = $request->ingredients;
+                    $cart["items"][$request->product_id]["ingredientPrice"] =  array_sum( $request->ingredients) + floatval($cart["items"][$request->product_id]['product_total']) ;
                 }
                 if ($request->has('special_request')){
                     $cart["items"][$request->product_id]["special_request"] = $request->special_request;
@@ -66,7 +69,8 @@ class CartController extends Controller
 
             $cart["items"][$menu->id] = [
                 "product" => $menu,
-                "quantity" => $request->quantity
+                "quantity" => $request->quantity,
+                "product_total" => $menu->price
             ];
 
             session()->put('cart', $cart);

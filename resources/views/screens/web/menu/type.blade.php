@@ -129,8 +129,11 @@
                                                     <p class="dish-p">{{ $menu->description }}</p>
                                                     <div class="dish-plus type.lunch_time">
                                                         <span class="dish-price">${{ $menu->price }}</span>
-                                                        <button class="dish-cart button-{{ $menu->id }}"
+                                                        <button
+                                                            class="dish-cart button-{{ $menu->id }} dish-cart-lunch-time"
                                                             id="{{ $menu->id }}"
+                                                            data-lunch-time-from="{{ $branch->lunch_time->from }}"
+                                                            data-lunch-time-to="{{ $branch->lunch_time->to }}"
                                                             {{ isset(session('cart')['items'][$menu->id]) ? 'disabled' : '' }}><i
                                                                 class="fa-solid fa-plus"></i></button>
                                                     </div>
@@ -147,7 +150,8 @@
                         <div class="menu-card-d-area d-none " id="menuCardRegular" data-menuType="regular">
                             <div class="row ">
                                 @forelse ($branch->categories as $category)
-                                    <h2 class="menu-title menu-category-title menu-category-title-{{ $category->id }}">
+                                    <h2
+                                        class="menu-title menu-category-title menu-category-title-{{ $category->id }}">
                                         {{ $category->name }}
                                     </h2>
                                     @forelse ($category->menus->where('branch_id',$branchId)->where('regular',1) as $menu)
@@ -209,9 +213,11 @@
                     <div class="locat-area active">
                         <select class="restaurantSelect form-select location-select select-val"
                             aria-label="Default select example" data-content="delivery">
-                            <option disabled >Select Restaurants</option>
+                            <option disabled>Select Restaurants</option>
                             @forelse ($branches as $branch)
-                                <option value="{{ $branch->id }}" {{ $branch->id == session('location')['branch'][0]['id'] ? 'selected' : '' }}>{{ $branch->name }}</option>
+                                <option value="{{ $branch->id }}"
+                                    {{ $branch->id == session('location')['branch'][0]['id'] ? 'selected' : '' }}>
+                                    {{ $branch->name }}</option>
                             @empty
                             @endforelse
 
@@ -252,7 +258,27 @@
 <script>
     $(document).ready(function() {
 
-        $(document).on("click",".head-location-btn",function () {
+        const timeToSeconds = (timeString) => {
+            const parts = timeString.split(':');
+            return (parseInt(parts[0]) * 3600) + (parseInt(parts[1]) * 60) + parseInt(parts[2]);
+        };
+
+        var LunchTimeFrom = timeToSeconds($('.dish-cart-lunch-time').attr("data-lunch-time-from"));
+        var LunchTimeTo = timeToSeconds($('.dish-cart-lunch-time').attr("data-lunch-time-to"));
+
+        var now = new Date();
+        var currentSeconds = (now.getHours() * 3600) + (now.getMinutes() * 60) + now.getSeconds();
+
+        if (currentSeconds < LunchTimeFrom || currentSeconds > LunchTimeTo) {
+            $('.dish-cart-lunch-time').prop("disabled", true);
+        } else {
+            $('.dish-cart-lunch-time').prop("disabled", false);
+        }
+
+
+
+
+        $(document).on("click", ".head-location-btn", function() {
             $('.location-popup-wrap').addClass("active")
         })
 
@@ -278,7 +304,7 @@
 
                         console.log(response)
 
-                            window.location.href = response.location.route
+                        window.location.href = response.location.route
                         $('.location-popup-wrap').removeClass('active')
 
 
@@ -290,7 +316,7 @@
             }
         })
 
-        $('.location-btns').on("click",function () {
+        $('.location-btns').on("click", function() {
             $('.location-btns').removeClass("active")
             $(this).addClass("active")
         })
@@ -311,7 +337,7 @@
 
 
 
-        $(document).on('click', ".menu-tab-btn",function() {
+        $(document).on('click', ".menu-tab-btn", function() {
             $('.menu-tab-btn').removeClass("active");
             $(this).addClass("active");
             var type = $(this).attr("id");
@@ -338,8 +364,17 @@
                     console.log(response.menu.name)
                     $('.popup-pro-title').html(response.menu.name)
                     $('.popup-sb-para').html(
-                        `<strong>Price :</strong> $${response.menu.price}`)
-                    $('.popup-sb-para').attr('data-price', response.menu.price)
+                        `<strong>Price :</strong> $${response.product_total}`)
+                    if (response.ingredientPrice) {
+                        $('#totalPrice').html(response.ingredientPrice)
+                        $('#totalPrice').attr("data-price", response.ingredientPrice)
+                    }
+                    else{
+                        $('.popup-sb-para').attr('data-price', response.product_total)
+                        $('#totalPrice').attr("data-price", response.product_total)
+                    }
+                    
+
                     $('.ingredients-row').html('')
 
 
@@ -469,13 +504,6 @@
                 var checkedValue = $(this).val();
                 var productId = $(this).attr("data-id")
                 var optionType = $(this).attr("data-typeoption");
-
-
-
-                // console.log(productId)
-                // console.log(sideline)
-                // console.log(checkedValue)
-                // console.log(optionType)
 
                 $.ajax({
                     type: "POST",

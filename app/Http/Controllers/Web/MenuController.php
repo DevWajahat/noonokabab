@@ -41,10 +41,11 @@ class MenuController extends Controller
                 $ingredientIds[] += $ingredientId;
             }
         }
-
+        $ingredientPrice = '';
         $request_special = "";
         if(isset($cart["items"][$menuId]["special_request"])){
             $request_special = $cart["items"][$menuId]["special_request"];
+            $ingredientPrice = $cart["items"][$menuId]["ingredientPrice"];
         }
 
         return response()->json([
@@ -53,7 +54,9 @@ class MenuController extends Controller
             'menu' => $menu,
             'ingredients' => $ingredients,
             'ingredientId' => $ingredientIds,
-            'request_special' => $request_special
+            'request_special' => $request_special,
+            'product_total' => $cart["items"][$menuId]["product_total"],
+            'ingredientPrice' => $ingredientPrice,
         ],200);
     }
 
