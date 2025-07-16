@@ -44,7 +44,7 @@
                     @forelse ($sideline->options as $option)
                         <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-2">
                             <div class="ingredients-checkbox-area">
-                                
+
                                 <input type="{{ $option->sideline->option == 'Optional' ? 'checkbox' : 'radio' }}"
                                     {{ isset($item['sidelines'][$sideline->name]) && $option->name == $item['sidelines'][$sideline->name] ? 'checked' : '' }}
                                     value="{{ $option->name }}"
@@ -74,5 +74,5 @@
 
 </div>
 <div class="cart-select-checkout-btn">
-    <a href="confirm-order.php">CHECK OUT</a>
+    <a href="{{ route('checkout') }}">CHECK OUT</a>
 </div>

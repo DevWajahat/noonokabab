@@ -38,19 +38,28 @@ class CartController extends Controller
                 if ($request->has('sideline')) {
                     $cart['items'][$request->product_id]["sidelines"][$request->sideline] = $request->option;
                 }
+
+                $ingredientPrice = '';
                 if ($request->has('quantity')) {
 
                     $cart["items"][$request->product_id]["quantity"] = $request->quantity;
 
-                    $cart["items"][$request->product_id]["product_total"] = floatval($request->quantity) * floatval($cart["items"][$request->product_id]["product"]["price"]);
+                    if (isset($cart["items"][$request->product_id]["ingredients"])) {
+                        $cart["items"][$request->product_id]["ingredientPrice"] = array_sum($cart["items"][$request->product_id]["ingredients"]);
+                        $cart["items"][$request->product_id]["product_total"] = floatval($request->quantity) *(floatval($cart["items"][$request->product_id]["ingredientPrice"]) + floatval($cart["items"][$request->product_id]["product"]["price"]));
+                    } else {
+                        $cart["items"][$request->product_id]["product_total"] = floatval($request->quantity) * floatval($cart["items"][$request->product_id]["product"]["price"]);
+                    }
                 }
+
 
                 if ($request->has("ingredients")) {
                     unset($cart["items"][$request->product_id]["ingredients"]);
                     $cart["items"][$request->product_id]["ingredients"] = $request->ingredients;
-                    $cart["items"][$request->product_id]["ingredientPrice"] =  array_sum( $request->ingredients) + floatval($cart["items"][$request->product_id]['product_total']) ;
+                    $cart["items"][$request->product_id]["ingredientPrice"] = array_sum($cart["items"][$request->product_id]["ingredients"]);
+                    $cart["items"][$request->product_id]["product_total"] = $cart["items"][$request->product_id]["quantity"] * (floatval($cart["items"][$request->product_id]["ingredientPrice"]) + floatval($cart["items"][$request->product_id]["product"]["price"]));
                 }
-                if ($request->has('special_request')){
+                if ($request->has('special_request')) {
                     $cart["items"][$request->product_id]["special_request"] = $request->special_request;
                 }
 
@@ -62,6 +71,9 @@ class CartController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => "updated it successfully.",
+                    'product_total' => $cart["items"][$request->product_id]["product_total"],
+                    'price' => $cart["items"][$request->product_id]["product"]["price"],
+                    'ingredient_price' => $ingredientPrice,
                     'button' => $cart,
                 ]);
             }

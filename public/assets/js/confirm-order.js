@@ -6,10 +6,12 @@ var incrementPlus = buttonPlus.click(function () {
   $n.val(Number($n.val()) + 1);
 });
 
+
 var incrementMinus = buttonMinus.click(function () {
+
   var $n = $(this).parent(".qty-container").find(".input-qty");
   var amount = Number($n.val());
-  if (amount > 0) {
+  if (amount > 1) {
     $n.val(amount - 1);
   }
 });

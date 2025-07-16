@@ -11,4 +11,11 @@ class CheckoutController extends Controller
     {
         return view('screens.web.checkout.index');
     }
+    public function store(Request $request)
+    {
+
+        dd($request->all());
+
+        // return redirect()->route('confirm');
+    }
 }

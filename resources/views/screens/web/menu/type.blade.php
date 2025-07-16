@@ -275,11 +275,13 @@
             $('.dish-cart-lunch-time').prop("disabled", false);
         }
 
-
+        var oldValue = $('.restaurantSelect').find(":selected").val();
 
 
         $(document).on("click", ".head-location-btn", function() {
             $('.location-popup-wrap').addClass("active")
+
+
         })
 
         $('#location-form').on("submit", function(e) {
@@ -288,6 +290,45 @@
             var restaurantSelect = $('.restaurantSelect').find(":selected").val()
             var locationType = $('.location-btns.active').attr("data-view");
             console.log(locationType)
+            if (oldValue != restaurantSelect) {
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "If you proceed Your Cart Will be Empty",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    cancelButtonText: "Don't Proceed Further",
+                    confirmButtonText: "Proceed"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Cart Empty!",
+                            text: "Your Cart Is Now Empty",
+                            icon: "success"
+                        });
+                        $.ajax({
+                            type: 'GET',
+                            url: '{{ route('cart.flush') }}',
+                            success: function(response) {
+
+                            }
+                        })
+
+                        orderRoute(restaurantSelect, locationType)
+
+                    }
+                });
+
+            } else {
+                orderRoute(restaurantSelect, locationType)
+
+            }
+        })
+
+        function orderRoute(restaurant, location) {
+
+
             if (parseInt($('.location-select').val())) {
 
 
@@ -296,8 +337,8 @@
                     url: "{{ route('location') }}",
                     data: {
                         _token: "{{ csrf_token() }}",
-                        location: restaurantSelect,
-                        type: locationType,
+                        location: restaurant,
+                        type: location,
 
                     },
                     success: function(response) {
@@ -306,15 +347,12 @@
 
                         window.location.href = response.location.route
                         $('.location-popup-wrap').removeClass('active')
-
-
-
                     }
                 })
             } else {
                 $('.errorRestaurant').html('Required Value');
             }
-        })
+        }
 
         $('.location-btns').on("click", function() {
             $('.location-btns').removeClass("active")
@@ -368,12 +406,11 @@
                     if (response.ingredientPrice) {
                         $('#totalPrice').html(response.ingredientPrice)
                         $('#totalPrice').attr("data-price", response.ingredientPrice)
-                    }
-                    else{
+                    } else {
                         $('.popup-sb-para').attr('data-price', response.product_total)
                         $('#totalPrice').attr("data-price", response.product_total)
                     }
-                    
+
 
                     $('.ingredients-row').html('')
 
@@ -432,12 +469,15 @@
                     if (response.status) {
                         $("#cart-main-container").html(response.cartHtml)
                     }
+                    console.log(response)
                     // console.log(response)
                     var proId = response.button.split("-")[1]
                     $('.button-' + proId).prop("disabled", true);
                 }
             })
         }
+
+
 
         const cartContainer = $("#cart-container");
 
