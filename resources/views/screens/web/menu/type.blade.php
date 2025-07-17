@@ -145,7 +145,7 @@
                                                             id="{{ $menu->id }}"
                                                             data-lunch-time-from="{{ $branch->lunch_time->from }}"
                                                             data-lunch-time-to="{{ $branch->lunch_time->to }}"
-                                                            {{ isset(session('cart')['items'][$menu->id]) ? 'disabled' : '' }}><i
+                                                            {{ isset(session('cart')['items'][$menu->id]) ? 'data-cart=Y' : 'n' }}><i
                                                                 class="fa-solid fa-plus"></i></button>
                                                     </div>
                                                 </div>
@@ -299,9 +299,21 @@
         var currentSeconds = (now.getHours() * 3600) + (now.getMinutes() * 60) + now.getSeconds();
 
         if (currentSeconds < LunchTimeFrom || currentSeconds > LunchTimeTo) {
+
             $('.dish-cart-lunch-time').prop("disabled", true);
         } else {
-            $('.dish-cart-lunch-time').prop("disabled", false);
+                   var attr = $('.dish-cart-lunch-time').attr("data-cart")
+            if(attr == 'Y'){
+
+                $('.dish-cart-lunch-time').prop("disabled", true);
+
+
+            }
+            else{
+                $('.dish-cart-lunch-time').prop("disabled", false);
+
+            }
+
         }
 
         var oldValue = $('.restaurantSelect').find(":selected").val();
@@ -510,7 +522,8 @@
                     }
                     console.log(response)
                     // console.log(response)
-                    var proId = response.button.split("-")[1]
+                    var proId = response.button
+                    proId = proId.split("-")[1]
                     $('.button-' + proId).prop("disabled", true);
                 }
             })
