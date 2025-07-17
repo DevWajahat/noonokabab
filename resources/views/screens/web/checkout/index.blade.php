@@ -9,9 +9,9 @@
                         industry. Lorem Ipsum has been the industry's standard <br> dummy text</p>
                 </div>
 
-                <div id="multi-step-form-container">
+                <div id="multi-step-form-container" novalidate>
                     <form id="order-form" name="" action="{{ route('checkout.store') }}" method="post"
-                        onsubmit="return validateCaptcha()">
+                        >
 
                         @csrf
 
@@ -107,56 +107,18 @@
                                                     <div class="card-fields">
                                                         <label class="pay-detail-sb-title">Schedule for</label>
                                                         <select class="form-select card-field-input"
-                                                            aria-label="Default select example">
-                                                            <option value="" selected="">Today</option>
-                                                            <option value="">Tomorrow</option>
-                                                            <option value="">Thursday, June 27</option>
-                                                            <option value="">Friday, June 28</option>
-                                                            <option value="">Saturday, June 29</option>
-                                                            <option value="">Sunday, June 30</option>
-                                                            <option value="">Monday, July 1</option>
+                                                            aria-label="Default select example" id="scheduleDate" name="schedule_date">
+                                                            <option value="" class="today" selected="">Today
+                                                            </option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-lg-12 col-xl-12 col-xxl-6">
                                                     <div class="card-fields">
                                                         <label class="pay-detail-sb-title">Time</label>
-                                                        <select class="form-select card-field-input"
+                                                        <select class="form-select card-field-input" id="timeSchedule" name="timeSchedule"
                                                             aria-label="Default select example">
                                                             <option value="asap">ASAP</option>
-                                                            <option value="19:25">07:25pm</option>
-                                                            <option value="19:30">07:30pm</option>
-                                                            <option value="19:35">07:35pm</option>
-                                                            <option value="19:40">07:40pm</option>
-                                                            <option value="19:45">07:45pm</option>
-                                                            <option value="19:50">07:50pm</option>
-                                                            <option value="19:55">07:55pm</option>
-                                                            <option value="20:00">08:00pm</option>
-                                                            <option value="20:05">08:05pm</option>
-                                                            <option value="20:10">08:10pm</option>
-                                                            <option value="20:15">08:15pm</option>
-                                                            <option value="20:20">08:20pm</option>
-                                                            <option value="20:25">08:25pm</option>
-                                                            <option value="20:30">08:30pm</option>
-                                                            <option value="20:35">08:35pm</option>
-                                                            <option value="20:40">08:40pm</option>
-                                                            <option value="20:45">08:45pm</option>
-                                                            <option value="20:50">08:50pm</option>
-                                                            <option value="20:55">08:55pm</option>
-                                                            <option value="21:00">09:00pm</option>
-                                                            <option value="21:05">09:05pm</option>
-                                                            <option value="21:10">09:10pm</option>
-                                                            <option value="21:15">09:15pm</option>
-                                                            <option value="21:20">09:20pm</option>
-                                                            <option value="21:25">09:25pm</option>
-                                                            <option value="21:30">09:30pm</option>
-                                                            <option value="21:35">09:35pm</option>
-                                                            <option value="21:40">09:40pm</option>
-                                                            <option value="21:45">09:45pm</option>
-                                                            <option value="21:50">09:50pm</option>
-                                                            <option value="21:55">09:55pm</option>
-                                                            <option value="22:00">10:00pm</option>
-                                                            <option value="22:05">10:05pm</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -239,7 +201,7 @@
                                                                 </select>
                                                                 <input class="card-field-input"
                                                                     placeholder="or enter your own" type="number"
-                                                                    value="" name=""
+                                                                     name="gratuity_price" step=".01"
                                                                     id="Gratuity_input">
                                                             </div>
                                                             <input class="card-field-input text-white" disabled
@@ -275,68 +237,17 @@
                                 <div class="pay-detail-main Payment_Details">
                                     <div class="pay-detail-area">
                                         <h2 class="pay-detail-title">Payment Details</h2>
-                                        <div class="card-fields-area">
-                                            <div class="row">
 
-                                                <div class="col-12 col-lg-12 col-xl-12 col-xxl-6">
-                                                    <div class="card-fields">
-                                                        <input class="card-field-input" required inputmode="numeric"
-                                                            placeholder="Card Number" type="text" name=""
-                                                            id="cardnumber">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-12 col-xl-12 col-xxl-6">
-                                                    <div class="card-fields">
-                                                        <input class="card-field-input" required inputmode="numeric"
-                                                            placeholder="Expiry" type="text" name=""
-                                                            id="expirationdate">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-12 col-xl-12 col-xxl-6">
-                                                    <div class="card-fields">
-                                                        <input class="card-field-input" required inputmode="numeric"
-                                                            placeholder="CVV" type="text" name=""
-                                                            id="securitycode">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-12 col-xl-12 col-xxl-6">
-                                                    <div class="card-fields">
-                                                        <input class="card-field-input" required
-                                                            placeholder="Billing Zip" type="text" name=""
-                                                            id="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <label class="pay-detail-sb-title">* Validation Code</label>
-                                                    <div class="card-fields">
-                                                        <div id="captchaContainer">
-
-                                                            <input type="text" class="card-field-input" required
-                                                                id="captchaInput" placeholder="" />
-                                                            <div class="position-relative">
-                                                                <img id="captchaImg" class="img-fluid"
-                                                                    src="{{ asset('assets/images/qr-code-img.png') }}"
-                                                                    alt="Refresh CAPTCHA" style="cursor: pointer;">
-                                                                <canvas id="captchaCanvas" width="150"
-                                                                    height="49"></canvas>
-                                                            </div>
-                                                        </div>
-                                                        <p class="dish-discrip text-white mt-1 lh-1" id="result">
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="billing-area">
                                             <div class="billing-inner-area">
                                                 <span class="billing-title">Sub Total</span>
                                                 <span class="billing-price"><strong>$</strong><span
-                                                        id="billingPrice">380.00</span></span>
+                                                        id="billingPrice">{{ session('cart')["subtotal"] }}</span></span>
                                             </div>
-                                            <div class="billing-inner-area">
+                                            {{-- <div class="billing-inner-area">
                                                 <span class="billing-title">Tax</span>
                                                 <span class="billing-price">$40</span>
-                                            </div>
+                                            </div> --}}
                                             <div class="billing-inner-area gratuity-price-area">
                                                 <span class="billing-title">Gratuity (Thank You!)</span>
                                                 <span class="billing-price"><strong>$</strong><span
@@ -350,7 +261,7 @@
                                             </button>
                                             <button type="submit" class="pay-btn">
                                                 <div class="">
-                                                    <span class="total-price">$470.00</span>
+                                                    <span class="total-price">${{ session('cart')["subtotal"] }}</span>
                                                 </div>
                                                 <div class="">
                                                     Pay
@@ -375,33 +286,33 @@
 <script>
     let captchaValue;
 
-    function generateCaptcha() {
-        captchaValue = Math.floor(100000 + Math.random() * 900000).toString();
-        const canvas = document.getElementById('captchaCanvas');
-        const ctx = canvas.getContext('2d');
+    // function generateCaptcha() {
+    //     captchaValue = Math.floor(100000 + Math.random() * 900000).toString();
+    //     const canvas = document.getElementById('captchaCanvas');
+    //     const ctx = canvas.getContext('2d');
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        ctx.font = '24px Arial';
-        ctx.fillStyle = '#fff';
-        ctx.textBaseline = 'middle';
-        ctx.textAlign = 'center';
-        ctx.fillText(captchaValue, canvas.width / 2, canvas.height / 2);
-    }
+    //     ctx.font = '24px Arial';
+    //     ctx.fillStyle = '#fff';
+    //     ctx.textBaseline = 'middle';
+    //     ctx.textAlign = 'center';
+    //     ctx.fillText(captchaValue, canvas.width / 2, canvas.height / 2);
+    // }
 
-    function validateCaptcha() {
-        const userInput = document.getElementById('captchaInput').value;
-        if (userInput === captchaValue) {
-            document.getElementById('result').innerText = "Code Validated";
-            return true;
-        } else {
-            document.getElementById('result').innerText = "Validation code does not match";
-            generateCaptcha();
-            return false;
-        }
-    }
+    // function validateCaptcha() {
+    //     const userInput = document.getElementById('captchaInput').value;
+    //     if (userInput === captchaValue) {
+    //         document.getElementById('result').innerText = "Code Validated";
+    //         return true;
+    //     } else {
+    //         document.getElementById('result').innerText = "Validation code does not match";
+    //         generateCaptcha();
+    //         return false;
+    //     }
+    // }
 
-    window.onload = generateCaptcha;
+    // window.onload = generateCaptcha;
 </script>
 
 
@@ -413,6 +324,76 @@
     $(document).ready(function() {
 
 
+        var timeDropDown = $('#timeSchedule')
+
+
+        var openTime = "{{ session('location')['branch'][0]['open_time'] }}"
+        var closeTime = "{{ session('location')['branch'][0]['close_time'] }}"
+
+
+        function timeToSeconds(timeString) {
+            const [hours, minutes, seconds] = timeString.split(':').map(Number);
+            return hours * 3600 + minutes * 60 + seconds;
+        }
+
+        openTime = timeToSeconds(openTime);
+        closeTime = timeToSeconds(closeTime);
+
+
+        for (var i = openTime; i <= closeTime; i += 300) {
+            var hour = Math.floor(i / 3600);
+            hour = hour.toString();
+            if (hour.length == 1) {
+                hour = hour.padStart(2, '0');
+            }
+            var minute = Math.floor(i % 3600 / 60);
+            minute = minute.toString();
+            if (minute.length == 1) {
+                minute = minute.padStart(2, '0');
+            }
+
+            var time = hour + ":" + minute
+            var newTime = tConvert(time);
+
+            timeDropDown.append(`<option value="${time}">${newTime}</option>`)
+
+        }
+
+        function tConvert(time) {
+
+            time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+            if (time.length > 1) {
+                time = time.slice(1);
+                time[5] = +time[0] < 12 ? 'AM' : 'PM';
+                time[0] = +time[0] % 12 || 12;
+            }
+            return time.join('');
+        }
+
+
+        var dateDropDown = $('#scheduleDate')
+        var today = new Date()
+
+        var optionHtml = '';
+        for (let i = 1; i < 7; i++) {
+            var nextDay = new Date(today);
+            nextDay.setDate(today.getDate() + i);
+
+            var option = document.createElement('option')
+            option.textContent = nextDay.toLocaleString('en-US', {
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric'
+            });
+
+            option.value = nextDay.toISOString().split('T')[0];
+
+            optionHtml += `${option}`;
+            dateDropDown.append(option)
+
+        }
+
 
         $(document).on("click", ".dish-dlt-btn ", function() {
             $(this).parents(".selected-dishes").remove()
@@ -422,8 +403,6 @@
                 url: '{{ url('cart/destroy') . '/' }}' + productId,
                 success: function(response) {
                     console.log(response)
-
-
 
                 }
             })
@@ -485,14 +464,13 @@
 
     document.getElementById('percentageSelect').addEventListener('change', function() {
         var billingPrice = parseFloat(document.getElementById('billingPrice').innerText);
+        // console.log(billingPrice)
         var selectedPercentage = parseFloat(this.value);
         var gratuityAmount = (billingPrice * selectedPercentage) / 100;
 
         GratuityInput.value = gratuityAmount.toFixed(2);
 
         gratuityPrice.textContent = gratuityAmount
-
-
 
         if (GratuityInput.value == "") {
             gratuityPriceArea.classList.remove('active')

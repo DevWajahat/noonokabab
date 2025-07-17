@@ -169,8 +169,7 @@
                                                         <span class="dish-price">${{ $menu->price }}</span>
                                                         <button class="dish-cart button-{{ $menu->id }}"
                                                             id="{{ $menu->id }}"
-                                                            {{ isset(session('cart')['items'][$menu->id]) ? 'disabled' : '' }}><i
-                                                                class="fa-solid fa-plus"></i></button>
+                                                            {{ isset(session('cart')['items'][$menu->id]) && session('cart')["items"][$menu->id]["product"]["id"] == $menu->id ? 'disabled' : '' }}><i class="fa-solid fa-plus"></i></button>
                                                     </div>
                                                 </div>
                                             </div>

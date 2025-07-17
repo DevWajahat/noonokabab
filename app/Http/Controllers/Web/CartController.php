@@ -26,7 +26,7 @@ class CartController extends Controller
     }
     public function store(Request $request)
     {
-        // dd($request->all());
+
         try {
 
             $cart = session()->get('cart');
@@ -46,7 +46,7 @@ class CartController extends Controller
 
                     if (isset($cart["items"][$request->product_id]["ingredients"])) {
                         $cart["items"][$request->product_id]["ingredientPrice"] = array_sum($cart["items"][$request->product_id]["ingredients"]);
-                        $cart["items"][$request->product_id]["product_total"] = floatval($request->quantity) *(floatval($cart["items"][$request->product_id]["ingredientPrice"]) + floatval($cart["items"][$request->product_id]["product"]["price"]));
+                        $cart["items"][$request->product_id]["product_total"] = floatval($request->quantity) * (floatval($cart["items"][$request->product_id]["ingredientPrice"]) + floatval($cart["items"][$request->product_id]["product"]["price"]));
                     } else {
                         $cart["items"][$request->product_id]["product_total"] = floatval($request->quantity) * floatval($cart["items"][$request->product_id]["product"]["price"]);
                     }
@@ -66,6 +66,9 @@ class CartController extends Controller
 
 
                 session()->put('cart', $cart);
+
+                $this->calculate();
+
 
 
                 return response()->json([
@@ -87,6 +90,8 @@ class CartController extends Controller
 
             session()->put('cart', $cart);
 
+            $this->calculate();
+
             $cartHtml = view('screens.web.menu.cart-menus', get_defined_vars())->render();
             return response()->json([
                 'status' =>  true,
@@ -103,6 +108,20 @@ class CartController extends Controller
         }
     }
 
+    public function calculate()
+    {
+        $cart = session()->get('cart');
+
+        $subTotal = 0;
+        foreach ($cart["items"] as $cartItem) {
+            $subTotal += floatval($cartItem['product_total']);
+        }
+
+        $cart["subtotal"] = $subTotal;
+
+        session()->put('cart', $cart);
+    }
+
     public function destroy($id)
     {
         $cart = session()->get('cart');
@@ -114,6 +133,7 @@ class CartController extends Controller
             session()->put('cart', $cart);
         }
 
+        $this->calculate();
 
         return response()->json([]);
     }
