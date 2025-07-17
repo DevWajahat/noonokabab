@@ -35,13 +35,16 @@ class MenuController extends Controller
 
         $cart = session()->get('cart');
 
+        $ingredientPrice = "";
         $ingredientIds = [];
         if(isset($cart["items"][$menuId]["ingredients"])){
             foreach($cart["items"][$menuId]["ingredients"] as $ingredientId => $value){
                 $ingredientIds[] += $ingredientId;
             }
+
+            $ingredientPrice = array_sum($cart["items"][$menuId]["ingredients"]);
+
         }
-        $ingredientPrice = '';
         $request_special = "";
         if(isset($cart["items"][$menuId]["special_request"])){
             $request_special = $cart["items"][$menuId]["special_request"];

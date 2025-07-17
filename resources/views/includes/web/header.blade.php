@@ -35,7 +35,7 @@
                                                 <ul class="header-nav">
                                                     <button class="hd-mob-close"><i
                                                             class="fa-solid fa-circle-xmark"></i></button>
-                                                    <li><a href="index.php">Home</a></li>
+                                                    <li><a href="{{ route('index') }}">Home</a></li>
                                                     <li><a href="{{ route('specials') }}">Specials</a></li>
                                                         <li><a href="#" class="orderRoute">Order</a></li>
 
@@ -108,9 +108,9 @@
                                                         </div>
                                                     @endauth
                                                     <div class="header-links ">
-                                                        <a href="{{ route('checkout') }}"><i
+                                                        <a href="{{ route('checkout') }}" ><i
                                                                 class="fa-solid fa-basket-shopping"></i></a>
-                                                        <span>0</span>
+                                                        <span id="cartItemValue">0</span>
                                                     </div>
                                                     <div class="header-links">
                                                         <button type="button" class="headtwo-menu-btn"><i

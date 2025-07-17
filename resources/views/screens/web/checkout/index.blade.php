@@ -10,8 +10,7 @@
                 </div>
 
                 <div id="multi-step-form-container" novalidate>
-                    <form id="order-form" name="" action="{{ route('checkout.store') }}" method="post"
-                        >
+                    <form id="order-form" name="" action="{{ route('checkout.store') }}" method="post">
 
                         @csrf
 
@@ -33,6 +32,7 @@
 
                                         <div class="selected-dishes-main-area">
                                             @forelse (session('cart')["items"] as $item)
+
                                                 <div class="selected-dishes">
                                                     <div class="dishes-left-area">
                                                         <div class="dish-img-area">
@@ -44,8 +44,50 @@
                                                             <h3 class="dsh-name">{{ $item['product']['name'] }}</h3>
                                                             <p class="dish-discrip">
                                                                 {{ $item['product']['description'] }}</p>
+
+                                                            @if (isset($item['sidelines']))
+                                                                <h3 class="ingredients-title text-black mt-3 fw-bold"
+                                                                    style="font-size: 20px">Sidelines</h3>
+                                                                <ul class="list-unstyled">
+                                                                    @forelse ($item["sidelines"] as $sideline => $option)
+                                                                        <li class="mt-2">{{ $sideline }} =
+                                                                            {{ $option }} </li>
+
+                                                                    @empty
+                                                                    @endforelse
+                                                                </ul>
+                                                            @endif
+
+                                                            @if (isset($item['ingredients']))
+                                                                <h3 class="ingredients-title text-black mt-3 fw-bold"
+                                                                    style="font-size: 20px">Ingredients</h3>
+                                                                <ul class="list-unstyled">
+                                                                    @forelse ($item["product"]->ingredients as $ing)
+                                                                        @forelse ($item["ingredients"] as $ingredient => $price)
+                                                                            @if ($ingredient == $ing->id)
+                                                                                <li class="mt-2">
+                                                                                    {{ $ingredient == $ing->id ? $ing->name : '' }}
+                                                                                    =
+                                                                                    ${{ $price }} </li>
+                                                                            @endif
+                                                                        @empty
+                                                                        @endforelse
+
+                                                                    @empty
+                                                                    @endforelse
+                                                                </ul>
+                                                            @endif
+
+                                                            @if (isset($item["special_request"]))
+                                                                     <h3 class="ingredients-title text-black mt-3 fw-bold"
+                                                                    style="font-size: 20px">Special Request</h3>
+                                                                    <p class="mt-3">{{ $item["special_request"] }}</p>
+
+
+                                                            @endif
                                                         </div>
                                                     </div>
+
                                                     <div class="dishes-right-area">
                                                         <div class="dish-qty-area qty-container">
                                                             <button type="button" class="dish-qty-btn qty-btn-minus"
@@ -107,8 +149,10 @@
                                                     <div class="card-fields">
                                                         <label class="pay-detail-sb-title">Schedule for</label>
                                                         <select class="form-select card-field-input"
-                                                            aria-label="Default select example" id="scheduleDate" name="schedule_date">
-                                                            <option value="" class="today" selected="">Today
+                                                            aria-label="Default select example" id="scheduleDate"
+                                                            name="schedule_date">
+                                                            <option value="" class="today" selected="">
+                                                                Today
                                                             </option>
                                                         </select>
                                                     </div>
@@ -116,8 +160,8 @@
                                                 <div class="col-12 col-lg-12 col-xl-12 col-xxl-6">
                                                     <div class="card-fields">
                                                         <label class="pay-detail-sb-title">Time</label>
-                                                        <select class="form-select card-field-input" id="timeSchedule" name="timeSchedule"
-                                                            aria-label="Default select example">
+                                                        <select class="form-select card-field-input" id="timeSchedule"
+                                                            name="timeSchedule" aria-label="Default select example">
                                                             <option value="asap">ASAP</option>
                                                         </select>
                                                     </div>
@@ -201,7 +245,7 @@
                                                                 </select>
                                                                 <input class="card-field-input"
                                                                     placeholder="or enter your own" type="number"
-                                                                     name="gratuity_price" step=".01"
+                                                                    name="gratuity_price" step=".01"
                                                                     id="Gratuity_input">
                                                             </div>
                                                             <input class="card-field-input text-white" disabled
@@ -242,7 +286,7 @@
                                             <div class="billing-inner-area">
                                                 <span class="billing-title">Sub Total</span>
                                                 <span class="billing-price"><strong>$</strong><span
-                                                        id="billingPrice">{{ session('cart')["subtotal"] }}</span></span>
+                                                        id="billingPrice">{{ session('cart')['subtotal'] }}</span></span>
                                             </div>
                                             {{-- <div class="billing-inner-area">
                                                 <span class="billing-title">Tax</span>
@@ -261,7 +305,8 @@
                                             </button>
                                             <button type="submit" class="pay-btn">
                                                 <div class="">
-                                                    <span class="total-price">${{ session('cart')["subtotal"] }}</span>
+                                                    <span
+                                                        class="total-price">${{ session('cart')['subtotal'] }}</span>
                                                 </div>
                                                 <div class="">
                                                     Pay

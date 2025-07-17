@@ -27,10 +27,10 @@
                                     <div class="menu-btn"><i class="fa-solid fa-bars"></i></div>
                                 </div>
                                 <ul>
-                                    <li class="locate-tab "><a
+                                    <li class="locate-tab {{ Route::current()->parameters["type"] == 'delivery' ? 'active' : '' }}"><a
                                             href="{{ route('menu.type', ['type' => 'delivery', 'branchId' => $branchId]) }}">DELIVERY</a>
                                     </li>
-                                    <li class=""><a
+                                    <li class="locate-tab {{ Route::current()->parameters["type"] == 'takeout' ? 'active' : '' }}"><a
                                             href="{{ route('menu.type', ['type' => 'takeout', 'branchId' => $branchId]) }}">TAKEOUT</a>
                                     </li>
                                     <li class=""><button type="button" class="order-via-btn">ORDER VIA</button>
@@ -48,7 +48,7 @@
                         <div class="tab-main">
                             <div class="prod-slider active">
                                 <div class="location-title">
-                                    <h2>Delivery:</h2>
+                                    <h2>{{ Route::current()->parameters["type"] == 'delivery' ? 'Delivery' : 'Takeout' }}: {{ session('location')["branch"][0]["name"] }}</h2>
                                 </div>
                                 <div class="pb-5 cart-select-overfl">
                                     <div class="no-select-cart-para">
@@ -66,20 +66,31 @@
                 </div>
                 <div class="col-xxl-5 col-lg-3 col-12 pos-res-1">
                     {{-- <div class="header-links "> --}}
-                    <button type="button" class="head-location-btn mt-5">
-                        <div class="">
-                            <i class="fa-solid fa-location-dot"></i>
+
+                    <div class="d-flex mt-5 justify-content-end header-buttons">
+
+                        <button type="button" class="head-location-btn ">
+                            <div class="">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="">
+                                {{-- @dd(session('location')) --}}
+                                <span class="spn-1">Change Location</span>
+                                @if (isset(session('location')['branch'][0]['name']))
+                                    <span
+                                        class="spn-2 locate-value">{{ session('location')['branch']['0']['name'] }}</span>
+                                @else
+                                    <span class="spn-2 locate-value">Change Location</span>
+                                @endif
+                            </div>
+                        </button>
+
+                        <div class="header-links ">
+                            <a href="{{ route('checkout') }}"><i class="fa-solid fa-basket-shopping"></i></a>
+                            <span id="cartItemValue">0</span>
                         </div>
-                        <div class="">
-                            {{-- @dd(session('location')) --}}
-                            <span class="spn-1">Change Location</span>
-                            @if (isset(session('location')['branch'][0]['name']))
-                                <span class="spn-2 locate-value">{{ session('location')['branch']['0']['name'] }}</span>
-                            @else
-                                <span class="spn-2 locate-value">Change Location</span>
-                            @endif
-                        </div>
-                    </button>
+                    </div>
+
                     {{-- </div> --}}
                     <div class=" menu-card-area" width="1000" height="750">
                         <div class="menu-card-logo">
@@ -169,7 +180,8 @@
                                                         <span class="dish-price">${{ $menu->price }}</span>
                                                         <button class="dish-cart button-{{ $menu->id }}"
                                                             id="{{ $menu->id }}"
-                                                            {{ isset(session('cart')['items'][$menu->id]) && session('cart')["items"][$menu->id]["product"]["id"] == $menu->id ? 'disabled' : '' }}><i class="fa-solid fa-plus"></i></button>
+                                                            {{ isset(session('cart')['items'][$menu->id]) && session('cart')['items'][$menu->id]['product']['id'] == $menu->id ? 'disabled' : '' }}><i
+                                                                class="fa-solid fa-plus"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -256,6 +268,24 @@
 
 <script>
     $(document).ready(function() {
+
+
+        var cartItem = $('#cartItemValue')
+
+        cartCount();
+
+        function cartCount() {
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('cart.index') }}',
+                success: function(response) {
+                    console.log(response)
+                    $('#cartItemValue').html(response.cartCount)
+                }
+            })
+
+        }
+
 
         const timeToSeconds = (timeString) => {
             const parts = timeString.split(':');
@@ -401,14 +431,24 @@
                     console.log(response.menu.name)
                     $('.popup-pro-title').html(response.menu.name)
                     $('.popup-sb-para').html(
-                        `<strong>Price :</strong> $${response.product_total}`)
-                    if (response.ingredientPrice) {
-                        $('#totalPrice').html(response.ingredientPrice)
-                        $('#totalPrice').attr("data-price", response.ingredientPrice)
-                    } else {
-                        $('.popup-sb-para').attr('data-price', response.product_total)
-                        $('#totalPrice').attr("data-price", response.product_total)
-                    }
+                        `<strong>Price :</strong> $${response.menu.price}`)
+
+                        $('.popup-sb-para').attr('data-price', response.menu.price)
+
+                        var IngredientPrice = parseFloat(response.ingredientPrice);
+                        if(IngredientPrice > 0){
+                            var ingPrice =  parseFloat(response.menu.price) + IngredientPrice
+                            console.log(IngredientPrice)
+
+                            $('#totalPrice').attr("data-price", ingPrice)
+                            $('#totalPrice').html(`<strong>Total: </strong> $${ingPrice}`)
+                        }
+                        else{
+
+                            $('#totalPrice').attr("data-price", response.menu.price)
+                            $('#totalPrice').html(`<strong>Total: </strong> $${response.menu.price}`)
+                        }
+
 
 
                     $('.ingredients-row').html('')
@@ -495,6 +535,8 @@
                     // console.log(response)
 
                     $('.button-' + productId).prop("disabled", false);
+
+                    cartCount();
                 }
 
             })
@@ -520,8 +562,11 @@
             type = type.split('.')[1]
             // console.log(type)
 
+
+
             cartStore(type, productId, 1)
 
+            cartCount();
 
             $(`#${productId}`).find('.dish-cart')
 

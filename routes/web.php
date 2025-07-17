@@ -46,8 +46,13 @@ Route::controller(AboutController::class)->group(function () {
     Route::get('reviews/media', 'mediaReviews')->name('reviews.media');
     Route::get('reviews/guest', 'guestReviews')->name('reviews.guest');
 });
-Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
-Route::post('checkout/store',[CheckoutController::class, 'store'])->name('checkout.store');
+
+Route::prefix('checkout')->controller(CheckoutController::class)->name('checkout')->group(function() {
+    Route::get('/', 'index');
+    Route::post('store', 'store')->name('.store');
+
+});
+
 
 
 Route::controller(AuthController::class)->group(function () {

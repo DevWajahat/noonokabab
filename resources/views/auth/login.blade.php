@@ -597,7 +597,7 @@
 </head>
 
 <body>
-    <a class="mt-0 mb-0" href="index.php">
+    <a class="mt-0 mb-0" href="{{ route('index') }}">
         <img class="img-fluid login-logo" src="{{ asset('assets/images/noon-o-kabab-logo.png') }}" alt="">
     </a>
     <h2 class="login-main-title">Noon O Kabab</h2>

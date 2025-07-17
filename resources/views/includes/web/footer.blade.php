@@ -104,6 +104,17 @@
 
         })
 
+            var cartItem =  $('#cartItemValue')
+
+            $.ajax({
+                type:'GET',
+                url: '{{ route('cart.index') }}',
+                success:function (response){
+                    console.log(response)
+                    $('#cartItemValue').html(response.cartCount)
+                }
+            })
+
 
         $('#location-form').on("submit", function(e) {
 

@@ -88,8 +88,9 @@ class CheckoutController extends Controller
             }
         }
 
+        session()->forget(['cart']);
 
 
-        return back();
+        return redirect()->route('index');
     }
 }

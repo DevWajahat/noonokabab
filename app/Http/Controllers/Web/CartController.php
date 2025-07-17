@@ -17,10 +17,14 @@ class CartController extends Controller
             $menu = Menu::all();
 
 
+
+            $cartCount = count(session()->get('cart')["items"]);
+
             $cartHtml = view('screens.web.menu.cart-menus', get_defined_vars())->render();
             return response()->json([
                 'status' =>  true,
-                'cartHtml' => $cartHtml
+                'cartHtml' => $cartHtml,
+                'cartCount' => $cartCount
             ], 200);
         }
     }
@@ -55,9 +59,15 @@ class CartController extends Controller
 
                 if ($request->has("ingredients")) {
                     unset($cart["items"][$request->product_id]["ingredients"]);
+                    unset($cart["items"][$request->product_id]["ingredientPrice"]);
+                    unset($cart["items"][$request->product_id]["product_total"]);
+
+
                     $cart["items"][$request->product_id]["ingredients"] = $request->ingredients;
                     $cart["items"][$request->product_id]["ingredientPrice"] = array_sum($cart["items"][$request->product_id]["ingredients"]);
-                    $cart["items"][$request->product_id]["product_total"] = $cart["items"][$request->product_id]["quantity"] * (floatval($cart["items"][$request->product_id]["ingredientPrice"]) + floatval($cart["items"][$request->product_id]["product"]["price"]));
+
+                    $cart["items"][$request->product_id]["product_total"] = $cart["items"][$request->product_id]["quantity"] *
+                        (floatval($cart["items"][$request->product_id]["ingredientPrice"]) + floatval($cart["items"][$request->product_id]["product"]["price"]));
                 }
                 if ($request->has('special_request')) {
                     $cart["items"][$request->product_id]["special_request"] = $request->special_request;
