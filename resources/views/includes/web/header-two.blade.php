@@ -26,7 +26,7 @@
 
 
                             <li class="link-area"><a href="#" class="link orderRoute" style="color:#fff !important">Order</a></li>
-                       
+
                         <li class="link-area">
                             <a class="link" href="{{ route('dine') }}">
                                 Dine-In
@@ -106,7 +106,7 @@
                     @endauth
                     <div class="header-links ">
                         <a href="{{ route('checkout') }}"><i class="fa-solid fa-basket-shopping"></i></a>
-                        <span>0</span>
+                        <span id="cartItemValue">0</span>
                     </div>
                     <div class="header-links">
                         <button type="button" class="headtwo-menu-btn"><i class="fa-solid fa-bars"></i></button>

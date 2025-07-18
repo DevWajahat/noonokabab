@@ -41,15 +41,17 @@
                 <div class="locat-area active">
                     <select class="restaurantSelect form-select location-select select-val"
                         aria-label="Default select example" data-content="delivery">
-                        <option disabled selected>Select Restaurants</option>
+                        <option disabled>Select Restaurants</option>
                         @forelse ($branches as $branch)
-                            <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                            <option value="{{ $branch->id }}"
+                                {{ session('location') !== null && $branch->id == session('location')['branch'][0]['id'] ? 'selected' : '' }}>
+                                {{ $branch->name }}</option>
                         @empty
                         @endforelse
 
                     </select>
                     <span class="text-danger errorRestaurant" style="color:red"></span>
-                    <div class="location-input-area">
+                    <div class="location-input-area" id="locationInputArea">
                         <input placeholder="Enter your location" class="pickupSelect location-select" type="text"
                             name="" id="cordinate" data-location="takeout">
                         <button id="getLocation" type="button" class="current-location-btn">
@@ -58,15 +60,17 @@
                     </div>
                 </div>
                 <div class="locat-area">
-                    <select data-content="takeout" class="form-select location-select select-val"
-                    id="pickupLocation" aria-label="Default select example">
-                    <option disabled>Select Pickup Location</option>
-                    @forelse ($branches as $branch)
-                            <option value="{{ $branch->id }}" {{ session('location') !== null && $branch->id  == session('location')["branch"][0]['id'] ? 'selected' : '' }}>{{ $branch->name }}
+                    <select data-content="takeout" class="form-select location-select select-val" id="pickupLocation"
+                        aria-label="Default select example">
+                        <option disabled>Select Pickup Location</option>
+                        @forelse ($branches as $branch)
+                            <option value="{{ $branch->id }}"
+                                {{ session('location') !== null && $branch->id == session('location')['branch'][0]['id'] ? 'selected' : '' }}>
+                                {{ $branch->name }}
                             </option>
-                            @empty
-                            @endforelse
-                        </select>
+                        @empty
+                        @endforelse
+                    </select>
                 </div>
                 <button type="submit" id="locateSelectBtn" class="locate-select-btn">Select</button>
             </form>
@@ -95,6 +99,9 @@
     $(document).ready(function() {
 
 
+        var oldValue = $('.restaurantSelect').find(":selected").val();
+
+
         $('.orderRoute').on("click", function() {
             @if (session('location') !== null)
                 var route = "{{ session('location')['route'] }}";
@@ -104,16 +111,121 @@
 
         })
 
-            var cartItem =  $('#cartItemValue')
+        var cartItem = $('#cartItemValue')
 
+        $.ajax({
+            type: 'GET',
+            url: '{{ route('cart.index') }}',
+            success: function(response) {
+                console.log(response)
+                $('#cartItemValue').html(response.cartCount)
+            }
+        })
+
+        $(document).on("click", '.location-btns', function() {
+            var type = $(this).attr("data-view");
+            console.log("da")
+
+            if (type == 'takeout') {
+                console.log(type)
+                $('#locationInputArea').addClass("d-none")
+            } else {
+                console.log(type)
+                $('#locationInputArea').removeClass("d-none")
+            }
+        })
+
+
+        $('#location-form').on("submit", function(e) {
+
+            e.preventDefault()
+            var restaurantSelect = $('.restaurantSelect').find(":selected").val()
+            var locationType = $('.location-btns.active').attr("data-view");
+            console.log(locationType)
+            if (oldValue != restaurantSelect) {
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "If you proceed Your Cart Will be Empty",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    cancelButtonText: "Don't Proceed Further",
+                    confirmButtonText: "Proceed"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Cart Empty!",
+                            text: "Your Cart Is Now Empty",
+                            icon: "success"
+                        });
+                        $.ajax({
+                            type: 'GET',
+                            url: '{{ route('cart.flush') }}',
+                            success: function(response) {
+                                cartCount()
+                            }
+                        })
+
+                        orderRoute(restaurantSelect, locationType)
+
+                        cartCount();
+
+                        window.location.reload();
+
+
+                    }
+                });
+
+            } else {
+                orderRoute(restaurantSelect, locationType)
+
+            }
+        })
+
+        function cartCount() {
             $.ajax({
-                type:'GET',
+                type: 'GET',
                 url: '{{ route('cart.index') }}',
-                success:function (response){
+                success: function(response) {
                     console.log(response)
                     $('#cartItemValue').html(response.cartCount)
                 }
             })
+
+        }
+
+        function orderRoute(restaurant, location) {
+
+
+            if (parseInt($('.location-select').val())) {
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('location') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        location: restaurant,
+                        type: location,
+
+                    },
+                    success: function(response) {
+
+                        console.log(response)
+
+                        $('.orderRoute').attr("href", response.location.route)
+                        $('.location-popup-wrap').removeClass('active')
+                    }
+                })
+            } else {
+                $('.errorRestaurant').html('Required Value');
+            }
+        }
+
+        // $('.orderRoute').attr("href",response.location.route)
+
+
 
 
         $('#location-form').on("submit", function(e) {
@@ -122,6 +234,8 @@
 
             var restaurantSelect = $('.restaurantSelect').find(':selected').val()
             var pickupSelect = $('.pickupSelect').find(':selected').val()
+
+
 
             if (parseInt($('.location-select').val())) {
                 var type = $('.location-select').attr("data-content")
@@ -140,25 +254,14 @@
 
                         console.log(response)
 
-
                         $('.orderRoute').attr("href", response.location.route)
                         $('.location-popup-wrap').removeClass('active')
-
-
 
                     }
                 })
             } else {
                 $('.errorRestaurant').html('Required Value');
             }
-
-
-
-
-            // } else {
-            //     $('.errorRestaurant').text("Required Value")
-            //     e.preventDefault();
-            // }
 
         })
     })

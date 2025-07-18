@@ -28,95 +28,100 @@
                                             <img class="bg-img four"
                                                 src="{{ asset('assets/images/confirm-pay-frame.png') }}" alt="">
                                         </div>
-                                        <h2 class="conf-pay-sb-title">Dishes You Have Selected:</h2>
 
-                                        <div class="selected-dishes-main-area">
-                                            @forelse (session('cart')["items"] as $item)
+                                        @if (isset(session('cart')['items']))
+                                            <h2 class="conf-pay-sb-title">Dishes You Have Selected:</h2>
 
-                                                <div class="selected-dishes">
-                                                    <div class="dishes-left-area">
-                                                        <div class="dish-img-area">
-                                                            <img class="img-fluid dish-img"
-                                                                src="{{ asset('assets/images/select-dish-img-1.png') }}"
-                                                                alt="">
-                                                        </div>
-                                                        <div class="dish-name-area">
-                                                            <h3 class="dsh-name">{{ $item['product']['name'] }}</h3>
-                                                            <p class="dish-discrip">
-                                                                {{ $item['product']['description'] }}</p>
 
-                                                            @if (isset($item['sidelines']))
-                                                                <h3 class="ingredients-title text-black mt-3 fw-bold"
-                                                                    style="font-size: 20px">Sidelines</h3>
-                                                                <ul class="list-unstyled">
-                                                                    @forelse ($item["sidelines"] as $sideline => $option)
-                                                                        <li class="mt-2">{{ $sideline }} =
-                                                                            {{ $option }} </li>
+                                            <div class="selected-dishes-main-area">
+                                                @forelse (session('cart')["items"] as $item)
+                                                    <div class="selected-dishes">
+                                                        <div class="dishes-left-area">
+                                                            <div class="dish-img-area">
+                                                                <img class="img-fluid dish-img"
+                                                                    src="{{ asset('assets/images/select-dish-img-1.png') }}"
+                                                                    alt="">
+                                                            </div>
+                                                            <div class="dish-name-area">
+                                                                <h3 class="dsh-name">{{ $item['product']['name'] }}</h3>
+                                                                <p class="dish-discrip">
+                                                                    {{ $item['product']['description'] }}</p>
 
-                                                                    @empty
-                                                                    @endforelse
-                                                                </ul>
-                                                            @endif
+                                                                @if (isset($item['sidelines']))
+                                                                    <h3 class="ingredients-title text-black mt-3 fw-bold"
+                                                                        style="font-size: 20px">Sidelines</h3>
+                                                                    <ul class="list-unstyled">
+                                                                        @forelse ($item["sidelines"] as $sideline => $option)
+                                                                            <li class="mt-2">{{ $sideline }} =
+                                                                                {{ $option }} </li>
 
-                                                            @if (isset($item['ingredients']))
-                                                                <h3 class="ingredients-title text-black mt-3 fw-bold"
-                                                                    style="font-size: 20px">Ingredients</h3>
-                                                                <ul class="list-unstyled">
-                                                                    @forelse ($item["product"]->ingredients as $ing)
-                                                                        @forelse ($item["ingredients"] as $ingredient => $price)
-                                                                            @if ($ingredient == $ing->id)
-                                                                                <li class="mt-2">
-                                                                                    {{ $ingredient == $ing->id ? $ing->name : '' }}
-                                                                                    =
-                                                                                    ${{ $price }} </li>
-                                                                            @endif
                                                                         @empty
                                                                         @endforelse
+                                                                    </ul>
+                                                                @endif
 
-                                                                    @empty
-                                                                    @endforelse
-                                                                </ul>
-                                                            @endif
+                                                                @if (isset($item['ingredients']))
+                                                                    <h3 class="ingredients-title text-black mt-3 fw-bold"
+                                                                        style="font-size: 20px">Ingredients</h3>
+                                                                    <ul class="list-unstyled">
+                                                                        @forelse ($item["product"]->ingredients as $ing)
+                                                                            @forelse ($item["ingredients"] as $ingredient => $price)
+                                                                                @if ($ingredient == $ing->id)
+                                                                                    <li class="mt-2">
+                                                                                        {{ $ingredient == $ing->id ? $ing->name : '' }}
+                                                                                        =
+                                                                                        ${{ $price }} </li>
+                                                                                @endif
+                                                                            @empty
+                                                                            @endforelse
 
-                                                            @if (isset($item["special_request"]))
-                                                                     <h3 class="ingredients-title text-black mt-3 fw-bold"
-                                                                    style="font-size: 20px">Special Request</h3>
-                                                                    <p class="mt-3">{{ $item["special_request"] }}</p>
+                                                                        @empty
+                                                                        @endforelse
+                                                                    </ul>
+                                                                @endif
 
+                                                                @if (isset($item['special_request']))
+                                                                    <h3 class="ingredients-title text-black mt-3 fw-bold"
+                                                                        style="font-size: 20px">Special Request</h3>
+                                                                    <p class="mt-3">{{ $item['special_request'] }}
+                                                                    </p>
+                                                                @endif
+                                                            </div>
+                                                        </div>
 
-                                                            @endif
+                                                        <div class="dishes-right-area">
+                                                            <div class="dish-qty-area qty-container">
+                                                                <button type="button"
+                                                                    class="dish-qty-btn qty-btn-minus" data-multi="0"
+                                                                    data-id="{{ $item['product']['id'] }}">
+                                                                    <i class="fa-solid fa-minus"></i>
+                                                                </button>
+                                                                <input class="dish-qty input-qty" type="number"
+                                                                    value="{{ $item['quantity'] }}" name=""
+                                                                    readonly id="displayCounter">
+                                                                <button type="button" class="dish-qty-btn qty-btn-plus"
+                                                                    data-id="{{ $item['product']['id'] }}">
+                                                                    <i class="fa-solid fa-plus"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="dish-price-area">
+                                                                <span
+                                                                    class="select-dish-price price-{{ $item['product']['id'] }}">${{ $item['product_total'] }}</span>
+                                                            </div>
+                                                            <div class="dish-delete-btn-area">
+                                                                <button type="button" class="dish-qty-btn dish-dlt-btn"
+                                                                    data-id="{{ $item['product']['id'] }}">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                @empty
+                                                @endforelse
+                                            </div>
 
-                                                    <div class="dishes-right-area">
-                                                        <div class="dish-qty-area qty-container">
-                                                            <button type="button" class="dish-qty-btn qty-btn-minus"
-                                                                data-multi="0" data-id="{{ $item['product']['id'] }}">
-                                                                <i class="fa-solid fa-minus"></i>
-                                                            </button>
-                                                            <input class="dish-qty input-qty" type="number"
-                                                                value="{{ $item['quantity'] }}" name="" readonly
-                                                                id="displayCounter">
-                                                            <button type="button" class="dish-qty-btn qty-btn-plus"
-                                                                data-id="{{ $item['product']['id'] }}">
-                                                                <i class="fa-solid fa-plus"></i>
-                                                            </button>
-                                                        </div>
-                                                        <div class="dish-price-area">
-                                                            <span
-                                                                class="select-dish-price price-{{ $item['product']['id'] }}">${{ $item['product_total'] }}</span>
-                                                        </div>
-                                                        <div class="dish-delete-btn-area">
-                                                            <button type="button" class="dish-qty-btn dish-dlt-btn"
-                                                                data-id="{{ $item['product']['id'] }}">
-                                                                <i class="fa-solid fa-trash"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @empty
-                                            @endforelse
-                                        </div>
+
+
                                     </div>
                                 </div>
                                 <div class="pay-detail-main Order_Details">
@@ -286,7 +291,7 @@
                                             <div class="billing-inner-area">
                                                 <span class="billing-title">Sub Total</span>
                                                 <span class="billing-price"><strong>$</strong><span
-                                                        id="billingPrice">{{ session('cart')['subtotal'] }}</span></span>
+                                                        id="billingPrice">{{ isset(session('cart')['subtotal']) ? session('cart')['subtotal'] : '' }}</span></span>
                                             </div>
                                             {{-- <div class="billing-inner-area">
                                                 <span class="billing-title">Tax</span>
@@ -306,7 +311,7 @@
                                             <button type="submit" class="pay-btn">
                                                 <div class="">
                                                     <span
-                                                        class="total-price">${{ session('cart')['subtotal'] }}</span>
+                                                        class="total-price">${{ isset(session('cart')['subtotal']) ? session('cart')['subtotal'] : '' }}</span>
                                                 </div>
                                                 <div class="">
                                                     Pay
@@ -318,6 +323,9 @@
                                 </div>
                             </div>
                         </section>
+                    @else
+                        <h2 class="conf-pay-sb-title">Cart Is Empty</h2>
+                        @endif
                     </form>
                 </div>
             </div>

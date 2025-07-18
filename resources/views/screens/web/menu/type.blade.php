@@ -27,10 +27,14 @@
                                     <div class="menu-btn"><i class="fa-solid fa-bars"></i></div>
                                 </div>
                                 <ul>
-                                    <li class="locate-tab {{ Route::current()->parameters["type"] == 'delivery' ? 'active' : '' }}"><a
+                                    <li
+                                        class="locate-tab {{ Route::current()->parameters['type'] == 'delivery' ? 'active' : '' }}">
+                                        <a
                                             href="{{ route('menu.type', ['type' => 'delivery', 'branchId' => $branchId]) }}">DELIVERY</a>
                                     </li>
-                                    <li class="locate-tab {{ Route::current()->parameters["type"] == 'takeout' ? 'active' : '' }}"><a
+                                    <li
+                                        class="locate-tab {{ Route::current()->parameters['type'] == 'takeout' ? 'active' : '' }}">
+                                        <a
                                             href="{{ route('menu.type', ['type' => 'takeout', 'branchId' => $branchId]) }}">TAKEOUT</a>
                                     </li>
                                     <li class=""><button type="button" class="order-via-btn">ORDER VIA</button>
@@ -48,7 +52,8 @@
                         <div class="tab-main">
                             <div class="prod-slider active">
                                 <div class="location-title">
-                                    <h2>{{ Route::current()->parameters["type"] == 'delivery' ? 'Delivery' : 'Takeout' }}: {{ session('location')["branch"][0]["name"] }}</h2>
+                                    <h2>{{ Route::current()->parameters['type'] == 'delivery' ? 'Delivery' : 'Takeout' }}:
+                                        {{ session('location')['branch'][0]['name'] }}</h2>
                                 </div>
                                 <div class="pb-5 cart-select-overfl">
                                     <div class="no-select-cart-para">
@@ -234,7 +239,7 @@
 
                         </select>
                         <span class="text-danger errorRestaurant" style="color:red"></span>
-                        <div class="location-input-area">
+                        <div class="location-input-area" id="locationInputArea">
                             <input placeholder="Enter your location" class="restaurantSelect location-select"
                                 type="text" name="" id="cordinate" data-location="takeout">
                             <button id="getLocation" type="button" class="current-location-btn">
@@ -285,6 +290,18 @@
             })
 
         }
+        $(document).on("click", '.location-btns', function() {
+            var type = $(this).attr("data-view");
+            console.log("da")
+
+            if (type == 'takeout') {
+                console.log(type)
+                $('#locationInputArea').addClass("d-none")
+            } else {
+                console.log(type)
+                $('#locationInputArea').removeClass("d-none")
+            }
+        })
 
 
         const timeToSeconds = (timeString) => {
@@ -302,14 +319,13 @@
 
             $('.dish-cart-lunch-time').prop("disabled", true);
         } else {
-                   var attr = $('.dish-cart-lunch-time').attr("data-cart")
-            if(attr == 'Y'){
+            var attr = $('.dish-cart-lunch-time').attr("data-cart")
+            if (attr == 'Y') {
 
                 $('.dish-cart-lunch-time').prop("disabled", true);
 
 
-            }
-            else{
+            } else {
                 $('.dish-cart-lunch-time').prop("disabled", false);
 
             }
@@ -445,21 +461,21 @@
                     $('.popup-sb-para').html(
                         `<strong>Price :</strong> $${response.menu.price}`)
 
-                        $('.popup-sb-para').attr('data-price', response.menu.price)
+                    $('.popup-sb-para').attr('data-price', response.menu.price)
 
-                        var IngredientPrice = parseFloat(response.ingredientPrice);
-                        if(IngredientPrice > 0){
-                            var ingPrice =  parseFloat(response.menu.price) + IngredientPrice
-                            console.log(IngredientPrice)
+                    var IngredientPrice = parseFloat(response.ingredientPrice);
+                    if (IngredientPrice > 0) {
+                        var ingPrice = parseFloat(response.menu.price) + IngredientPrice
+                        console.log(IngredientPrice)
 
-                            $('#totalPrice').attr("data-price", ingPrice)
-                            $('#totalPrice').html(`<strong>Total: </strong> $${ingPrice}`)
-                        }
-                        else{
+                        $('#totalPrice').attr("data-price", ingPrice)
+                        $('#totalPrice').html(`<strong>Total: </strong> $${ingPrice}`)
+                    } else {
 
-                            $('#totalPrice').attr("data-price", response.menu.price)
-                            $('#totalPrice').html(`<strong>Total: </strong> $${response.menu.price}`)
-                        }
+                        $('#totalPrice').attr("data-price", response.menu.price)
+                        $('#totalPrice').html(
+                            `<strong>Total: </strong> $${response.menu.price}`)
+                    }
 
 
 
