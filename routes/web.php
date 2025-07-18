@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\BranchController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\IndexController as AdminIndexController;
+use App\Http\Controllers\Admin\LunchTimeController;
+use App\Http\Controllers\Admin\MenuController as AdminMenuController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Web\SpecialController;
 use App\Http\Controllers\Web\AboutController;
 use App\Http\Controllers\Web\AuthController;
@@ -23,20 +30,19 @@ Route::get('dine-in', [DineController::class, 'index'])->name('dine');
 Route::controller(StoryController::class)->group(function () {
     Route::get('story', 'index')->name('story');
 });
-// Route::prefix('menu/')->controller(MenuController::class)->middleware('CheckLocation')->name('menu.')->group(function () {});
 
-Route::get('menu/{type}/{branchId}',[MenuController::class,'type'])->middleware('CheckLocation')->name('menu.type');
-Route::post('menu/{type}/{branchId}',[MenuController::class,'type']);
-Route::get('menu/extra/ingredients/{menuId}',[MenuController::class,'ingredients'])->name('menu.ingredients');
+Route::get('menu/{type}/{branchId}', [MenuController::class, 'type'])->middleware('CheckLocation')->name('menu.type');
+Route::post('menu/{type}/{branchId}', [MenuController::class, 'type']);
+Route::get('menu/extra/ingredients/{menuId}', [MenuController::class, 'ingredients'])->name('menu.ingredients');
 
-// Route::post('','');
+
 
 Route::prefix('cart')->controller(CartController::class)->name('cart.')->group(function () {
-    Route::post('store','store')->name('store');
-    Route::get('flush','flush')->name('flush');
-    Route::get('/','index')->name('index');
-    Route::post('unset-ingredient','')->name('unset.ingredient');
-    Route::get('destroy/{id}','destroy')->name('destroy');
+    Route::post('store', 'store')->name('store');
+    Route::get('flush', 'flush')->name('flush');
+    Route::get('/', 'index')->name('index');
+    Route::post('unset-ingredient', '')->name('unset.ingredient');
+    Route::get('destroy/{id}', 'destroy')->name('destroy');
 });
 
 Route::controller(AboutController::class)->group(function () {
@@ -47,10 +53,9 @@ Route::controller(AboutController::class)->group(function () {
     Route::get('reviews/guest', 'guestReviews')->name('reviews.guest');
 });
 
-Route::prefix('checkout')->controller(CheckoutController::class)->name('checkout')->group(function() {
+Route::prefix('checkout')->controller(CheckoutController::class)->name('checkout')->group(function () {
     Route::get('/', 'index');
     Route::post('store', 'store')->name('.store');
-
 });
 
 
@@ -63,3 +68,51 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::post('location', [LocationController::class, 'index'])->name('location');
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminIndexController::class, 'index'])->name('index');
+
+
+    Route::prefix('category')->controller(CategoryController::class)->name('category.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('.store');
+        Route::get('edit/{id}', 'edit')->name('.edit');
+        Route::post('update/{id}', 'update')->name('.update');
+        Route::get('destroy/{id}', 'destroy')->name('.destroy');
+    });
+
+    Route::prefix('branch')->controller(BranchController::class)->name('branch.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::post('update/{id}', 'update')->name('update');
+        Route::get('destroy/{id}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('menus')->controller(AdminMenuController::class)->name('menu.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::post('update/{id}', 'update')->name('update');
+        Route::get('destroy/{id}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('lunchtime')->controller(LunchTimeController::class)->name('lunchtime.')->group(function () {
+        Route::get('/','index')->name('index');
+        Route::get('create','create')->name('create');
+        Route::post('store','store')->name('store');
+        Route::get('edit/{id}','edit')->name('edit');
+        Route::post('update/{id}','update')->name('update');
+        Route::get('destroy/{id}','destroy')->name('destroy');
+    });
+
+    Route::prefix('users')->controller(UserController::class)->name('user.')->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
+
+    Route::get('orders', [OrderController::class, 'index'])->name('orders');
+});

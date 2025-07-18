@@ -14,7 +14,7 @@
         </section>
 
         <section class="careers-section">
-            <img class="img-fluid left-img" src="{{ asset("assets/images/main-side-design.png") }}" alt="">
+            <img class="img-fluid left-img" src="{{ asset("assets/web/images/main-side-design.png") }}" alt="">
             <div class="container-two">
                 <div class="row">
                     <div class="col-12">
@@ -26,7 +26,7 @@
                         <div class="careers-job-detail bg-color">
                             <div class="job-img-name-area">
                                 <div class="job-img-area">
-                                    <img class="job-img img-fluid" src="{{ asset("assets/images/career-job-img-1.png") }}"
+                                    <img class="job-img img-fluid" src="{{ asset("assets/web/images/career-job-img-1.png") }}"
                                         alt="">
                                 </div>
                                 <div class="job-name-area">
@@ -46,7 +46,7 @@
                         <div class="careers-job-detail">
                             <div class="job-img-name-area">
                                 <div class="job-img-area">
-                                    <img class="job-img img-fluid" src="{{ asset("assets/images/career-job-img-2.png") }}"
+                                    <img class="job-img img-fluid" src="{{ asset("assets/web/images/career-job-img-2.png") }}"
                                         alt="">
                                 </div>
                                 <div class="job-name-area">
@@ -66,7 +66,7 @@
                         <div class="careers-job-detail bg-color">
                             <div class="job-img-name-area">
                                 <div class="job-img-area">
-                                    <img class="job-img img-fluid" src="{{ asset("assets/images/career-job-img-1.png") }}"
+                                    <img class="job-img img-fluid" src="{{ asset("assets/web/images/career-job-img-1.png") }}"
                                         alt="">
                                 </div>
                                 <div class="job-name-area">
@@ -86,7 +86,7 @@
                         <div class="careers-job-detail">
                             <div class="job-img-name-area">
                                 <div class="job-img-area">
-                                    <img class="job-img img-fluid" src="{{ asset("assets/images/career-job-img-2.png") }}"
+                                    <img class="job-img img-fluid" src="{{ asset("assets/web/images/career-job-img-2.png") }}"
                                         alt="">
                                 </div>
                                 <div class="job-name-area">
@@ -106,7 +106,7 @@
                         <div class="careers-job-detail bg-color">
                             <div class="job-img-name-area">
                                 <div class="job-img-area">
-                                    <img class="job-img img-fluid" src="{{ asset("assets/images/career-job-img-1.png") }}"
+                                    <img class="job-img img-fluid" src="{{ asset("assets/web/images/career-job-img-1.png") }}"
                                         alt="">
                                 </div>
                                 <div class="job-name-area">
@@ -126,7 +126,7 @@
                         <div class="careers-job-detail">
                             <div class="job-img-name-area">
                                 <div class="job-img-area">
-                                    <img class="job-img img-fluid" src="{{ asset("assets/images/career-job-img-2.png") }}"
+                                    <img class="job-img img-fluid" src="{{ asset("assets/web/images/career-job-img-2.png") }}"
                                         alt="">
                                 </div>
                                 <div class="job-name-area">

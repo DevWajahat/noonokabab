@@ -6,19 +6,19 @@
                 <div class="col-xxl-5 col-lg-7 col-12">
                     <div class="sign-board-area">
                         <div class="frame-border frame-t-left">
-                            <img src="{{ asset('assets/images/frame-top-left.png') }}" alt="">
+                            <img src="{{ asset('assets/web/images/frame-top-left.png') }}" alt="">
                         </div>
                         <div class="frame-border frame-t-right">
-                            <img src="{{ asset('assets/images/frame-top-right.png') }}" alt="">
+                            <img src="{{ asset('assets/web/images/frame-top-right.png') }}" alt="">
                         </div>
                         <div class="frame-border frame-b-left">
-                            <img src="{{ asset('assets/images/frame-bottom-left.png') }}" alt="">
+                            <img src="{{ asset('assets/web/images/frame-bottom-left.png') }}" alt="">
                         </div>
                         <div class="frame-border frame-b-right">
-                            <img src="{{ asset('assets/images/framer-bottom-right.png') }}" alt="">
+                            <img src="{{ asset('assets/web/images/framer-bottom-right.png') }}" alt="">
                         </div>
                         <div class="frame-logo circle-small-logo">
-                            <img class="circle-logo" src="{{ asset('assets/images/circle-logo.png') }}" alt="">
+                            <img class="circle-logo" src="{{ asset('assets/web/images/circle-logo.png') }}" alt="">
                             <a class="sign-back-btn" href="{{ route('index') }}"><i
                                     class="fa-solid fa-chevron-left"></i></a>
                             <div class="pick-tab-btn">
@@ -104,7 +104,7 @@
                 <div class="col-xxl-5 col-lg-3 col-12 pos-res-1">
                     <div class="menu-card-area" width="1000" height="750">
                         <div class="menu-card-logo">
-                            <img src="{{ asset('assets/images/menu-card-logo.png') }}" alt="">
+                            <img src="{{ asset('assets/web/images/menu-card-logo.png') }}" alt="">
                         </div>
                         <div class="menu-desc">
                             <p>This is our full menu from all of our restaurants*</p>
@@ -142,7 +142,7 @@
                                         <div class="col-xxl-6 col-lg-12 col-md-6 col-12 menu-item">
                                             <div class="dish-card">
                                                 <div class="dish-img">
-                                                    <img src="{{ asset('assets/images/dish-1.png') }}" alt="">
+                                                    <img src="{{ asset('assets/web/images/dish-1.png') }}" alt="">
                                                 </div>
                                                 <div class="dish-detail">
                                                     <h2 class="dish-title" id="{{ $menu->id }}">

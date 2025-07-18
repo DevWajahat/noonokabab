@@ -1,0 +1,397 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body {
+  font-family: "Poppins", sans-serif;
+}
+.accordion {
+  background-color: #a91125;
+  color: white;
+  cursor: pointer;
+  padding: 14px 20px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 22px;
+  transition: 0.4s;
+}
+
+.active,
+.accordion:hover {
+  background-color: black;
+}
+.panel {
+  display: block;
+  background-color: white;
+  overflow: hidden;
+  padding: 12px 0 0;
+}
+.flex-dashboard {
+  display: flex;
+  align-items: start;
+  gap: 25px;
+}
+
+.sidebar-menu {
+  margin-bottom: 30px;
+  padding: 0;
+  border: 1px solid #c1c1c1;
+  box-shadow: 1px 1px 10px 0 #0000002e;
+}
+.menu-tabs ul {
+  padding: 0 10px;
+}
+.menu-tabs ul li {
+  padding: 6px 7px;
+  margin-bottom: 3px;
+  color: black;
+}
+
+.menu-tabs ul li a i {
+  margin-right: 12px;
+  color: #787878;
+}
+
+.menu-tabs ul li a {
+  color: black;
+  text-decoration: none;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.content-area {
+  width: 100%;
+  background: white;
+  padding: 10px 10px;
+  border: 1px solid #00000029;
+  height: 100%;
+}
+
+.table > :not(caption) > * > * {
+  background: transparent !important;
+}
+
+table.dataTable tr.odd {
+  background: #e9e8e86e !important;
+}
+
+section.supportticket-page {
+  padding: 0 0;
+}
+body .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  padding: 4px 10px !important;
+}
+body .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  padding: 4px 10px !important;
+}
+body .dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 4px 10px !important;
+}
+body .dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 4px 10px;
+}
+button.open-btn,
+button.closed-btn {
+  padding: 8px 9px;
+  color: white;
+  border: none;
+  text-transform: capitalize;
+}
+button.open-btn {
+  background: green;
+}
+button.closed-btn {
+  background: var(--primary);
+}
+table.dataTable {
+  margin-bottom: 20px;
+  padding-top: 20px;
+}
+.table > :not(:last-child) > :last-child > * {
+  text-align: center;
+}
+
+table.dataTable tbody th,
+table.dataTable tbody td {
+  text-align: center;
+}
+
+.form-fields label {
+  width: 100%;
+  font-size: 17px;
+  margin-bottom: 9px;
+}
+
+.form-fields input {
+  width: 100%;
+  padding: 10px 10px;
+  background: #002bff03;
+  outline: none;
+  border: 1px solid;
+  border-radius: 4px;
+}
+.form-fields select {
+  width: 100%;
+  padding: 10px 10px;
+  background: #002bff03;
+  outline: none;
+  border: 1px solid;
+  border-radius: 4px;
+}
+h2.ticket-hd {
+  font-size: 33px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+button.browse-greybtn {
+  background: #cdc7c7;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 0;
+}
+.browse-btn {
+  display: flex;
+  justify-content: end;
+}
+.file-input {
+  /* position: absolute; */
+}
+.input-files.position-relative {
+  display: flex;
+  justify-content: space-between;
+}
+.w-90 {
+  width: 85%;
+}
+button.addmore-btn {
+  background: #cdc7c7;
+  padding: 6px 9px;
+  border: none;
+  border-radius: 0;
+}
+
+.flex-download-icons {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 50px;
+  padding-bottom: 25px;
+  padding-top: 19px;
+}
+
+.download-layers img {
+  width: 81px;
+  height: 82px;
+}
+
+.download-layers button {
+  border: none;
+  background: transparent;
+}
+
+.tox.tox-tinymce {
+  height: 257px !important;
+}
+
+.rowarea-single {
+  border: 1px solid;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.rowarea-single h2.ticket-hd {
+  background: #b3b3b3;
+  padding: 10px 14px;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.innercontect-annouc {
+  padding: 12px 15px;
+  font-size: 15px;
+  line-height: 21px;
+}
+.innercontect-annouc p {
+  margin-bottom: 9px;
+}
+
+.innercontect-annouc p b {
+  font-weight: 700;
+}
+.side-area {
+  max-width: 250px;
+  width: 100%;
+}
+.accordion i {
+  font-size: 16px;
+}
+
+button.accordion {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+}
+
+.single-para {
+  padding: 9px 10px 9px;
+  border-bottom: 1px solid #c1c1c1;
+}
+
+.single-para p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+button.owner-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 3px 8px;
+  border-radius: 5px;
+}
+.single-para p span {
+  display: block;
+}
+.single-para span {
+  font-weight: 600;
+}
+button.origin-btn {
+  border: navajowhite;
+  background: #ff4107;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+
+button.grey-color {
+  background: gray;
+  border: none;
+  border-radius: 4px;
+  padding: 0 10px;
+}
+table.dataTable tbody td a {
+  text-decoration: none;
+  color: black;
+}
+
+table.dataTable tbody td a:hover {
+  text-decoration: revert;
+}
+.ticket-view h2 {
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.ticket-view p {
+  font-size: 16px;
+  margin: 13px 0;
+}
+
+.ticket-view p span {
+  font-size: 21px;
+  font-weight: 600;
+}
+.view-ticket {
+  margin-bottom: 20px;
+}
+button.replay-btn {
+  padding: 8px 17px;
+  color: black;
+  border: none;
+  text-transform: capitalize;
+}
+.messages-boxs {
+  background-color: #8080801a;
+  padding: 12px 10px;
+  margin-top: 20px;
+  line-height: 1.2;
+}
+
+.messages-boxs button.owner-btn {
+  float: right;
+  margin-top: -20px;
+}
+.operator-btn {
+  background: #2579d0;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 5px;
+  float: right;
+  margin-top: -20px;
+}
+.hr-lien hr:not([size]) {
+  height: 4px;
+  margin-top: 33px;
+}
+button.delete-btn {
+  background: var(--primary);
+  padding: 12px 20px;
+  margin-left: 11px;
+  color: white;
+  font-size: 17px;
+  border: none;
+}
+.green-bg-color {
+  background-color: green !important;
+}
+b {
+  font-weight: bold;
+}
+
+.note-editable ul li {
+  list-style: disc;
+  margin-bottom: 12px;
+}
+
+.note-editable ul {
+  padding: 0 18px;
+}
+.note-editable ol li {
+  list-style: auto;
+  margin-bottom: 12px;
+}
+
+.note-editable ol {
+  padding: 0 18px;
+}
+button.submit-btn {
+  background: var(--primary);
+  padding: 14px 14px;
+  color: white;
+  border: none;
+}
+.note-btn-group:first-child {
+  display: none;
+}
+.note-btn-group:nth-child(3) {
+  display: none;
+}
+
+.note-btn:nth-child(3) {
+  display: none;
+}
+.note-btn:nth-child(5) {
+  display: none !important;
+}
+.note-btn-group.note-insert {
+  display: none;
+}
+
+.note-btn-group.note-view {
+  display: none;
+}

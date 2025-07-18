@@ -33,7 +33,7 @@
                                     <tr>
                                         <td>01</td>
                                         <td>
-                                            <img class="img-fluid external-img" src="./public/images/tabel-restaurent-img.jpg" alt="">
+                                            <img class="img-fluid external-img" src="{{ asset("images/tabel-restaurent-img.jpg")}}" alt="">
                                         </td>
                                         <td>Branch</td>
                                         <td>Lorem ipsum dolor, sit amet consectetur</td>

@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col-12">
                     <a class="d-block thnks-logo-area text-center mb-5" href=".">
-                        <img class="img-fluid" src="{{ asset("assets/images/noon-o-kabab-logo.png") }}" alt="">
+                        <img class="img-fluid" src="{{ asset("assets/web/images/noon-o-kabab-logo.png") }}" alt="">
                     </a>
                 </div>
                 <div class="col-12 col-lg-6">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="thank-right-area text-center">
-                        <img class="img-fluid thnks-img" src="{{ asset("assets/images/thank-img.png") }}" alt="">
+                        <img class="img-fluid thnks-img" src="{{ asset("assets/web/images/thank-img.png") }}" alt="">
                         <h4 class="thank-ordr-title">Thank you for ordering!</h4>
                         <p class="thnk-para">Sit back and relax, your order is <br> being prepared</p>
                         <div class="bg-white radius-6px pt-lg-4 pb-lg-4 px-lg-2 p-xl-4 py-3 px-sm-4 px-2">

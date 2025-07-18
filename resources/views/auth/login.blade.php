@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{{ asset('assets/images/navbar_logo.png') }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ asset('assets/style/bootstrap.min.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/web/images/navbar_logo.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('assets/web/style/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -25,12 +25,12 @@
 
         @font-face {
             font-family: "Seized-Future-Regular";
-            src: url('{{ asset('assets/fonts/Seized-Future/Seized-Future-Regular/Seized Future Regular.ttf') }}');
+            src: url('{{ asset('assets/web/fonts/Seized-Future/Seized-Future-Regular/Seized Future Regular.ttf Future Regular.ttf') }}');
         }
 
         @font-face {
             font-family: "PlayfairDisplay-Bold";
-            src: url('{{ asset('assets/fonts/PlayfairDisplay-Bold.ttf') }}');
+            src: url('{{ asset('assets/web/fonts/PlayfairDisplay-Black.ttf') }}');
         }
 
         body {
@@ -40,7 +40,7 @@
             flex-direction: column;
             font-family: "Poppins";
             position: relative;
-            background-image: url('{{ asset('assets/images/login-bg-img.png') }}');
+            background-image: url('{{ asset('assets/web/images/login-bg-img.png') }}');
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -598,7 +598,7 @@
 
 <body>
     <a class="mt-0 mb-0" href="{{ route('index') }}">
-        <img class="img-fluid login-logo" src="{{ asset('assets/images/noon-o-kabab-logo.png') }}" alt="">
+        <img class="img-fluid login-logo" src="{{ asset('assets/web/images/noon-o-kabab-logo.png') }}" alt="">
     </a>
     <h2 class="login-main-title">Noon O Kabab</h2>
     <div class="container" id="container">

@@ -23,7 +23,7 @@
                                     <h3 class="exp-year">10+</h3>
                                     <span class="exp-letter">Years Of <br> Experience</span>
                                 </div>
-                                <img class="img-fluid" src="{{ asset("assets/images/cate-ser-img.png") }}" alt="">
+                                <img class="img-fluid" src="{{ asset("assets/web/images/cate-ser-img.png") }}" alt="">
                             </div>
                             <div class="catering-services-inner mt-3">
                                 <div class="catering-services-detail">

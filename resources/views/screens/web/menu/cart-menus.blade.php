@@ -8,7 +8,7 @@
         <div class="select-cart-area" id="{{ $item['product']['id'] }}">
             <div class="select-cart-area-top">
                 <div class="select-img">
-                    <img src="{{ asset('assets/images/dish-1.png') }}" alt="">
+                    <img src="{{ asset('assets/web/images/dish-1.png') }}" alt="">
                 </div>
                 <div class="select-cart-detail">
                     <h2 class="s-title">{{ $item['product']['name'] }}</h2>

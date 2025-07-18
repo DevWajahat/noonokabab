@@ -32,7 +32,7 @@
                                         <td>01</td>
                                         <td>2323</td>
                                         <td>
-                                            <img class="img-fluid review-logo" src="./public/images/no-image.png" alt="">
+                                            <img class="img-fluid review-logo" src="{{ asset("assets/admin/images/no-image.png") }}" alt="">
                                         </td>
                                         <td>Review Title</td>
                                         <td>Review Heading</td>

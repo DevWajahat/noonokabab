@@ -1,6 +1,6 @@
-<?php
-include "headerr.php"
-?>
+@extends('layout.admin.app')
+
+@section('content')
 <div class="content-body">
   <!-- row -->
   <div class="container-fluid">
@@ -11,9 +11,6 @@ include "headerr.php"
             <div class="media align-items-center">
               <span class="p-2 me-3 feature-icon rounded">
                 <i class="fa-solid fa-bars-staggered"></i>
-                <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM64 256c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
-                </svg> -->
               </span>
               <div class="media-body text-end feature-icon-text">
                 <p class="fs-18 text-white mb-2">Orders</p>
@@ -39,7 +36,7 @@ include "headerr.php"
                 <p class="fs-18 text-white mb-2">Impressions</p>
                 <span class="fs-48 text-white font-w600">75</span>
               </div>
-            </div> 
+            </div>
           </div>
         </div>
       </div>
@@ -116,6 +113,4 @@ include "headerr.php"
     </div>
   </div>
 </div>
-<?php
-include "footerr.php"
-?>
+@endsection

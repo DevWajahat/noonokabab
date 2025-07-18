@@ -14,7 +14,7 @@
             </div>
         </section>
         <section class="newspaper-reviews-section guest-review pb-0">
-            <img class="left-img" src="{{ asset("assets/images/main-side-design.png") }}" alt="">
+            <img class="left-img" src="{{ asset("assets/web/images/main-side-design.png") }}" alt="">
             <div class="container-two">
                 <div class="row">
                     <div class="col-12">

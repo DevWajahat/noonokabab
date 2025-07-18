@@ -11,7 +11,7 @@
                         <h4 class="section-title">Add Review</h4>
                         <form action="." class="mb-0">
                             <div class="row">
-                                
+
                                 <div class="mb-3 col-12 col-lg-6">
                                     <label class="form-label">Id</label>
                                     <input type="number" placeholder="Id" name="" id="" class="form-control">
@@ -62,10 +62,10 @@
                                         <input type="file" name="" id="" onchange="readURL(this);" class="form-control">
                                     </div>
                                     <div class="pre-img-area mt-3">
-                                        <img id="logo-image" class="preview-img" src="./public/images/no-image.png" alt="your image" />
+                                        <img id="logo-image" class="preview-img" src="{{ asset("assets/admin/images/no-image.png") }}" alt="your image" />
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-12 text-end">
                                     <button class="btn btn-primary bg-deepblue" type="submit">Add Review</button>
                                 </div>
@@ -74,7 +74,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </div>

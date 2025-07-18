@@ -20,13 +20,13 @@
                                     <div class="selected-dishes-area">
                                         <div class="selected-bg-images">
                                             <img class="bg-img one"
-                                                src="{{ asset('assets/images/confirm-pay-frame.png') }}" alt="">
+                                                src="{{ asset('assets/web/images/confirm-pay-frame.png') }}" alt="">
                                             <img class="bg-img two"
-                                                src="{{ asset('assets/images/confirm-pay-frame.png') }}" alt="">
+                                                src="{{ asset('assets/web/images/confirm-pay-frame.png') }}" alt="">
                                             <img class="bg-img three"
-                                                src="{{ asset('assets/images/confirm-pay-frame.png') }}" alt="">
+                                                src="{{ asset('assets/web/images/confirm-pay-frame.png') }}" alt="">
                                             <img class="bg-img four"
-                                                src="{{ asset('assets/images/confirm-pay-frame.png') }}" alt="">
+                                                src="{{ asset('assets/web/images/confirm-pay-frame.png') }}" alt="">
                                         </div>
 
                                         @if (isset(session('cart')['items']))
@@ -39,7 +39,7 @@
                                                         <div class="dishes-left-area">
                                                             <div class="dish-img-area">
                                                                 <img class="img-fluid dish-img"
-                                                                    src="{{ asset('assets/images/select-dish-img-1.png') }}"
+                                                                    src="{{ asset('assets/web/images/select-dish-img-1.png') }}"
                                                                     alt="">
                                                             </div>
                                                             <div class="dish-name-area">
@@ -611,5 +611,5 @@
 </script>
 
 
-<script src="{{ asset('assets/js/imask.min.js') }}"></script>
-<script src="{{ asset('assets/js/confirm-order.js') }}"></script>
+<script src="{{ asset('assets/web/js/imask.min.js') }}"></script>
+<script src="{{ asset('assets/web/js/confirm-order.js') }}"></script>

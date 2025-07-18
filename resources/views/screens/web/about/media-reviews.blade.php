@@ -13,7 +13,7 @@
             </div>
         </section>
         <section class="newspaper-reviews-section">
-            <img class="left-img" src="{{ asset("assets/images/main-side-design.png") }}" alt="">
+            <img class="left-img" src="{{ asset("assets/web/images/main-side-design.png") }}" alt="">
             <div class="container-two">
                 <div class="row">
                     <div class="col-12">
@@ -21,7 +21,7 @@
                     </div>
                     <div class="media-reviews">
                         <div class="reviews-area-top">
-                            <img class="img-fluid news-paper-left-img" src="{{ asset("assets/images/newspaper-rev-left-img.png") }}"
+                            <img class="img-fluid news-paper-left-img" src="{{ asset("assets/web/images/newspaper-rev-left-img.png") }}"
                                 alt="">
                             <h2 class="review-title">FOUR FORKS</h2>
                             <p class="review-dis-text">This should happen more frequently than it does: You walk into a
@@ -70,7 +70,7 @@
                                 ambiance created by the host and his interplay with the customers is delightful.</p>
                         </div>
                         <div class="reviews-area-bttm">
-                            <img class="img-fluid rev-user-img" src="{{ asset("assets/images/review-user-img-1.png") }}" alt="">
+                            <img class="img-fluid rev-user-img" src="{{ asset("assets/web/images/review-user-img-1.png") }}" alt="">
                             <h2 class="rev-user-name">Chicago Tribune</h2>
                             <div class="review-date-area">
                                 <span class="review-date">by William Rice</span>
@@ -96,7 +96,7 @@
                                 to wait for a table.</p>
                         </div>
                         <div class="reviews-area-bttm">
-                            <img class="img-fluid rev-user-img" src="{{ asset("assets/images/review-user-img-2.png") }}" alt="">
+                            <img class="img-fluid rev-user-img" src="{{ asset("assets/web/images/review-user-img-2.png") }}" alt="">
                             <h2 class="rev-user-name">ABC EyeWitness News</h2>
                             <div class="review-date-area">
                                 <span class="review-date">by By Steve Dolinsky</span>
@@ -116,7 +116,7 @@
                     </div>
                     <div class="media-reviews">
                         <div class="reviews-area-top">
-                            <img class="img-fluid news-paper-left-img" src="{{ asset("assets/images/newspaper-rev-left-img.png") }}"
+                            <img class="img-fluid news-paper-left-img" src="{{ asset("assets/web/images/newspaper-rev-left-img.png") }}"
                                 alt="">
                             <h2 class="review-title">K/RATING of 19/20</h2>
                             <p class="review-dis-text">AMBIANCE/DECOR 3/4 HOSPITALITY 5/5 FOOD 10/10 VALUE 1/1 A guest at a
@@ -150,7 +150,7 @@
                                 4661 North Kedzie and has a K/RATING of 19/20.</p>
                         </div>
                         <div class="reviews-area-bttm">
-                            <img class="img-fluid rev-user-img" src="{{ asset("assets/images/wbbm.jpg") }}" alt="">
+                            <img class="img-fluid rev-user-img" src="{{ asset("assets/web/images/wbbm.jpg") }}" alt="">
                             <h2 class="rev-user-name">News Radio WBBM</h2>
                             <div class="review-date-area">
                                 <span class="review-date">By Sherman Kaplan</span>
@@ -185,7 +185,7 @@
                                     barberry served with white rice). Wonder what I will get tomorrow?</p>
                             </div>
                             <div class="reviews-area-bttm">
-                                <img class="img-fluid rev-user-img" src="{{ asset("assets/images/review-user-img-2.png") }}"
+                                <img class="img-fluid rev-user-img" src="{{ asset("assets/web/images/review-user-img-2.png") }}"
                                     alt="">
                                 <h2 class="rev-user-name">Metromix</h2>
                                 <div class="review-date-area">
@@ -213,7 +213,7 @@
                                     this is what a true restaurant should be. Bravo to Noon O'Kabab!!!</p>
                             </div>
                             <div class="reviews-area-bttm">
-                                <img class="img-fluid rev-user-img" src="{{ asset("assets/images/review-user-img-2.png") }}"
+                                <img class="img-fluid rev-user-img" src="{{ asset("assets/web/images/review-user-img-2.png") }}"
                                     alt="">
                                 <h2 class="rev-user-name">Metromix</h2>
                                 <div class="review-date-area">
@@ -244,7 +244,7 @@
                                     &nbsp;Great for a date and a family night out!</p>
                             </div>
                             <div class="reviews-area-bttm">
-                                <img class="img-fluid rev-user-img" src="{{ asset("assets/images/yelp.logo.jpg") }}" alt="">
+                                <img class="img-fluid rev-user-img" src="{{ asset("assets/web/images/yelp.logo.jpg") }}" alt="">
                                 <h2 class="rev-user-name">Yelp</h2>
                                 <div class="review-date-area">
                                     <span class="review-date">By Gavin D.</span>
@@ -260,7 +260,7 @@
                                     was tasty and our various kebobs were crazy succulent.</p>
                             </div>
                             <div class="reviews-area-bttm">
-                                <img class="img-fluid rev-user-img" src="{{ asset("assets/images/yelp.logo.jpg") }}" alt="">
+                                <img class="img-fluid rev-user-img" src="{{ asset("assets/web/images/yelp.logo.jpg") }}" alt="">
                                 <h2 class="rev-user-name">Yelp</h2>
                                 <div class="review-date-area">
                                     <span class="review-date">By Brady H.</span>
@@ -286,7 +286,7 @@
                                 mango, citrus and a mineral finish). Ahhhhhh, satisfying.</p>
                         </div>
                         <div class="reviews-area-bttm">
-                            <img class="img-fluid rev-user-img" src="{{ asset("assets/images/yelp.logo.jpg") }}" alt="">
+                            <img class="img-fluid rev-user-img" src="{{ asset("assets/web/images/yelp.logo.jpg") }}" alt="">
                             <h2 class="rev-user-name">Yelp</h2>
                             <div class="review-date-area">
                                 <span class="review-date">By Beth M.</span>
@@ -321,7 +321,7 @@
                             </p>
                         </div>
                         <div class="reviews-area-bttm">
-                            <img class="img-fluid rev-user-img" src="{{ ("assets/images/michel.png") }}" alt="">
+                            <img class="img-fluid rev-user-img" src="{{ asset("assets/web/images/michel.png") }}" alt="">
                             <h2 class="rev-user-name">Michelin Guide</h2>
                             <div class="review-date-area">
                                 <span class="review-date">By MICHELIN guide inspectors</span>

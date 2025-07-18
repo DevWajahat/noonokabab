@@ -4,7 +4,7 @@
             <div class="col-3 col-xl-2 col-lg-2">
                 <div class="logo-area">
                     <a href="{{ route('index') }}">
-                        <img class="img-fluid header-logo" src="{{ asset('assets/images/noon-o-kabab-logo.png') }}"
+                        <img class="img-fluid header-logo" src="{{ asset('assets/web/images/noon-o-kabab-logo.png') }}"
                             alt="">
                     </a>
                 </div>
@@ -138,7 +138,7 @@
 </script>
 
 
-<script src="{{ asset('assets/js/jquery.js') }}"></script>
+<script src="{{ asset('assets/web/js/jquery.js') }}"></script>
 
 
 <script>

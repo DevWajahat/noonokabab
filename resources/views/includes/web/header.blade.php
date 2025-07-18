@@ -7,7 +7,7 @@
                         <div class="banner-side-cont">
                             <a href="{{ route('index') }}">
                                 <div class="circle-logo">
-                                    <img src="assets/images/noon-o-kabab-logo.png" alt="">
+                                    <img src="{{ asset("assets/web/images/noon-o-kabab-logo.png") }}" alt="">
                                 </div>
                             </a>
                             <div class="side-cont-det">
@@ -28,7 +28,7 @@
                                             <div class="mob-logo">
                                                 <a href=".">
                                                     <img class="img-fluid header-logo"
-                                                        src="./assets/images/noon-o-kabab-logo.png" alt="">
+                                                        src="{{ asset("assets/web/images/noon-o-kabab-logo.png") }}" alt="">
                                                 </a>
                                             </div>
                                             <div class="">
@@ -132,7 +132,7 @@
                                 </video>
                             </div> -->
                         <div class="siderlayer">
-                            <img src="assets/images/hero-banner.png" alt="">
+                            <img src="{{ asset("assets/web/images/hero-banner.png") }}" alt="">
                         </div>
                         <!-- <div class="siderlayer">
                                 <img src="assets/images/hero-banner.png" alt="">
@@ -146,6 +146,6 @@
             </div>
         </div>
         <div class="side-design">
-            <img src="assets/images/main-side-design.png" alt="">
+            <img src="{{ asset("assets/web/images/main-side-design.png") }}" alt="">
         </div>
         </div>

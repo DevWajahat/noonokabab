@@ -33,7 +33,7 @@
                                     <tr>
                                         <td>1</td>
                                         <td>
-                                            <img class="img-fluid external-img" src="./public/images/tabel-restaurent-img.jpg" alt="">
+                                            <img class="img-fluid external-img" src="{{ asset("assets/admin/images/tabel-restaurent-img.jpg") }}" alt="">
                                         </td>
                                         <td>Lorem, ipsum.</td>
                                         <td>
@@ -50,7 +50,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                    </tr>                                  
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

@@ -7,19 +7,19 @@
                     <div class="col-xxl-5 col-lg-7 col-12">
                         <div class="sign-board-area">
                             <div class="frame-border frame-t-left">
-                                <img src="{{ asset("assets/images/frame-top-left.png") }}" alt="">
+                                <img src="{{ asset("assets/web/images/frame-top-left.png") }}" alt="">
                             </div>
                             <div class="frame-border frame-t-right">
-                                <img src="{{ asset("assets/images/frame-top-right.png") }}" alt="">
+                                <img src="{{ asset("assets/web/images/frame-top-right.png") }}" alt="">
                             </div>
                             <div class="frame-border frame-b-left">
-                                <img src="{{ asset("assets/images/frame-bottom-left.png") }}" alt="">
+                                <img src="{{ asset("assets/web/images/frame-bottom-left.png") }}" alt="">
                             </div>
                             <div class="frame-border frame-b-right">
-                                <img src="{{ asset("assets/images/framer-bottom-right.png") }}" alt="">
+                                <img src="{{ asset("assets/web/images/framer-bottom-right.png") }}" alt="">
                             </div>
                             <div class="frame-logo circle-small-logo">
-                                <img class="circle-logo" src="assets/images/circle-logo.png" alt="">
+                                <img class="circle-logo" src="{{ asset("assets/web/images/circle-logo.png") }}" alt="">
                                 <a class="sign-back-btn" href="order.php"><i class="fa-solid fa-chevron-left"></i></a>
                                 <div class="pick-tab-btn">
                                     <div class="mob-tab-btn">
@@ -50,7 +50,7 @@
                                         <div id="cart-container">
                                             <div class="select-cart-area">
                                                 <div class="select-img">
-                                                    <img src="assets/images/history-hills-lunch-img-13.jpg" alt="">
+                                                    <img src="{{ asset("assets/web/images/history-hills-lunch-img-13.jpg") }}" alt="">
                                                 </div>
                                                 <div class="select-cart-detail">
                                                     <div class="">

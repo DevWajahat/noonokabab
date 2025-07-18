@@ -1,0 +1,115 @@
+@media (max-width: 1600px) {
+    .accordion {
+        font-size: 16px;
+    }
+    button.open-btn, button.closed-btn {
+        padding: 8px 8px;
+        font-size: 12px;
+    }
+    table.dataTable tbody th, table.dataTable tbody td {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+}
+@media (max-width: 1540px) {}
+@media (max-width: 1440px) {}
+@media (max-width: 1400px) {}
+@media (max-width: 1366px) {
+    button.addmore-btn {
+        padding: 0px 10px
+    }
+}
+@media (max-width: 1280px) {}
+@media (max-width: 1202px) {
+    h2.ticket-hd {
+        font-size: 28px;
+    }
+}
+@media (max-width: 1024px) {
+    .ticket-view h2 {
+        font-size: 29px;
+        margin-bottom: 8px;
+    }
+    .ticket-view p {
+        line-height: 1.5;
+    }
+    .w-90 {
+        width: 80%;
+    }
+    button.open-btn, button.closed-btn {
+        padding: 8px 8px;
+        font-size: 12px;
+        margin: 2px 0;
+    }
+    table.dataTable tbody th, table.dataTable tbody td {
+        padding: 8px 10px;
+        line-height: 1.5;
+    }
+    
+}
+@media (max-width: 991px) {
+    table.dataTable thead th {
+        font-size: 12px;
+    }
+    .input-files.position-relative {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+    .input-files button.addmore-btn {
+        padding: 12px 25px;
+    }
+
+.w-90 {
+    width: 100%;
+}
+}
+@media (max-width: 768px) {
+    .side-area {
+        max-width: 100%;
+        width: 100%;
+    }
+    .flex-dashboard {
+        display: flex;
+        align-items: start;
+        gap: 25px;
+        flex-wrap: wrap;
+    }
+    .w-90 {
+        width: 100%;
+    }
+}
+@media (max-width: 767px) {
+    
+}
+@media (max-width: 650px) {
+    .ticket-view h2 {
+        font-size: 23px;
+    }
+    h2.ticket-hd {
+        font-size: 21px;
+    }
+    .form-fields label {
+        font-size: 16px;
+    }
+}
+@media (max-width: 514px) {}
+@media (max-width: 480px) {
+    .button-rplaycolse {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        justify-content: end;
+    }
+}
+@media (max-width: 414px) {
+    .ticket-view h2 {
+        font-size: 23px;
+        line-height: 31px;
+    }
+}
+@media (max-width: 390px) {}
+@media (max-width: 375px) {}
+@media (max-width: 360px) {}
+@media (max-width: 320px) {}

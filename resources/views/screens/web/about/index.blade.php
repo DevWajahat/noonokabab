@@ -15,12 +15,12 @@
         </section>
         <section class="story-section">
             <div class="container-two">
-                <img class="img-fluid story-left-img" src="{{ asset("assets/images/main-side-design.png") }}" alt="">
+                <img class="img-fluid story-left-img" src="{{ asset("assets/web/images/main-side-design.png") }}" alt="">
 
                 <div class="row">
                     <div class="col-12 col-lg-7">
                         <div class="story-discrip-area drop-shadow bg-img">
-                            <img class="img-fluid story-img-1" src= "{{ asset("assets/images/pot.png") }}" alt="">
+                            <img class="img-fluid story-img-1" src= "{{ asset("assets/web/images/pot.png") }}" alt="">
                             <p class="story-discrip-para">
                                 What once began as a dream to introduce authentic, nourishing Persian food to Chicagoland
                                 has become a true success story. We started as a small, family-owned, 11 table restaurant in
@@ -44,7 +44,7 @@
                 <div class="row justify-content-end">
                     <div class="col-12 col-lg-6">
                         <div class="story-discrip-area bg-color">
-                            <img class="img-fluid story-img-2" src="{{ asset("assets/images/story-discrip-img-1.png") }}" alt="">
+                            <img class="img-fluid story-img-2" src="{{ asset("assets/web/images/story-discrip-img-1.png") }}" alt="">
                             <p class="story-discrip-para">
                                 Our restaurant ambiance is quiet, and softly lit, the walls and alcoves decorated with
                                 exquisite Persian tiles depicting Sufi fables and tales. Melodious Persian music accompanies
@@ -66,7 +66,7 @@
                 <div class="row">
                     <div class="col-12 col-lg-7">
                         <div class="story-discrip-area top bg-img">
-                            <img class="img-fluid story-img-3" src="{{ asset("assets/images/story-discrip-img-3.png") }}" alt="">
+                            <img class="img-fluid story-img-3" src="{{ asset("assets/web/images/story-discrip-img-3.png") }}" alt="">
                             <p class="story-discrip-para">
                                 With every order we take, we bring the magic of Persia to corporate events, birthdays and
                                 even weddings. We customise the festive experience from menu decisions, tastings to

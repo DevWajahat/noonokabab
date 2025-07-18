@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-6 p-relative">
-                <img class="img-fluid em-img" src="assets/images/em.png" alt="">
+                <img class="img-fluid em-img" src="{{ asset("assets/web/images/em.png") }}" alt="">
             </div>
             <div class="col-lg-6 col-12">
                 <div class="email-detail-area">
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="e-side-logo">
-                <img src="assets/images/email-side-logo.png" alt="">
+                <img src="{{ asset("assets/web/images/email-side-logo.png") }}" alt="">
             </div>
         </div>
     </div>

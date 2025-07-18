@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="sing-img">
-                    <img class="img-fluid" src="{{ asset('assets/images/sing.png') }}" alt="">
+                    <img class="img-fluid" src="{{ asset('assets/web/images/sing.png') }}" alt="">
                 </div>
                 <div class="col-lg-5 col-12">
                     <div class="we-cater-box">
@@ -44,7 +44,7 @@
                     <div class="col-4">
                         <div class="dishes-order-box">
                             <div class="d-img">
-                                <img class="img-fluid" src="{{ asset('assets/images/sec-dish-1.png') }}" alt="">
+                                <img class="img-fluid" src="{{ asset('assets/web/images/sec-dish-1.png') }}" alt="">
                             </div>
                             <div class="d-btn">
                                 <p class="myDIV">{{ $category->name }}</p>
@@ -98,7 +98,7 @@
                         </div>
                         <div class="b-tbl-form">
                             <div class="side-pot-img">
-                                <img src="{{ asset('assets/images/pot.png') }}" alt="">
+                                <img src="{{ asset('assets/web/images/pot.png') }}" alt="">
                             </div>
                             <form action="">
                                 <div class="booktable-title">

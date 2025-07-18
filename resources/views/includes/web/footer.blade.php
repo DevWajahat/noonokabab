@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <div class="footer-logo">
-                    <img src="{{ asset('assets/images/noon-o-kabab-logo.png') }}" alt="">
+                    <img src="{{ asset('assets/web/images/noon-o-kabab-logo.png') }}" alt="">
                 </div>
                 <div class="footer-social-link">
                     <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
@@ -25,7 +25,7 @@
 <div class="location-popup-wrap">
     <div class="location-popup-area">
         <div class="location-popup">
-            <img class="img-fluid select-location-logo" src="{{ asset('assets/images/noon-o-kabab-logo.png') }}"
+            <img class="img-fluid select-location-logo" src="{{ asset('assets/web/images/noon-o-kabab-logo.png') }}"
                 alt="">
             <h4 class="branch-title">Please Select Location</h4>
             <form id="location-form" action="">
@@ -79,7 +79,7 @@
 </div>
 
 
-<script src="{{ asset('assets/js/jquery.js') }}"></script>
+<script src="{{ asset('assets/web/js/jquery.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"
     integrity="sha512-MSOo1aY+3pXCOCdGAYoBZ6YGI0aragoQsg1mKKBHXCYPIWxamwOE7Drh+N5CPgGI5SA9IEKJiPjdfqWFWmZtRA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -91,7 +91,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD28UEoebX1hKscL3odt2TiTRVfe5SSpwE&amp;libraries=places">
 </script>
-<script src="{{ asset('assets/js/index.js') }}"></script>
+<script src="{{ asset('assets/web/js/index.js') }}"></script>
 
 <script>
     // const location =
@@ -266,3 +266,5 @@
         })
     })
 </script>
+
+@stack('scripts')

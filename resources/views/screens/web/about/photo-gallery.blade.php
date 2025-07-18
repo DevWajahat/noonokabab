@@ -50,8 +50,8 @@
 
 
                             <div class="gallery-img-inner card">
-                                <a href="{{ asset("assets/images/photo-gallery-img-1.png") }}" data-fancybox="group" data-caption="">
-                                    <img src="{{ asset("assets/images/photo-gallery-img-1.png") }}" />
+                                <a href="{{ asset("assets/web/images/photo-gallery-img-1.png") }}" data-fancybox="group" data-caption="">
+                                    <img src="{{ asset("assets/web/images/photo-gallery-img-1.png") }}" />
                                 </a>
                                 <!-- <img class="img-fluid" src="./assets/images/photo-gallery-img-1.png" alt=""> -->
                             </div>
