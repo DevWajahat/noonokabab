@@ -3,7 +3,12 @@
 @section('content')
     <div class="content-body ">
         <div class="container-fluid">
-
+            @if (session()->has('message'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('message') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -33,23 +38,25 @@
                                             <th>Lunch Time</th>
                                             <th>Created At</th>
                                             <th>Updated At</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse ($menus as $menu)
-                                        <tr>
-                                            <td>{{ $menu->id }}</td>
-                                            <td>{{ $menu->category->name }}</td>
-                                            <td>{{ $menu->branch->name }}</td>
-                                            <td>{{ $menu->name }}</td>
-                                            <td>{{ $menu->description }}</td>
-                                            <td>${{ $menu->price }}</td>
-                                            <td>{{ $menu->regular == 1 ? 'Yes' : 'No' }}</td>
-                                            <td>{{ $menu->lunch_time == 1 ? 'Yes' : 'No' }}</td>
-                                            <td>{{ $menu->created_at }}</td>
-                                            <td>{{ $menu->updated_at }}</td>
+                                            <tr>
+                                                <td>{{ $menu->id }}</td>
+                                                <td>{{ $menu->category->name }}</td>
+                                                <td>{{ $menu->branch->name }}</td>
+                                                <td>{{ $menu->name }}</td>
+                                                <td>{{ $menu->description }}</td>
+                                                <td>${{ $menu->price }}</td>
+                                                <td>{{ $menu->regular == 1 ? 'Yes' : 'No' }}</td>
+                                                <td>{{ $menu->lunch_time == 1 ? 'Yes' : 'No' }}</td>
+                                                <td>{{ $menu->created_at }}</td>
+                                                <td>{{ $menu->updated_at }}</td>
+                                                <td><a href="{{ route('admin.menu.edit',$menu->id) }}"><i class="ri-edit-2-fill"></i></a></td>
 
-                                        </tr>
+                                            </tr>
                                         @empty
                                         @endforelse
 
