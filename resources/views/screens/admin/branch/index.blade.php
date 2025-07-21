@@ -2,6 +2,12 @@
 
 @section('content')
     <div class="content-body ">
+        @if (session()->has('message'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="container-fluid">
 
             <div class="row">
@@ -12,52 +18,61 @@
                                 <h4 class="section-title mb-0">Branches</h4>
                             </div>
                             <div class="">
-                                <a class="add-branch-link" href="add-branch.php">
+                                <a class="add-branch-link" href="{{ route('admin.branch.create') }}">
                                     Add Branch
                                 </a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="branch-tabel" class="display table-responsive-md">
+
+                                <table id="example" class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>S.No</th>
-                                            <th>Location</th>
-                                            <th>Branch Name</th>
-                                            <th>Contact Number</th>
-                                            <th>Open</th>
-                                            <th>Close</th>
+                                            <th>Id</th>
+                                            <th>Name</th>
+                                            <th>Country</th>
+                                            <th>State</th>
+                                            <th>City</th>
+                                            <th>Zip</th>
+                                            <th>Address</th>
+                                            <th>Contact</th>
+                                            <th>Open_Time</th>
+                                            <th>Close_Time</th>
                                             <th>Code</th>
-                                            <th>Action</th>
+                                            <th>LunchTime From</th>
+                                            <th>LunchTime To</th>
+                                            <th>Created At</th>
+                                            <th>Updated At</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>01</td>
-                                            <td>Location One</td>
-                                            <td>Branch One</td>
-                                            <td>1234567890</td>
-                                            <td>12:30pm</td>
-                                            <td>09:00pm</td>
-                                            <td>1234</td>
-                                            <td>
-                                                <div
-                                                    class="action-btns d-flex justify-content-start align-items-center gap-4">
-                                                    <div class="">
-                                                        <button type="button" class="view-edit-btn">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="">
-                                                        <button type="button" class="view-edit-btn">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @forelse ($branches as $branch)
+                                            <tr>
+                                                <td>{{ $branch->id }}</td>
+                                                <td>{{ $branch->name }}</td>
+                                                <td>{{ $branch->country }}</td>
+                                                <td>{{ $branch->state }}</td>
+                                                <td>{{ $branch->city }}</td>
+                                                <td>{{ $branch->zip }}</td>
+                                                <td>{{ $branch->address }}</td>
+                                                <td>{{ $branch->contact }}</td>
+                                                <td>{{ $branch->open_time }}</td>
+                                                <td>{{ $branch->close_time }}</td>
+                                                <td>{{ $branch->code }}</td>
+                                                <td>{{ $branch->lunch_time->from }}</td>
+                                                <td>{{ $branch->lunch_time->to }}</td>
+                                                <td>{{ $branch->created_at }}</td>
+                                                <td>{{ $branch->updated_at }}</td>
+                                                <td> <a href="{{ route('admin.branch.edit', $branch->id) }}"><i class="ri-edit-2-fill"></i>Edit</a></td>
+
+                                            </tr>
+                                        @empty
+                                        @endforelse
+
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>

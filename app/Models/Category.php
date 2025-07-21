@@ -12,7 +12,7 @@ class Category extends Model
 
     public function branches(): BelongsToMany
     {
-        return $this->belongsToMany(Branch::class);
+        return $this->belongsToMany(Branch::class)->withTimestamps();
     }
     public function menus() : HasMany
     {

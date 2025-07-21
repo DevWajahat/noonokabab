@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
     public function index()
     {
-        return view('screens.admin.menus.index');
+        $menus = Menu::all();
+
+        return view('screens.admin.menus.index',get_defined_vars());
     }
       public function create()
     {

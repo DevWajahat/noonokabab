@@ -1,105 +1,115 @@
  <div class="footer">
-   <div class="container-fluid">
-     <div class="col-12">
-       <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 set-justify">
-         <p class="copyright-color">© Copyright <strong><script>
-               document.write(new Date().getFullYear())
-             </script> Noon O Kabab</strong> All rights Reserved</p>
-         <p class="copyright-color">Designed & Developed by <strong><a href="https://webdesignglory.com/" target="_blank">Web Design Glory.</a></strong></p>
-       </div>
+     <div class="container-fluid">
+         <div class="col-12">
+             <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 set-justify">
+                 <p class="copyright-color">© Copyright <strong>
+                         <script>
+                             document.write(new Date().getFullYear())
+                         </script> Noon O Kabab
+                     </strong> All rights Reserved</p>
+                 <p class="copyright-color">Designed & Developed by <strong><a href="https://webdesignglory.com/"
+                             target="_blank">Web Design Glory.</a></strong></p>
+             </div>
+         </div>
      </div>
-   </div>
  </div>
  </div>
- <script src="{{ asset("assets/admin/vendor/global/global.min.js") }}" type="text/javascript"></script>
- <script src="{{ asset("assets/admin/vendor/bootstrap-select/dist/js/bootstrap-select.min.js") }}" type="text/javascript"></script>
- <script src="{{ asset("assets/admin/vendor/chart.js/Chart.bundle.min.js") }}" type="text/javascript"></script>
- <script src="{{ asset("assets/admin/vendor/owl-carousel/owl.carousel.css") }}" type="text/javascript"></script>
- <script src="{{ asset("assets/admin/vendor/peity/jquery.peity.min.js") }}" type="text/javascript"></script>
- <script src="{{ asset("assets/admin/js/dashboard/dashboard-1.js") }}" type="text/javascript"></script>
- <script src="{{ asset("assets/admin/vendor/datatables/js/jquery.dataTables.min.js") }}" type="text/javascript"></script>
- <script src="{{ asset("assets/admin/js/plugins-init/datatables.init.js") }}" type="text/javascript"></script>
- <script src="{{ asset("assets/admin/js/custom.min.js") }}" type="text/javascript"></script>
- <script src="{{ asset("assets/admin/js/deznav-init.js") }}" type="text/javascript"></script>
- <script src="{{ asset("assets/admin/js/demo.js") }}" type="text/javascript"></script>
- <script src="{{ asset("assets/admin/js/styleSwitcher.js") }}" type="text/javascript"></script>
-
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ <script src="{{ asset('assets/admin/vendor/global/global.min.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('assets/admin/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"
+     type="text/javascript"></script>
+ <script src="{{ asset('assets/admin/vendor/chart.js/Chart.bundle.min.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('assets/admin/vendor/owl-carousel/owl.carousel.css') }}" type="text/javascript"></script>
+ <script src="{{ asset('assets/admin/vendor/peity/jquery.peity.min.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('assets/admin/js/dashboard/dashboard-1.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('assets/admin/vendor/datatables/js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('assets/admin/js/plugins-init/datatables.init.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('assets/admin/js/custom.min.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('assets/admin/js/deznav-init.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('assets/admin/js/demo.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('assets/admin/js/styleSwitcher.js') }}" type="text/javascript"></script>
+ <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+ <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+ @stack('scripts')
  <script>
-   function carouselReview() {
-     function checkDirection() {
-       var phpClassName = document
-         .getElementsByTagName("php")[0]
-         .getAttribute("class");
-       if (phpClassName == "rtl") {
-         return true;
-       } else {
-         return false;
-       }
-     }
-     jQuery(".testimonial-one").owlCarousel({
-       loop: true,
-       autoplay: true,
-       margin: 15,
-       nav: false,
-       dots: false,
-       left: true,
-       rtl: checkDirection(),
-       navText: ["", ""],
-       responsive: {
-         0: {
-           items: 1,
-         },
-         800: {
-           items: 2,
-         },
-         991: {
-           items: 2,
-         },
+     //    function carouselReview() {
+     //      function checkDirection() {
+     //        var phpClassName = document
+     //          .getElementsByTagName("php")[0]
+     //          .getAttribute("class");
+     //        if (phpClassName == "rtl") {
+     //          return true;
+     //        } else {
+     //          return false;
+     //        }
+     //      }
+     //      jQuery(".testimonial-one").owlCarousel({
+     //        loop: true,
+     //        autoplay: true,
+     //        margin: 15,
+     //        nav: false,
+     //        dots: false,
+     //        left: true,
+     //        rtl: checkDirection(),
+     //        navText: ["", ""],
+     //        responsive: {
+     //          0: {
+     //            items: 1,
+     //          },
+     //          800: {
+     //            items: 2,
+     //          },
+     //          991: {
+     //            items: 2,
+     //          },
 
-         1200: {
-           items: 2,
-         },
-         1600: {
-           items: 2,
-         },
-       },
-     });
-     jQuery(".testimonial-two").owlCarousel({
-       loop: true,
-       autoplay: true,
-       margin: 15,
-       nav: false,
-       dots: true,
-       left: true,
-       rtl: checkDirection(),
-       navText: ["", ""],
-       responsive: {
-         0: {
-           items: 1,
-         },
-         600: {
-           items: 2,
-         },
-         991: {
-           items: 3,
-         },
+     //          1200: {
+     //            items: 2,
+     //          },
+     //          1600: {
+     //            items: 2,
+     //          },
+     //        },
+     //      });
+     //      jQuery(".testimonial-two").owlCarousel({
+     //        loop: true,
+     //        autoplay: true,
+     //        margin: 15,
+     //        nav: false,
+     //        dots: true,
+     //        left: true,
+     //        rtl: checkDirection(),
+     //        navText: ["", ""],
+     //        responsive: {
+     //          0: {
+     //            items: 1,
+     //          },
+     //          600: {
+     //            items: 2,
+     //          },
+     //          991: {
+     //            items: 3,
+     //          },
 
-         1200: {
-           items: 3,
-         },
-         1600: {
-           items: 4,
-         },
-       },
-     });
-   }
-   jQuery(window).on("load", function() {
-     setTimeout(function() {
-       carouselReview();
-     }, 1000);
-   });
+     //          1200: {
+     //            items: 3,
+     //          },
+     //          1600: {
+     //            items: 4,
+     //          },
+     //        },
+     //      });
+     //    }
+     //    jQuery(window).on("load", function() {
+     //      setTimeout(function() {
+     //        carouselReview();
+     //      }, 1000);
+     //    });
  </script>
 
 
  </body>
- </php>
+
+ </html>

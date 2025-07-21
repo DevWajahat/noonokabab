@@ -1,6 +1,14 @@
 @extends('layout.admin.app')
 @section('content')
     <div class="content-body ">
+
+        @if (session()->has('message'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -10,44 +18,40 @@
                                 <h4 class="section-title mb-0">Lunchtime</h4>
                             </div>
                             <div class="">
-                                <a class="add-branch-link" href="add-lunchtime.php">
+                                <a class="add-branch-link" href="{{ route('admin.lunchtime.create') }}">
                                     Add Lunchtime
                                 </a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="lunchtime-tabel" class="display table-responsive-md">
+                                <table id="example" class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>S.No</th>
+                                            <th>Id</th>
                                             <th>From</th>
                                             <th>To</th>
-                                            <th>Action</th>
+                                            <th>Created At</th>
+                                            <th>Updated At</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>01</td>
-                                            <td>12:00pm</td>
-                                            <td>03:00pm</td>
-                                            <td>
-                                                <div
-                                                    class="action-btns d-flex justify-content-start align-items-center gap-4">
-                                                    <div class="">
-                                                        <button type="button" class="view-edit-btn">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="">
-                                                        <button type="button" class="view-edit-btn">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @forelse ($lunchTimes as $lunchTime)
+                                            <tr>
+                                                <td>{{ $lunchTime->id }}</td>
+                                                <td>{{ $lunchTime->from }}</td>
+                                                <td>{{ $lunchTime->to }}</td>
+                                                <td>{{ $lunchTime->created_at }}</td>
+                                                <td>{{ $lunchTime->updated_at }}</td>
+                                                <td><a href="{{ route('admin.lunchtime.edit',$lunchTime->id) }}"><i class="ri-edit-2-fill"></i></a> </td>
+
+                                            </tr>
+                                        @empty
+                                        @endforelse
+
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>

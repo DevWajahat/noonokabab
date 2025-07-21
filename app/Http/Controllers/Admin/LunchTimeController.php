@@ -3,32 +3,67 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreLunchTimeRequest;
+use App\Models\LunchTime;
 use Illuminate\Http\Request;
 
 class LunchTimeController extends Controller
 {
      public function index()
     {
-        return view('screens.admin.lunch-time.index');
+        $lunchTimes = LunchTime::all();
+
+
+        return view('screens.admin.lunch-time.index',get_defined_vars());
     }
       public function create()
     {
+
+
         return view('screens.admin.lunch-time.create');
     }
-    public function store(Request $request)
+    public function store(StoreLunchTimeRequest $request)
     {
-        return back()->with('message','Category Added Successfully.');
+
+        // dd($request->all());
+
+        LunchTime::create([
+            'from' => $request->from,
+            'to' => $request->to
+        ]);
+
+
+        return redirect()->route('admin.lunchtime.index')->with('message','Lunch Time Added Successfully.');
     }
-    public function edit()
+    public function edit($id)
     {
-        return view('screens.admin.lunch-time.edit');
+
+        $lunchTime = LunchTime::find($id);
+
+
+
+        return view('screens.admin.lunch-time.edit',get_defined_vars());
     }
-    public function update(Request $request)
+    public function update(StoreLunchTimeRequest $request, $id)
     {
-        return back()->with('message','Category Updated Successfully.');
+
+      
+
+        $lunchTime = LunchTime::find($id);
+
+        $lunchTime->update([
+            'from' => $request->from,
+            'to' => $request->to
+        ]);
+
+
+        return redirect()->route('admin.lunchtime.index')->with('message','Lunch Time Updated Successfully.');
     }
-    public function destroy()
-    {
-        return view('');
-    }
+
+
+
+    // public function destroy()
+    // {
+    //    return back()->with('message','Lunch Time Deleted Successfully.');
+    // }
 }

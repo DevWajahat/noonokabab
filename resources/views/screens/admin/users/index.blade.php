@@ -11,174 +11,53 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="order-tabel" class="display table-responsive-md">
+
+
+                                <table id="example" class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>S.No</th>
+                                            <th>Id</th>
                                             <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone Number</th>
-                                            <!--<th>Details</th>-->
+                                            <th>Country</th>
+                                            <th>State</th>
+                                            <th>City</th>
+                                            <th>Zip</th>
+                                            <th>Address</th>
+                                            <th>Contact</th>
+                                            <th>Open_Time</th>
+                                            <th>Close_Time</th>
+                                            <th>Code</th>
+                                            <th>LunchTime From</th>
+                                            <th>LunchTime To</th>
+                                            <th>Created At</th>
+                                            <th>Updated At</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @forelse ($branches as $branch)
                                         <tr>
-                                            <td>01</td>
-                                            <td>Jhon Wick</td>
-                                            <td>Jhon@gmail.com</td>
-                                            <td>
-                                                12564567890
-                                            </td>
-                                            <!--<td class="">-->
-                                            <!--    <button class="invoice-btn">-->
-                                            <!--        <i class="fa-solid fa-eye"></i>-->
-                                            <!--    </button>-->
-                                            <!--</td>-->
+                                            <td>{{ $branch->id }}</td>
+                                            <td>{{ $branch->name }}</td>
+                                            <td>{{ $branch->country }}</td>
+                                            <td>{{ $branch->state }}</td>
+                                            <td>{{ $branch->city }}</td>
+                                            <td>{{ $branch->zip }}</td>
+                                            <td>{{ $branch->address }}</td>
+                                            <td>{{ $branch->contact }}</td>
+                                            <td>{{ $branch->open_time }}</td>
+                                            <td>{{ $branch->close_time }}</td>
+                                            <td>{{ $branch->code }}</td>
+                                            <td>{{ $branch->lunch_time->from }}</td>
+                                            <td>{{ $branch->lunch_time->to }}</td>
+                                            <td>{{ $branch->created_at }}</td>
+                                            <td>{{ $branch->updated_at }}</td>
+
                                         </tr>
-                                        <tr>
-                                            <td>02</td>
-                                            <td>Anonymous</td>
-                                            <td>Anonymous@gmail.com</td>
-                                            <td>
-                                                12564567890
-                                            </td>
-                                            <!--<td class="">-->
-                                            <!--    <button class="invoice-btn">-->
-                                            <!--        <i class="fa-solid fa-eye"></i>-->
-                                            <!--    </button>-->
-                                            <!--</td>-->
-                                        </tr>
-                                        <tr>
-                                            <td>03</td>
-                                            <td>Anonymous</td>
-                                            <td>Anonymous@gmail.com</td>
-                                            <td>
-                                                12564567890
-                                            </td>
-                                            <!--<td class="">-->
-                                            <!--    <button class="invoice-btn">-->
-                                            <!--        <i class="fa-solid fa-eye"></i>-->
-                                            <!--    </button>-->
-                                            <!--</td>-->
-                                        </tr>
-                                        <tr>
-                                            <td>04</td>
-                                            <td>Oliver</td>
-                                            <td>Oliver@gmail.com</td>
-                                            <td>
-                                                12564567890
-                                            </td>
-                                            <!--<td class="">-->
-                                            <!--    <button class="invoice-btn">-->
-                                            <!--        <i class="fa-solid fa-eye"></i>-->
-                                            <!--    </button>-->
-                                            <!--</td>-->
-                                        </tr>
-                                        <tr>
-                                            <td>05</td>
-                                            <td>Anonymous</td>
-                                            <td>Anonymous@gmail.com</td>
-                                            <td>
-                                                12564567890
-                                            </td>
-                                            <!--<td class="">-->
-                                            <!--    <button class="invoice-btn">-->
-                                            <!--        <i class="fa-solid fa-eye"></i>-->
-                                            <!--    </button>-->
-                                            <!--</td>-->
-                                        </tr>
-                                        <tr>
-                                            <td>05</td>
-                                            <td>Elijah</td>
-                                            <td>Elijah@gmail.com</td>
-                                            <td>
-                                                12564567890
-                                            </td>
-                                            <!--<td class="">-->
-                                            <!--    <button class="invoice-btn">-->
-                                            <!--        <i class="fa-solid fa-eye"></i>-->
-                                            <!--    </button>-->
-                                            <!--</td>-->
-                                        </tr>
-                                        <tr>
-                                            <td>05</td>
-                                            <td>William</td>
-                                            <td>William@gmail.com</td>
-                                            <td>
-                                                12564567890
-                                            </td>
-                                            <!--<td class="">-->
-                                            <!--    <button class="invoice-btn">-->
-                                            <!--        <i class="fa-solid fa-eye"></i>-->
-                                            <!--    </button>-->
-                                            <!--</td>-->
-                                        </tr>
-                                        <tr>
-                                            <td>06</td>
-                                            <td>Anonymous</td>
-                                            <td>Anonymous@gmail.com</td>
-                                            <td>
-                                                12564567890
-                                            </td>
-                                            <!--<td class="">-->
-                                            <!--    <button class="invoice-btn">-->
-                                            <!--        <i class="fa-solid fa-eye"></i>-->
-                                            <!--    </button>-->
-                                            <!--</td>-->
-                                        </tr>
-                                        <tr>
-                                            <td>07</td>
-                                            <td>Lucas</td>
-                                            <td>Lucas@gmail.com</td>
-                                            <td>
-                                                12564567890
-                                            </td>
-                                            <!--<td class="">-->
-                                            <!--    <button class="invoice-btn">-->
-                                            <!--        <i class="fa-solid fa-eye"></i>-->
-                                            <!--    </button>-->
-                                            <!--</td>-->
-                                        </tr>
-                                        <tr>
-                                            <td>08</td>
-                                            <td>Daniel</td>
-                                            <td>Daniel@gmail.com</td>
-                                            <td>
-                                                12564567890
-                                            </td>
-                                            <!--<td class="">-->
-                                            <!--    <button class="invoice-btn">-->
-                                            <!--        <i class="fa-solid fa-eye"></i>-->
-                                            <!--    </button>-->
-                                            <!--</td>-->
-                                        </tr>
-                                        <tr>
-                                            <td>09</td>
-                                            <td>Jack</td>
-                                            <td>Jack@gmail.com</td>
-                                            <td>
-                                                12564567890
-                                            </td>
-                                            <!--<td class="">-->
-                                            <!--    <button class="invoice-btn">-->
-                                            <!--        <i class="fa-solid fa-eye"></i>-->
-                                            <!--    </button>-->
-                                            <!--</td>-->
-                                        </tr>
-                                        <tr>
-                                            <td>10</td>
-                                            <td>Michael</td>
-                                            <td>Michael@gmail.com</td>
-                                            <td>
-                                                12564567890
-                                            </td>
-                                            <!--<td class="">-->
-                                            <!--    <button class="invoice-btn">-->
-                                            <!--        <i class="fa-solid fa-eye"></i>-->
-                                            <!--    </button>-->
-                                            <!--</td>-->
-                                        </tr>
+                                        @empty
+                                        @endforelse
+
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>

@@ -13,11 +13,13 @@
     <link href="{{ asset("assets/admin/vendor/chartist/css/chartist.min.css") }}" rel="stylesheet" type="text/css" />
     <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link href="{{ asset("assets/admin/vendor/owl-carousel/owl.carousel.css") }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("assets/admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css") }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("assets/admin/vendor/datatables/css/jquery.dataTables.min.css") }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("assets/admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css") }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("assets/admin/css/style.css") }}" rel="stylesheet" type="text/css" />
+   
     <script src="https://cdn.tiny.cloud/1/dfpwqzta0shla64s4zi0rqjezy639oqfj9hnk8bwsqr8lu08/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
   </head>
 
@@ -162,24 +164,24 @@
                 <span class="nav-text">Dashboard</span>
               </a>
             </li>
-            <li class="has-menu">
+            {{-- <li class="has-menu">
               <a class="has-arrow ai-icon" href="profile.php" aria-expanded="false">
                 <i class="fa-solid fa-user"></i>
                 <span class="nav-text">Profile</span>
               </a>
-            </li>
+            </li> --}}
             <li class="has-menu">
-              <a class="has-arrow ai-icon" href="{{ route('admin.orders') }}" aria-expanded="false">
+              <a class="has-arrow ai-icon" href="{{ route('admin.orders.index') }}" aria-expanded="false">
                 <i class="fa-solid fa-bars-staggered"></i>
                 <span class="nav-text">Orders </span>
               </a>
             </li>
-            <li class="has-menu">
+            {{-- <li class="has-menu">
               <a class="has-arrow ai-icon" href="./user-impressions.php" aria-expanded="false">
                 <i class="fa-regular fa-eye"></i>
                 <span class="nav-text">Impressions</span>
               </a>
-            </li>
+            </li> --}}
             <li class="has-menu">
               <a class="has-arrow ai-icon" href="{{ route('admin.user.index') }}" aria-expanded="false">
                 <i class="fa-solid fa-users"></i>
@@ -205,7 +207,7 @@
                 </li>
               </ul>
             </li>
-            <li class="has-menu">
+            {{-- <li class="has-menu">
               <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                 <i class="fa-solid fa-location-dot"></i>
                 <span class="nav-text">Locations</span>
@@ -222,7 +224,7 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> --}}
             <li class="has-menu">
               <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                 <i class="fa-solid fa-clock"></i>
@@ -241,7 +243,7 @@
                 </li>
               </ul>
             </li>
-            <li class="has-menu">
+            {{-- <li class="has-menu">
               <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
               <i class="fas fa-external-link-alt"></i>
                 <span class="nav-text">Externals</span>
@@ -258,7 +260,7 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> --}}
             <li class="has-menu">
               <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                  <i class="fas fa-utensils"></i>
@@ -266,12 +268,12 @@
               </a>
               <ul class="metismenu" id="menu">
                 <li class="has-menu">
-                  <a class="has-arrow ai-icon" href="add-menu.php" aria-expanded="false">
+                  <a class="has-arrow ai-icon" href="{{ route('admin.menu.create') }}" aria-expanded="false">
                     <span class="nav-text">Add Menu</span>
                   </a>
                 </li>
                 <li class="has-menu">
-                  <a class="has-arrow ai-icon" href="menu.php" aria-expanded="false">
+                  <a class="has-arrow ai-icon" href="{{ route('admin.menu.index') }}" aria-expanded="false">
                     <span class="nav-text">Menu List</span>
                   </a>
                 </li>
@@ -284,18 +286,18 @@
               </a>
               <ul class="metismenu" id="menu">
                 <li class="has-menu">
-                  <a class="has-arrow ai-icon" href="add-catigory.php" aria-expanded="false">
+                  <a class="has-arrow ai-icon" href="{{ route('admin.category.create') }}" aria-expanded="false">
                     <span class="nav-text">Add Categories</span>
                   </a>
                 </li>
                 <li class="has-menu">
-                  <a class="has-arrow ai-icon" href="Categories.php" aria-expanded="false">
+                  <a class="has-arrow ai-icon" href="{{ route('admin.category.index') }}" aria-expanded="false">
                     <span class="nav-text">Categories List</span>
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="has-menu">
+            {{-- <li class="has-menu">
               <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                 <i class="fa-regular fa-image"></i>
                 <span class="nav-text">Galleries</span>
@@ -312,14 +314,14 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> --}}
             <li class="has-menu">
               <a class="has-arrow ai-icon" href="reservation.php" aria-expanded="false">
               <i class="fas fa-calendar-check"></i>
                 <span class="nav-text">Reservation</span>
               </a>
             </li>
-            <li class="has-menu">
+            {{-- <li class="has-menu">
               <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
               <i class="fas fa-user-tie"></i>
                 <span class="nav-text">Careers</span>
@@ -341,7 +343,7 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> --}}
             <li class="has-menu">
               <a class="has-arrow ai-icon" href="contacts.php" aria-expanded="false">
                 <i class="fa-solid fa-address-book"></i>

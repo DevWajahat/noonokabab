@@ -18,4 +18,5 @@ class Order extends Model
     {
         return $this->belongsToMany(Menu::class)->withTimestamps()->withPivot('name','price','total_price','quantity','category','created_at','updated_at','id');
     }
+    
 }

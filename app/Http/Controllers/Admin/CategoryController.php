@@ -3,32 +3,59 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        return view('screens.admin.category.index');
+
+        $categories = Category::all();
+
+        return view('screens.admin.category.index', get_defined_vars());
     }
     public function create()
     {
         return view('screens.admin.category.create');
     }
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        return back()->with('message','Category Added Successfully.');
+
+        Category::create([
+            'name' => $request->category
+        ]);
+
+        return redirect()->route('admin.category.index')->with('message', 'Category Added Successfully.');
     }
-    public function edit()
+    public function edit($id)
     {
-        return view('screens.admin.category.edit');
+         $category = Category::find($id);
+
+        return view('screens.admin.category.edit',get_defined_vars());
     }
-    public function update(Request $request)
+    public function update(StoreCategoryRequest $request, $id)
     {
-        return back()->with('message','Category Updated Successfully.');
+
+        $category = Category::find($id);
+
+        $category->update([
+            'name' => $request->category
+        ]);
+
+        return redirect()->route('admin.category.index')->with('message', 'Category Updated Successfully.');
     }
-    public function destroy()
+
+
+    public function destroy($id)
     {
-        return view('');
+        $category = Category::find($id);
+
+        $category->delete();
+
+
+
+        return back()->with('message', 'Category Updated Successfully.');
     }
 }

@@ -12,179 +12,56 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="order-tabel" class="display table-responsive-md">
+
+
+                                <table id="example" class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>S.No</th>
-                                            <th>Order Id</th>
-                                            <th>Amount</th>
-                                            <th>Order Type</th>
-                                            <th>Payment Mode</th>
-                                            <th>Date Time</th>
-                                            <th>Invoice</th>
+                                            <th>Id</th>
+                                            <th>User</th>
+                                            <th>Phone</th>
+                                            <th>type</th>
+                                            <th>Delivery Address</th>
+                                            <th>Floor</th>
+                                            <th>Order Time</th>
+                                            <th>Schedule</th>
+                                            <th>Date</th>
+                                            <th>Sub total</th>
+                                            <th>total</th>
+                                            <th>gratuity</th>
+                                            <th>Discount Code</th>
+                                            <th>Discount Price</th>
+                                            <th>Pickup Point</th>
+                                            <th>Created At</th>
+                                            <th>Updated At</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @forelse ($orders as $order)
                                         <tr>
-                                            <td>01</td>
-                                            <td>#12345</td>
-                                            <td>$510.00</td>
-                                            <td>Delivery</td>
-                                            <td>Card</td>
-                                            <td>
-                                                <span class="order-date">6/10/2024</span>
-                                                <span class="order-time">5:30 PM</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="invoice-btn">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </button>
-                                            </td>
+                                            <td>{{ $order->id }}</td>
+                                            <td>{{ $order->user->name }}</td>
+                                            <td>{{ $order->phone }}</td>
+                                            <td>{{ $order->type }}</td>
+                                            <td>{{ $order->delivery_address }}</td>
+                                            <td>{{ $order->floor }}</td>
+                                            <td>{{ $order->time }}</td>
+                                            <td>{{ $order->schedule }}</td>
+                                            <td>{{ $order->created_at }}</td>
+                                            <td>${{ $order->sub_total }}</td>
+                                            <td>${{ $order->total }}</td>
+                                            <td>${{ $order->gratuity }}</td>
+                                            <td>{{ $order->discount_code }}</td>
+                                            <td>{{ $order->discount_price }}</td>
+                                            <td>{{ $order->pickup_point }}</td>
+                                            <td>{{ $order->created_at }}</td>
+                                            <td>{{ $order->updated_at }}</td>
+                                            <td><a href="{{ route('admin.orders.details',$order->id) }}"><i class="ri-eye-fill"></i></a></td>
                                         </tr>
-                                        <tr>
-                                            <td>02</td>
-                                            <td>#12345</td>
-                                            <td>$510.00</td>
-                                            <td>Pickup</td>
-                                            <td>Cash</td>
-                                            <td>
-                                                <span class="order-date">6/10/2024</span>
-                                                <span class="order-time">5:30 PM</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="invoice-btn">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>03</td>
-                                            <td>#12345</td>
-                                            <td>$510.00</td>
-                                            <td>Delivery</td>
-                                            <td>Card</td>
-                                            <td>
-                                                <span class="order-date">6/10/2024</span>
-                                                <span class="order-time">5:30 PM</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="invoice-btn">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>04</td>
-                                            <td>#12345</td>
-                                            <td>$510.00</td>
-                                            <td>Pickup</td>
-                                            <td>Cash</td>
-                                            <td>
-                                                <span class="order-date">6/10/2024</span>
-                                                <span class="order-time">5:30 PM</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="invoice-btn">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>05</td>
-                                            <td>#12345</td>
-                                            <td>$510.00</td>
-                                            <td>Delivery</td>
-                                            <td>Card</td>
-                                            <td>
-                                                <span class="order-date">6/10/2024</span>
-                                                <span class="order-time">5:30 PM</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="invoice-btn">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>06</td>
-                                            <td>#12345</td>
-                                            <td>$510.00</td>
-                                            <td>Pickup</td>
-                                            <td>Cash</td>
-                                            <td>
-                                                <span class="order-date">6/10/2024</span>
-                                                <span class="order-time">5:30 PM</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="invoice-btn">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>07</td>
-                                            <td>#12345</td>
-                                            <td>$510.00</td>
-                                            <td>Delivery</td>
-                                            <td>Card</td>
-                                            <td>
-                                                <span class="order-date">6/10/2024</span>
-                                                <span class="order-time">5:30 PM</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="invoice-btn">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>08</td>
-                                            <td>#12345</td>
-                                            <td>$510.00</td>
-                                            <td>Pickup</td>
-                                            <td>Cash</td>
-                                            <td>
-                                                <span class="order-date">6/10/2024</span>
-                                                <span class="order-time">5:30 PM</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="invoice-btn">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>09</td>
-                                            <td>#12345</td>
-                                            <td>$510.00</td>
-                                            <td>Delivery</td>
-                                            <td>Card</td>
-                                            <td>
-                                                <span class="order-date">6/10/2024</span>
-                                                <span class="order-time">5:30 PM</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="invoice-btn">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>10</td>
-                                            <td>#12345</td>
-                                            <td>$510.00</td>
-                                            <td>Pickup</td>
-                                            <td>Cash</td>
-                                            <td>
-                                                <span class="order-date">6/10/2024</span>
-                                                <span class="order-time">5:30 PM</span>
-                                            </td>
-                                            <td class="text-center">
-                                                <button class="invoice-btn">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
+                                        @empty
+                                        @endforelse
+
                                     </tbody>
 
                                 </table>
@@ -201,6 +78,7 @@
 
 @push('scripts')
     <script>
+        new DataTable('#example');
         $(function() {
             $("#order-tabel").DataTable({
                 processing: true,

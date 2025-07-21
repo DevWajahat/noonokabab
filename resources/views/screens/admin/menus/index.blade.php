@@ -19,48 +19,42 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="menu-tabel" class="display table-responsive-md">
+
+                                <table id="example" class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Image</th>
+                                            <th>Id</th>
+                                            <th>Category</th>
                                             <th>Branch</th>
-                                            <th>Menu Name</th>
-                                            <th>Discription</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
                                             <th>Price</th>
                                             <th>Regular</th>
-                                            <th>Lunch Special</th>
-                                            <th>Action</th>
+                                            <th>Lunch Time</th>
+                                            <th>Created At</th>
+                                            <th>Updated At</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @forelse ($menus as $menu)
                                         <tr>
-                                            <td>
-                                                <img class="img-fluid external-img"
-                                                    src="{{ asset("assets/admin/images/tabel-restaurent-img.jpg") }}" alt="">
-                                            </td>
-                                            <td>Branch Name</td>
-                                            <td>Menu Name</td>
-                                            <td style="max-width: 150px;">Lorem ipsum dolor sit amet </td>
-                                            <td>$50</td>
-                                            <td>True</td>
-                                            <td>False</td>
-                                            <td>
-                                                <div
-                                                    class="action-btns d-flex justify-content-start align-items-center gap-4">
-                                                    <div class="">
-                                                        <button type="button" class="view-edit-btn">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="">
-                                                        <button type="button" class="view-edit-btn">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
+                                            <td>{{ $menu->id }}</td>
+                                            <td>{{ $menu->category->name }}</td>
+                                            <td>{{ $menu->branch->name }}</td>
+                                            <td>{{ $menu->name }}</td>
+                                            <td>{{ $menu->description }}</td>
+                                            <td>${{ $menu->price }}</td>
+                                            <td>{{ $menu->regular == 1 ? 'Yes' : 'No' }}</td>
+                                            <td>{{ $menu->lunch_time == 1 ? 'Yes' : 'No' }}</td>
+                                            <td>{{ $menu->created_at }}</td>
+                                            <td>{{ $menu->updated_at }}</td>
+
                                         </tr>
+                                        @empty
+                                        @endforelse
+
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>
