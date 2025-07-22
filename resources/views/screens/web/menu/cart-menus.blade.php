@@ -41,13 +41,13 @@
                     <div class="select-cart-area-bottom mt-3">
                         <h2 class="popup-ingredients-sb-title text-black mb-3 mb-2">{{ $sideline->name }}</h2>
                     </div>
-                    @forelse ($sideline->options as $option)
+                    @forelse ($sideline->options as $key => $option)
                         <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-2">
                             <div class="ingredients-checkbox-area">
-
+                                {{-- @dd($key,$option) --}}
                                 <input type="{{ $option->sideline->option == 'Optional' ? 'checkbox' : 'radio' }}"
                                     {{ isset($item['sidelines'][$sideline->name]) && $option->name == $item['sidelines'][$sideline->name] ? 'checked' : '' }}
-                                    value="{{ $option->name }}"
+                                    value="{{ $option->name }}" {{  $key == 0 && $option->sideline->option == 'Compulsory' ? 'checked data-checked=1' : '' }}
                                     class="ingredients-checkbox sides-checkbox sides-checkbox-optional"
                                     name="side_{{ $option->sideline->id }}"
                                     id="side_{{ $option->sideline->id }}_{{ $option->id }}"

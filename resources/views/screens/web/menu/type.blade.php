@@ -19,7 +19,8 @@
                             <img src="{{ asset('assets/web/images/framer-bottom-right.png') }}" alt="">
                         </div>
                         <div class="frame-logo circle-small-logo">
-                            <img class="circle-logo" src="{{ asset('assets/web/images/circle-logo.png') }}" alt="">
+                            <img class="circle-logo" src="{{ asset('assets/web/images/circle-logo.png') }}"
+                                alt="">
                             <a class="sign-back-btn" href="{{ route('index') }}"><i
                                     class="fa-solid fa-chevron-left"></i></a>
                             <div class="pick-tab-btn">
@@ -137,7 +138,8 @@
                                         <div class="col-xxl-6 col-lg-12 col-md-6 col-12 menu-item">
                                             <div class="dish-card">
                                                 <div class="dish-img">
-                                                    <img src="{{ asset('assets/web/images/dish-1.png') }}" alt="">
+                                                    <img src="{{ asset('assets/web/images/dish-1.png') }}"
+                                                        alt="">
                                                 </div>
                                                 <div class="dish-detail">
                                                     <h2 class="dish-title" id="{{ $menu->id }}">
@@ -212,8 +214,8 @@
     <div class="location-popup-wrap">
         <div class="location-popup-area">
             <div class="location-popup">
-                <img class="img-fluid select-location-logo" src="{{ asset('assets/web/images/noon-o-kabab-logo.png') }}"
-                    alt="">
+                <img class="img-fluid select-location-logo"
+                    src="{{ asset('assets/web/images/noon-o-kabab-logo.png') }}" alt="">
                 <h4 class="branch-title">Please Select Location</h4>
                 <form id="location-form" action="">
                     <ul class="select-area-list">
@@ -288,8 +290,11 @@
                     $('#cartItemValue').html(response.cartCount)
                 }
             })
-
         }
+
+
+
+
         $(document).on("click", '.location-btns', function() {
             var type = $(this).attr("data-view");
             console.log("da")
@@ -347,35 +352,51 @@
             var restaurantSelect = $('.restaurantSelect').find(":selected").val()
             var locationType = $('.location-btns.active').attr("data-view");
             console.log(locationType)
+
+
             if (oldValue != restaurantSelect) {
 
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "If you proceed Your Cart Will be Empty",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    cancelButtonText: "Don't Proceed Further",
-                    confirmButtonText: "Proceed"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Cart Empty!",
-                            text: "Your Cart Is Now Empty",
-                            icon: "success"
-                        });
-                        $.ajax({
-                            type: 'GET',
-                            url: '{{ route('cart.flush') }}',
-                            success: function(response) {
 
-                            }
-                        })
 
-                        orderRoute(restaurantSelect, locationType)
+                @if (session('cart') !== null && session('cart')['items'] !== null)
 
-                    }
-                });
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "If you proceed Your Cart Will be Empty",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        cancelButtonText: "Don't Proceed Further",
+                        confirmButtonText: "Proceed"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: "Cart Empty!",
+                                text: "Your Cart Is Now Empty",
+                                icon: "success"
+                            });
+                            $.ajax({
+                                type: 'GET',
+                                url: '{{ route('cart.flush') }}',
+                                success: function(response) {
+
+                                }
+                            })
+                            orderRoute(restaurantSelect, locationType)
+                        }
+                    });
+                @else
+                    $.ajax({
+                        type: 'GET',
+                        url: '{{ route('cart.flush') }}',
+                        success: function(response) {
+
+                        }
+                    })
+                    orderRoute(restaurantSelect, locationType)
+                @endif
+
+
 
             } else {
                 orderRoute(restaurantSelect, locationType)
@@ -535,8 +556,12 @@
                 success: function(response) {
                     if (response.status) {
                         $("#cart-main-container").html(response.cartHtml)
+
+
+
                     }
-                    console.log(response)
+
+                    // console.log(response)
                     // console.log(response)
                     var proId = response.button
                     proId = proId.split("-")[1]
@@ -544,7 +569,6 @@
                 }
             })
         }
-
 
 
         const cartContainer = $("#cart-container");
@@ -595,12 +619,15 @@
 
             cartStore(type, productId, 1)
 
+            //    console.log( $("body > .ingredients-checkbox"));
+
             cartCount();
 
             $(`#${productId}`).find('.dish-cart')
 
 
         });
+
 
         $(document).on("change", ".ingredients-checkbox", function() {
 
