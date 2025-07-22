@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 use App\Http\Controllers\Admin\LunchTimeController;
 use App\Http\Controllers\Admin\MenuController as AdminMenuController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\SidelineController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Web\SpecialController;
 use App\Http\Controllers\Web\AboutController;
@@ -117,5 +118,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('orders')->controller(OrderController::class)->name('orders.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('details/{id}','details')->name('details');
+    });
+
+    Route::prefix('sideline')->controller(SidelineController::class)->name('sideline.')->group(function () {
+        Route::get('/','index')->name('index');
+        Route::get('create','create')->name('create');
+        Route::post('store','store')->name('store');
+        Route::get('edit/{id}','edit')->name('edit');
+        Route::post('update/{id}','update')->name('update');
     });
 });
