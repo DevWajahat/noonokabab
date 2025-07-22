@@ -14,7 +14,7 @@
               </span>
               <div class="media-body text-end feature-icon-text">
                 <p class="fs-18 text-white mb-2">Orders</p>
-                <span class="fs-48 text-white font-w600">86</span>
+                <span class="fs-48 text-white font-w600">{{ count($orders) }}</span>
               </div>
             </div>
           </div>
@@ -32,10 +32,10 @@
                   <path d="M3.50017 10.4995C1.57551 10.4995 0 12.075 0 13.9997V34.9997C0 36.9243 1.57551 38.5004 3.50017 38.5004H6.99983V10.4995H3.50017Z" fill="white" />
                 </svg> -->
               </span>
-              <div class="media-body text-end feature-icon-text">
+              {{-- <div class="media-body text-end feature-icon-text">
                 <p class="fs-18 text-white mb-2">Impressions</p>
                 <span class="fs-48 text-white font-w600">75</span>
-              </div>
+              </div> --}}
             </div>
           </div>
         </div>

@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
-use App\Http\Controllers\Admin\IngredientController ;
+use App\Http\Controllers\Admin\IngredientController;
 use App\Http\Controllers\Admin\LunchTimeController;
 use App\Http\Controllers\Admin\MenuController as AdminMenuController;
 use App\Http\Controllers\Admin\OrderController;
@@ -66,14 +67,14 @@ Route::prefix('checkout')->controller(CheckoutController::class)->name('checkout
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'login_view')->name('login')->middleware('guest');
     Route::post('login', 'login');
-    Route::get('logout', 'logout')->name('logout');
+    // Route::get('logout', 'logout')->name('logout');
     Route::post('register', 'register')->name('register')->middleware('guest');
 });
 
 Route::post('location', [LocationController::class, 'index'])->name('location');
 
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('CheckAdmin')->group(function () {
     Route::get('/', [AdminIndexController::class, 'index'])->name('index');
 
 
@@ -105,11 +106,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 
     Route::prefix('lunchtime')->controller(LunchTimeController::class)->name('lunchtime.')->group(function () {
-        Route::get('/','index')->name('index');
-        Route::get('create','create')->name('create');
-        Route::post('store','store')->name('store');
-        Route::get('edit/{id}','edit')->name('edit');
-        Route::post('update/{id}','update')->name('update');
+        Route::get('/', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::post('update/{id}', 'update')->name('update');
         // Route::get('destroy/{id}','destroy')->name('destroy');
     });
 
@@ -119,22 +120,33 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::prefix('orders')->controller(OrderController::class)->name('orders.')->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('details/{id}','details')->name('details');
+        Route::get('details/{id}', 'details')->name('details');
     });
 
     Route::prefix('sideline')->controller(SidelineController::class)->name('sideline.')->group(function () {
-        Route::get('/','index')->name('index');
-        Route::get('create','create')->name('create');
-        Route::post('store','store')->name('store');
-        Route::get('edit/{id}','edit')->name('edit');
-        Route::post('update/{id}','update')->name('update');
+        Route::get('/', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::post('update/{id}', 'update')->name('update');
     });
 
     Route::prefix('ingredients')->controller(IngredientController::class)->name('ingredients.')->group(function () {
-        Route::get('/','index')->name('index');
-        Route::get('create','create')->name('create');
-        Route::post('store','store')->name('store');
-        Route::get('edit/{id}','edit')->name('edit');
-        Route::post('update/{id}','update')->name('update');
+        Route::get('/', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::post('update/{id}', 'update')->name('update');
     });
+
+
+
+
 });
+    Route::prefix('admin')->name('admin.')->controller(AdminAuthController::class)->group(function () {
+        Route::get('register', 'register_view')->name('register');
+        Route::post('register', 'register');
+        Route::get('login', 'login_view')->name('login');
+        Route::post('login', 'login');
+        Route::get('logout','logout')->name('logout');
+    });
