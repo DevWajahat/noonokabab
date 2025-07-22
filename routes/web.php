@@ -57,7 +57,7 @@ Route::controller(AboutController::class)->group(function () {
     Route::get('reviews/guest', 'guestReviews')->name('reviews.guest');
 });
 
-Route::prefix('checkout')->controller(CheckoutController::class)->name('checkout')->group(function () {
+Route::prefix('checkout')->middleware('checkCart')->controller(CheckoutController::class)->name('checkout')->group(function () {
     Route::get('/', 'index');
     Route::post('store', 'store')->name('.store');
 });

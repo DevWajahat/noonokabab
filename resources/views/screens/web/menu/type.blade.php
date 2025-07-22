@@ -92,7 +92,7 @@
                         </button>
 
                         <div class="header-links ">
-                            <a href="{{ route('checkout') }}"><i class="fa-solid fa-basket-shopping"></i></a>
+                            <a href="#" id="checkout"><i class="fa-solid fa-basket-shopping"></i></a>
                             <span id="cartItemValue">0</span>
                         </div>
                     </div>
@@ -277,6 +277,31 @@
     $(document).ready(function() {
 
 
+        $('#checkout').on("click", function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('cart.index') }}',
+                success: function(response) {
+                    console.log(response)
+                    if (response.cartCount > 0) {
+                        window.location.href = "{{ route('checkout') }}";
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Cart is Empty",
+                        });
+                    }
+                }
+            })
+
+
+
+        })
+
+
+
         var cartItem = $('#cartItemValue')
 
         cartCount();
@@ -288,8 +313,13 @@
                 success: function(response) {
                     console.log(response)
                     $('#cartItemValue').html(response.cartCount)
+                    var cartCount = response.cartCount
+
+                    return response;
                 }
             })
+
+            // return cartCount;
         }
 
 

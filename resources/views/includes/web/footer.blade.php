@@ -101,6 +101,26 @@
 
         var oldValue = $('.restaurantSelect').find(":selected").val();
 
+        $('#checkout').on("click", function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('cart.index') }}',
+                success: function(response) {
+                    console.log(response)
+                    if (response.cartCount > 0) {
+                        window.location.href = "{{ route('checkout') }}";
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Cart is Empty",
+                        });
+                    }
+                }
+            })
+        })
+
 
         $('.orderRoute').on("click", function() {
             @if (session('location') !== null)
