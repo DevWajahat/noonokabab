@@ -287,16 +287,33 @@
                                         <span class="nav-text">Sideline Item List</span>
                                     </a>
                                 </li>
-                                {{-- <li class="has-menu">
-                                    <a class="has-arrow ai-icon" href="{{ route('admin.lunchtime.index') }}"
+                            </ul>
+                        </li>
+                             <li class="has-menu">
+                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="fa-solid fa-clock"></i>
+                                <span class="nav-text">Ingredients</span>
+                            </a>
+                            <ul class="metismenu" id="menu">
+                                <li class="has-menu">
+                                    <a class="has-arrow ai-icon" href="{{ route('admin.ingredients.create') }}"
                                         aria-expanded="false">
-                                        <span class="nav-text">Sidelines List</span>
+                                        <span class="nav-text">Add Ingredients</span>
                                     </a>
-                                </li> --}}
+                                </li>
+                                <li class="has-menu">
+                                    <a class="has-arrow ai-icon" href="{{ route('admin.ingredients.index') }}"
+                                        aria-expanded="false">
+                                        <span class="nav-text">Ingredients Item List</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
-                        {{-- <li class="has-menu">
+
+
+
+                                {{-- <li class="has-menu">
               <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
               <i class="fas fa-external-link-alt"></i>
                 <span class="nav-text">Externals</span>
@@ -314,47 +331,47 @@
                 </li>
               </ul>
             </li> --}}
-                        <li class="has-menu">
-                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                <i class="fas fa-utensils"></i>
-                                <span class="nav-text">Menu</span>
-                            </a>
-                            <ul class="metismenu" id="menu">
                                 <li class="has-menu">
-                                    <a class="has-arrow ai-icon" href="{{ route('admin.menu.create') }}"
-                                        aria-expanded="false">
-                                        <span class="nav-text">Add Menu</span>
+                                    <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                        <i class="fas fa-utensils"></i>
+                                        <span class="nav-text">Menu</span>
                                     </a>
+                                    <ul class="metismenu" id="menu">
+                                        <li class="has-menu">
+                                            <a class="has-arrow ai-icon" href="{{ route('admin.menu.create') }}"
+                                                aria-expanded="false">
+                                                <span class="nav-text">Add Menu</span>
+                                            </a>
+                                        </li>
+                                        <li class="has-menu">
+                                            <a class="has-arrow ai-icon" href="{{ route('admin.menu.index') }}"
+                                                aria-expanded="false">
+                                                <span class="nav-text">Menu List</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li class="has-menu">
-                                    <a class="has-arrow ai-icon" href="{{ route('admin.menu.index') }}"
-                                        aria-expanded="false">
-                                        <span class="nav-text">Menu List</span>
+                                    <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                        <i class="fa-solid fa-list"></i>
+                                        <span class="nav-text">Categories</span>
                                     </a>
+                                    <ul class="metismenu" id="menu">
+                                        <li class="has-menu">
+                                            <a class="has-arrow ai-icon" href="{{ route('admin.category.create') }}"
+                                                aria-expanded="false">
+                                                <span class="nav-text">Add Categories</span>
+                                            </a>
+                                        </li>
+                                        <li class="has-menu">
+                                            <a class="has-arrow ai-icon" href="{{ route('admin.category.index') }}"
+                                                aria-expanded="false">
+                                                <span class="nav-text">Categories List</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                            </ul>
-                        </li>
-                        <li class="has-menu">
-                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                <i class="fa-solid fa-list"></i>
-                                <span class="nav-text">Categories</span>
-                            </a>
-                            <ul class="metismenu" id="menu">
-                                <li class="has-menu">
-                                    <a class="has-arrow ai-icon" href="{{ route('admin.category.create') }}"
-                                        aria-expanded="false">
-                                        <span class="nav-text">Add Categories</span>
-                                    </a>
-                                </li>
-                                <li class="has-menu">
-                                    <a class="has-arrow ai-icon" href="{{ route('admin.category.index') }}"
-                                        aria-expanded="false">
-                                        <span class="nav-text">Categories List</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        {{-- <li class="has-menu">
+                                {{-- <li class="has-menu">
               <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                 <i class="fa-regular fa-image"></i>
                 <span class="nav-text">Galleries</span>
@@ -372,13 +389,13 @@
                 </li>
               </ul>
             </li> --}}
-                        <li class="has-menu">
-                            <a class="has-arrow ai-icon" href="reservation.php" aria-expanded="false">
-                                <i class="fas fa-calendar-check"></i>
-                                <span class="nav-text">Reservation</span>
-                            </a>
-                        </li>
-                        {{-- <li class="has-menu">
+                                <li class="has-menu">
+                                    <a class="has-arrow ai-icon" href="reservation.php" aria-expanded="false">
+                                        <i class="fas fa-calendar-check"></i>
+                                        <span class="nav-text">Reservation</span>
+                                    </a>
+                                </li>
+                                {{-- <li class="has-menu">
               <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
               <i class="fas fa-user-tie"></i>
                 <span class="nav-text">Careers</span>
@@ -401,30 +418,30 @@
                 </li>
               </ul>
             </li> --}}
-                        <li class="has-menu">
-                            <a class="has-arrow ai-icon" href="contacts.php" aria-expanded="false">
-                                <i class="fa-solid fa-address-book"></i>
-                                <span class="nav-text">Contact</span>
-                            </a>
-                        </li>
-                        <li class="has-menu">
-                            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                <i class="fa-solid fa-star"></i>
-                                <span class="nav-text">Reviews</span>
-                            </a>
-                            <ul class="metismenu" id="menu">
                                 <li class="has-menu">
-                                    <a class="has-arrow ai-icon" href="add-review.php" aria-expanded="false">
-                                        <span class="nav-text">Add Reviews</span>
+                                    <a class="has-arrow ai-icon" href="contacts.php" aria-expanded="false">
+                                        <i class="fa-solid fa-address-book"></i>
+                                        <span class="nav-text">Contact</span>
                                     </a>
                                 </li>
                                 <li class="has-menu">
-                                    <a class="has-arrow ai-icon" href=" reviews.php" aria-expanded="false">
-                                        <span class="nav-text">Review List</span>
+                                    <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                        <i class="fa-solid fa-star"></i>
+                                        <span class="nav-text">Reviews</span>
                                     </a>
+                                    <ul class="metismenu" id="menu">
+                                        <li class="has-menu">
+                                            <a class="has-arrow ai-icon" href="add-review.php" aria-expanded="false">
+                                                <span class="nav-text">Add Reviews</span>
+                                            </a>
+                                        </li>
+                                        <li class="has-menu">
+                                            <a class="has-arrow ai-icon" href=" reviews.php" aria-expanded="false">
+                                                <span class="nav-text">Review List</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
-                        </li>
-                    </ul>
                 </div>
             </div>
