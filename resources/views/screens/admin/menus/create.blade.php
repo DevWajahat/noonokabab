@@ -8,7 +8,8 @@
                     <div class="bg-white">
                         <div class="card-body">
                             <h4 class="section-title">Add Menu</h4>
-                            <form action="{{ route('admin.menu.store') }}" method="post" class="mb-0" enctype="multipart/form-data">
+                            <form action="{{ route('admin.menu.store') }}" method="post" class="mb-0"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="mb-3 col-12 col-lg-6">
@@ -62,7 +63,6 @@
                                     <div class="mb-3 col-12 col-lg-6">
                                         <label class="form-label">Upload Image</label>
                                         <input type="file" name="image" id=""
-                                        
                                             class="form-control @error('image') is-invalid @enderror">
                                         @error('image')
                                             <span class="text-danger">{{ $message }}</span>
@@ -70,16 +70,33 @@
                                     </div>
                                     <div class="mb-3 col-12 col-lg-6">
                                         <div class="d-flex justify-content-start align-items-center gap-3">
-                                            <input id="regular" value="1" class="input-checkbox" type="checkbox" name="regular"
-                                                id="">
+                                            <input id="regular" value="1" class="input-checkbox" type="checkbox"
+                                                name="regular" id="">
                                             <label for="regular" class="form-label m-0 cursor-pointer">Regular</label>
                                         </div>
                                     </div>
                                     <div class="mb-3 col-12 col-lg-6">
+                                        <label for="">Add Ingredients</label>
+                                        <select class="js-example-basic-multiple" name="ingredeints[]" multiple="multiple">
+                                            @forelse ($ingredients as  $ingredient)
+                                                <option value="{{ $ingredient->id }}">{{ $ingredient->name }}</option>
+                                            @empty
+                                            @endforelse
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-12 col-lg-6">
+                                        <label for="">Add Sidelines</label>
+                                        <select class="js-example-basic-multiple" name="sidelines[]" multiple="multiple">
+                                            @forelse ($sidelines as  $sideline)
+                                                <option value="{{ $sideline->id }}">{{ $sideline->name }}</option>
+                                            @empty
+                                            @endforelse
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-12 col-lg-6">
                                         <div class="d-flex justify-content-start align-items-center gap-3">
-                                            <input id="lunch-special" class="input-checkbox"
-                                                value="1" type="checkbox" name="lunch_special"
-                                                id="">
+                                            <input id="lunch-special" class="input-checkbox" value="1" type="checkbox"
+                                                name="lunch_special" id="">
                                             <label for="lunch-special" class="form-label m-0 cursor-pointer">Lunch
                                                 Special</label>
                                         </div>
@@ -107,3 +124,10 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
+@endpush

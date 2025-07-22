@@ -67,7 +67,7 @@ Route::prefix('checkout')->controller(CheckoutController::class)->name('checkout
 Route::controller(AuthController::class)->group(function () {
     Route::get('login', 'login_view')->name('login')->middleware('guest');
     Route::post('login', 'login');
-    // Route::get('logout', 'logout')->name('logout');
+    Route::get('logout', 'logout')->name('logout');
     Route::post('register', 'register')->name('register')->middleware('guest');
 });
 
@@ -143,7 +143,7 @@ Route::prefix('admin')->name('admin.')->middleware('CheckAdmin')->group(function
 
 
 });
-    Route::prefix('admin')->name('admin.')->controller(AdminAuthController::class)->group(function () {
+    Route::prefix('admin')->name('admin.')->middleware('guest')->controller(AdminAuthController::class)->group(function () {
         Route::get('register', 'register_view')->name('register');
         Route::post('register', 'register');
         Route::get('login', 'login_view')->name('login');

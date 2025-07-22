@@ -20,7 +20,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-4 col-lg-6 col-sm-6">
+      {{-- <div class="col-xl-4 col-lg-6 col-sm-6">
         <div class="card bg-payment overflow-hidden">
           <div class="card-body">
             <div class="media align-items-center">
@@ -32,14 +32,14 @@
                   <path d="M3.50017 10.4995C1.57551 10.4995 0 12.075 0 13.9997V34.9997C0 36.9243 1.57551 38.5004 3.50017 38.5004H6.99983V10.4995H3.50017Z" fill="white" />
                 </svg> -->
               </span>
-              {{-- <div class="media-body text-end feature-icon-text">
+               <div class="media-body text-end feature-icon-text">
                 <p class="fs-18 text-white mb-2">Impressions</p>
                 <span class="fs-48 text-white font-w600">75</span>
-              </div> --}}
+              </div> 
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
       <div class="col-xl-4 col-lg-6 col-sm-6">
         <div class="card bg-profile">
           <div class="card-body">

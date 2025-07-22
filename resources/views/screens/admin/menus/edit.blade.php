@@ -86,6 +86,24 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 col-12 col-lg-6">
+                                        <label for="">Add Ingredients</label>
+                                        <select class="js-example-basic-multiple" name="ingredeints[]" multiple="multiple">
+                                            @forelse ($ingredients as  $ingredient)
+                                                <option value="{{ $ingredient->id }}" {{ is_array($menuIngredients) && in_array($ingredient->id, $menuIngredients) ? 'selected' : '' }}>{{ $ingredient->name }}</option>
+                                            @empty
+                                            @endforelse
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-12 col-lg-6">
+                                        <label for="">Add Sidelines</label>
+                                        <select class="js-example-basic-multiple" name="sidelines[]" multiple="multiple">
+                                            @forelse ($sidelines as  $sideline)
+                                                <option value="{{ $sideline->id }}" {{ is_array($menuSidelines) && in_array($sideline->id, $menuSidelines) ? 'selected' : '' }}>{{ $sideline->name }}</option>
+                                            @empty
+                                            @endforelse
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-12 col-lg-6">
                                         <div class="d-flex justify-content-start align-items-center gap-3">
                                             <input id="lunch-special" class="input-checkbox" value="1" type="checkbox"
                                                 name="lunch_special" {{ $menu->lunch_time == '1' ? 'checked' : '' }}
@@ -117,3 +135,10 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
+@endpush

@@ -22,12 +22,12 @@ class Menu extends Model
 
     public function sidelines(): BelongsToMany
     {
-        return $this->belongsToMany(Sideline::class);
+        return $this->belongsToMany(Sideline::class)->withTimestamps();
     }
 
     public function ingredients(): BelongsToMany
     {
-        return $this->belongsToMany(Ingredient::class);
+        return $this->belongsToMany(Ingredient::class)->withTimestamps();
     }
     public function orders() : BelongsToMany
     {

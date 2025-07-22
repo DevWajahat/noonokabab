@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMenuRequest;
 use App\Models\Branch;
 use App\Models\Category;
+use App\Models\Ingredient;
 use App\Models\Menu;
+use App\Models\Sideline;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -24,13 +26,21 @@ class MenuController extends Controller
 
         $categories = Category::all();
 
+        $ingredients = Ingredient::all();
+
+        $sidelines = Sideline::all();
+
+
         return view('screens.admin.menus.create', get_defined_vars());
     }
     public function store(StoreMenuRequest $request)
     {
 
 
+
         $branch = Branch::find($request->branch);
+
+
 
 
 
@@ -43,7 +53,7 @@ class MenuController extends Controller
         $regular = isset($request->regular) ? 1 : 0;
 
 
-        $branch->menus()->create([
+        $menu = $branch->menus()->create([
             'name' => $request->menu,
             'description' => $request->description,
             'price' => $request->price,
@@ -52,6 +62,14 @@ class MenuController extends Controller
             'category_id' => $request->category,
             'image' => $imageName
         ]);
+
+        if ($request->has('ingredeints')) {
+            $menu->ingredients()->attach($request->ingredeints);
+        }
+
+        if ($request->has('sidelines')) {
+            $menu->sidelines()->attach($request->sidelines);
+        }
 
         return redirect()->route('admin.menu.index')->with('message', 'Menu Added Successfully.');
     }
@@ -63,6 +81,23 @@ class MenuController extends Controller
         $categories = Category::all();
 
         $menu = Menu::find($id);
+
+         $ingredients = Ingredient::all();
+
+        $sidelines = Sideline::all();
+
+
+        $menuSidelines = [];
+
+        foreach ($menu->sidelines as $sideline) {
+            $menuSidelines[] += $sideline->id;
+        }
+
+          $menuIngredients = [];
+
+        foreach ($menu->ingredients as $ingredient) {
+            $menuIngredients[] += $ingredient->id;
+        }
 
 
         return view('screens.admin.menus.edit', get_defined_vars());
@@ -93,6 +128,17 @@ class MenuController extends Controller
             'category_id' => $request->category,
             'image' => $imageName
         ]);
+
+        if ($request->has('ingredeints')) {
+            $menu->ingredients()->detach();
+
+            $menu->ingredients()->attach($request->ingredeints);
+        }
+
+        if ($request->has('sidelines')) {
+             $menu->sidelines()->detach();
+            $menu->sidelines()->attach($request->sidelines);
+        }
 
 
 
