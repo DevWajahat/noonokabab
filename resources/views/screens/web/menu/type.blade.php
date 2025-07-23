@@ -290,11 +290,23 @@
                 type: 'GET',
                 url: '{{ route('cart.index') }}',
                 success: function(response) {
-                    console.log(response)
-                    if (response.cartCount > 0) {
+                   
+                    if (response.cartCount > 0 && response) {
                         window.location.href = "{{ route('checkout') }}";
                     } else {
                         Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Cart is Empty",
+                        });
+                    }
+                },
+                error: function(XHR, textStatus, errorThrown) {
+
+                    var error = XHR.responseText.split(":")[3]
+                    console.log(error)
+                    if(error == `"Trying to access array offset on value of type null"}`){
+                          Swal.fire({
                             icon: "error",
                             title: "Oops...",
                             text: "Cart is Empty",

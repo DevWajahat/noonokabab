@@ -12,20 +12,29 @@ class CartController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $cart = session()->get('cart');
 
-            $menu = Menu::all();
+            try {
+                $cart = session()->get('cart');
+
+                $menu = Menu::all();
 
 
 
-            $cartCount = count(session()->get('cart')["items"]);
+                $cartCount = count(session()->get('cart')["items"]);
 
-            $cartHtml = view('screens.web.menu.cart-menus', get_defined_vars())->render();
-            return response()->json([
-                'status' =>  true,
-                'cartHtml' => $cartHtml,
-                'cartCount' => $cartCount
-            ], 200);
+                $cartHtml = view('screens.web.menu.cart-menus', get_defined_vars())->render();
+                return response()->json([
+                    'status' =>  true,
+                    'cartHtml' => $cartHtml,
+                    'cartCount' => $cartCount
+                ], 200);
+            } catch (Exception $e) {
+                return response()->json([
+                    'status' =>  false,
+                    'message' => 'Something went wrong',
+                    'error_message' => $e->getMessage(),
+                ], 400);
+            }
         }
     }
     public function store(Request $request)
@@ -169,9 +178,9 @@ class CartController extends Controller
                 unset($cart["items"][$request->product_id]["product_total"]);
 
                 $cart["items"][$request->product_id]["product_total"] = $cart["items"][$request->product_id]["quantity"] *
-                  floatval($cart["items"][$request->product_id]["product"]["price"]);
+                    floatval($cart["items"][$request->product_id]["product"]["price"]);
 
-                  $message = 'ingredient removed Successfully.';
+                $message = 'ingredient removed Successfully.';
             }
         }
 
