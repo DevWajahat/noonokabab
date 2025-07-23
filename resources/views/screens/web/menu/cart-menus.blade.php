@@ -74,5 +74,5 @@
 
 </div>
 <div class="cart-select-checkout-btn">
-    <a href="#" id="checkoutBtn">CHECK OUT</a>
+    <a href="{{ route('checkout') }}" id="checkoutBtn">CHECK OUT</a>
 </div>

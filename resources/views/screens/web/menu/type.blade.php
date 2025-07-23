@@ -290,8 +290,8 @@
                 type: 'GET',
                 url: '{{ route('cart.index') }}',
                 success: function(response) {
-                   
-                    if (response.cartCount > 0 && response) {
+
+                    if (response.cartCount > 0 && response || response == null) {
                         window.location.href = "{{ route('checkout') }}";
                     } else {
                         Swal.fire({

@@ -20,13 +20,17 @@
                                     <div class="selected-dishes-area">
                                         <div class="selected-bg-images">
                                             <img class="bg-img one"
-                                                src="{{ asset('assets/web/images/confirm-pay-frame.png') }}" alt="">
+                                                src="{{ asset('assets/web/images/confirm-pay-frame.png') }}"
+                                                alt="">
                                             <img class="bg-img two"
-                                                src="{{ asset('assets/web/images/confirm-pay-frame.png') }}" alt="">
+                                                src="{{ asset('assets/web/images/confirm-pay-frame.png') }}"
+                                                alt="">
                                             <img class="bg-img three"
-                                                src="{{ asset('assets/web/images/confirm-pay-frame.png') }}" alt="">
+                                                src="{{ asset('assets/web/images/confirm-pay-frame.png') }}"
+                                                alt="">
                                             <img class="bg-img four"
-                                                src="{{ asset('assets/web/images/confirm-pay-frame.png') }}" alt="">
+                                                src="{{ asset('assets/web/images/confirm-pay-frame.png') }}"
+                                                alt="">
                                         </div>
 
                                         @if (isset(session('cart')['items']))
@@ -310,8 +314,8 @@
                                             </button>
                                             <button type="submit" class="pay-btn">
                                                 <div class="">
-                                                    <span
-                                                        class="total-price">${{ isset(session('cart')['subtotal']) ? session('cart')['subtotal'] : '' }}</span>
+                                                    <span class="total-price"
+                                                        id="totalPrice">${{ isset(session('cart')['subtotal']) ? session('cart')['subtotal'] : '' }}</span>
                                                 </div>
                                                 <div class="">
                                                     Pay
@@ -456,7 +460,13 @@
                 url: '{{ url('cart/destroy') . '/' }}' + productId,
                 success: function(response) {
                     console.log(response)
+                    console.log($('#totalPrice'))
+                    console.log(response.cart.subtotal)
+                    $('#totalPrice').html(response.cart.subtotal)
 
+                    if($(".selected-dishes").length == 0){
+                        window.location.href = "{{ route('index') }}"
+                    }
                 }
             })
         })
@@ -482,6 +492,10 @@
 
                     console.log(productId)
                     $(`.price-${productId}`).html(`$${response.product_total}`)
+
+                    console.log($('#totalPrice'))
+                    console.log(response.cart.subtotal)
+                    $('#totalPrice').html(response.cart.subtotal)
                 }
             })
 

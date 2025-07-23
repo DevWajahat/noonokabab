@@ -97,6 +97,7 @@ class CartController extends Controller
                     'price' => $cart["items"][$request->product_id]["product"]["price"],
                     'ingredient_price' => $ingredientPrice,
                     'button' => $cart,
+                    'cart' => $cart
                 ]);
             }
 
@@ -154,7 +155,11 @@ class CartController extends Controller
 
         $this->calculate();
 
-        return response()->json([]);
+        
+
+        return response()->json([
+            'cart' => $cart
+        ]);
     }
 
     public function unsetIngredients(Request $request)
@@ -186,8 +191,11 @@ class CartController extends Controller
 
         $cart = session()->put('cart', $cart);
 
+
+
         return response()->json([
             'status' => true,
+            'cart' => $cart,
             'message' => $message,
 
         ]);

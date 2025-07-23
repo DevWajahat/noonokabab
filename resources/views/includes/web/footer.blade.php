@@ -107,8 +107,8 @@
                 type: 'GET',
                 url: '{{ route('cart.index') }}',
                 success: function(response) {
-                    console.log(response)
-                    if (response.cartCount > 0) {
+
+                    if (response.cartCount > 0 && response || response == null) {
                         window.location.href = "{{ route('checkout') }}";
                     } else {
                         Swal.fire({
@@ -117,10 +117,24 @@
                             text: "Cart is Empty",
                         });
                     }
+                },
+                error: function(XHR, textStatus, errorThrown) {
+
+                    var error = XHR.responseText.split(":")[3]
+                    console.log(error)
+                    if (error == `"Trying to access array offset on value of type null"}`) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Cart is Empty",
+                        });
+                    }
                 }
             })
-        })
 
+
+
+        })
 
         $('.orderRoute').on("click", function() {
             @if (session('location') !== null)
@@ -163,40 +177,54 @@
             var restaurantSelect = $('.restaurantSelect').find(":selected").val()
             var locationType = $('.location-btns.active').attr("data-view");
             console.log(locationType)
+
+
             if (oldValue != restaurantSelect) {
 
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "If you proceed Your Cart Will be Empty",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    cancelButtonText: "Don't Proceed Further",
-                    confirmButtonText: "Proceed"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Cart Empty!",
-                            text: "Your Cart Is Now Empty",
-                            icon: "success"
-                        });
-                        $.ajax({
-                            type: 'GET',
-                            url: '{{ route('cart.flush') }}',
-                            success: function(response) {
-                                cartCount()
-                            }
-                        })
-
-                        orderRoute(restaurantSelect, locationType)
-
-                        cartCount();
-
-                        window.location.reload();
 
 
-                    }
-                });
+                @if (session('cart') !== null && session('cart')['items'] !== null)
+
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "If you proceed Your Cart Will be Empty",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        cancelButtonText: "Don't Proceed Further",
+                        confirmButtonText: "Proceed"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: "Cart Empty!",
+                                text: "Your Cart Is Now Empty",
+                                icon: "success"
+                            });
+                            $.ajax({
+                                type: 'GET',
+                                url: '{{ route('cart.flush') }}',
+                                success: function(response) {
+
+                                }
+                            })
+                            cartCount();
+                            window.location.reload()
+                            orderRoute(restaurantSelect, locationType)
+                        }
+                    });
+                @else
+                    $.ajax({
+                        type: 'GET',
+                        url: '{{ route('cart.flush') }}',
+                        success: function(response) {
+
+                        }
+                    })
+                    cartCount();
+                    orderRoute(restaurantSelect, locationType)
+                @endif
+
+
 
             } else {
                 orderRoute(restaurantSelect, locationType)
