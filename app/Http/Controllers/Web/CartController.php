@@ -151,14 +151,35 @@ class CartController extends Controller
     public function unsetIngredients(Request $request)
     {
 
-        dd($request->all());
+        // dd($request->all());
+
+        $cart = session()->get('cart');
+
+        if (isset($cart['items'][$request->product_id])) {
 
 
+            if ($request->has('sideline')) {
+                unset($cart['items'][$request->product_id]["sidelines"][$request->sideline]);
+                $message = 'sideline removed Successfully.';
+            }
 
+            if ($request->has("ingredients")) {
+                unset($cart["items"][$request->product_id]["ingredients"]);
+                unset($cart["items"][$request->product_id]["ingredientPrice"]);
+                unset($cart["items"][$request->product_id]["product_total"]);
+
+                $cart["items"][$request->product_id]["product_total"] = $cart["items"][$request->product_id]["quantity"] *
+                  floatval($cart["items"][$request->product_id]["product"]["price"]);
+
+                  $message = 'ingredient removed Successfully.';
+            }
+        }
+
+        $cart = session()->put('cart', $cart);
 
         return response()->json([
             'status' => true,
-            'message' => 'ingredient added successfully.',
+            'message' => $message,
 
         ]);
     }

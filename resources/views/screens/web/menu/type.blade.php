@@ -736,7 +736,28 @@
                 })
             } else {
                 var uncheckedValue = $(this).val();
-                // console.log(uncheckedValue)
+                var sideline = $(this).attr("data-sideline");
+                var sidelineName = $(this).attr("name");
+
+                $(`.ingredients-checkbox[name=${sidelineName}]`).prop("checked", false)
+                $(this).prop("checked", false)
+
+
+                var checkedValue = $(this).val();
+                var productId = $(this).attr("data-id")
+                var optionType = $(this).attr("data-typeoption");
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('cart.unset.ingredient') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        product_id: productId,
+                        option: checkedValue,
+                        sideline: sideline,
+                        optiontype: optionType
+                    }
+                })
             }
 
 
@@ -777,39 +798,62 @@
             var productId = $('#IngredientSubmit').attr("data-product-id");
             var specialRequest = $('.ingredient-text-area').val();
             checkedValues = {}
-            $('input[class="extra-ingredients-box"]:checked').each(function() {
-                var key = $(this).val();
-                var price = $(this).attr("data-price");
-                checkedValues[key] = price
+            if ($('input[class="extra-ingredients-box"]').is(":checked")) {
+
+                $('input[class="extra-ingredients-box"]:checked').each(function() {
+                    var key = $(this).val();
+                    var price = $(this).attr("data-price");
+                    checkedValues[key] = price
+                })
+                console.log(checkedValues)
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('cart.store') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        product_id: productId,
+                        ingredients: checkedValues,
+                        special_request: specialRequest
+                    },
+                    success: function(response) {
+                        console.log(response)
+
+                        $('.ingredients-popup-wrap').removeClass("active");
+
+                        Swal.fire({
+                            title: "Ingredients Added Successfully",
+                            icon: "success",
+                            draggable: false
+                        });
+                    }
+                })
+            } else {
+                var productId = $('#IngredientSubmit').attr("data-product-id");
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('cart.unset.ingredient') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        product_id: productId,
+                        ingredients: "0"
+                    },
+                    success: function(response) {
+                        console.log(response)
+
+                        $('.ingredients-popup-wrap').removeClass("active");
+
+                        Swal.fire({
+                            title: "Ingredients Added Successfully",
+                            icon: "success",
+                            draggable: false
+                        });
+                    }
+                })
+            }
 
 
-                // $()
-            })
-
-
-            console.log(checkedValues)
-
-            $.ajax({
-                type: "POST",
-                url: "{{ route('cart.store') }}",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    product_id: productId,
-                    ingredients: checkedValues,
-                    special_request: specialRequest
-                },
-                success: function(response) {
-                    console.log(response)
-
-                    $('.ingredients-popup-wrap').removeClass("active");
-
-                    Swal.fire({
-                        title: "Ingredients Added Successfully",
-                        icon: "success",
-                        draggable: false
-                    });
-                }
-            })
         })
 
         $(document).on("click", ".ddd", function() {

@@ -45,7 +45,7 @@ Route::prefix('cart')->controller(CartController::class)->name('cart.')->group(f
     Route::post('store', 'store')->name('store');
     Route::get('flush', 'flush')->name('flush');
     Route::get('/', 'index')->name('index');
-    Route::post('unset-ingredient', '')->name('unset.ingredient');
+    Route::post('unset-ingredient', 'unsetIngredients')->name('unset.ingredient');
     Route::get('destroy/{id}', 'destroy')->name('destroy');
 });
 
