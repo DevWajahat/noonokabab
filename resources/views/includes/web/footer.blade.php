@@ -131,6 +131,7 @@
 
         })
 
+
         var cartItem = $('#cartItemValue')
 
         $.ajax({

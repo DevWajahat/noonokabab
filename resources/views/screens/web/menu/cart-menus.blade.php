@@ -25,10 +25,9 @@
                                     id="{{ $item['product']['id'] }}">+</button></div>
                         </div>
                         {{-- @dd($item['product']->ingredients) --}}
-                        @if(count($item['product']->ingredients) !=0)
-
-
-                        <button type="button" class="ingredients" id="{{ $item['product']['id'] }}">EXTRA INGREDIENTS</button>
+                        @if (count($item['product']->ingredients) != 0)
+                            <button type="button" class="ingredients" id="{{ $item['product']['id'] }}">EXTRA
+                                INGREDIENTS</button>
                         @endif
                     </div>
                 </div>
@@ -47,7 +46,8 @@
                                 {{-- @dd($key,$option) --}}
                                 <input type="{{ $option->sideline->option == 'Optional' ? 'checkbox' : 'radio' }}"
                                     {{ isset($item['sidelines'][$sideline->name]) && $option->name == $item['sidelines'][$sideline->name] ? 'checked' : '' }}
-                                    value="{{ $option->name }}" {{  $key == 0 && $option->sideline->option == 'Compulsory' ? 'checked data-checked=1' : '' }}
+                                    value="{{ $option->name }}"
+                                    {{ $key == 0 && $option->sideline->option == 'Compulsory' ? 'checked data-check=1' : '' }}
                                     class="ingredients-checkbox sides-checkbox sides-checkbox-optional"
                                     name="side_{{ $option->sideline->id }}"
                                     id="side_{{ $option->sideline->id }}_{{ $option->id }}"
@@ -74,5 +74,5 @@
 
 </div>
 <div class="cart-select-checkout-btn">
-    <a href="{{ route('checkout') }}">CHECK OUT</a>
+    <a href="#" id="checkoutBtn">CHECK OUT</a>
 </div>

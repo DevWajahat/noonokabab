@@ -38,9 +38,9 @@
                                         <a
                                             href="{{ route('menu.type', ['type' => 'takeout', 'branchId' => $branchId]) }}">TAKEOUT</a>
                                     </li>
-                                    <li class=""><button type="button" class="order-via-btn">ORDER VIA</button>
+                                    {{-- <li class=""><button type="button" class="order-via-btn">ORDER VIA</button>
                                     </li>
-                                    <li class="locate-tab "><a href="location.php">LOCATIONS</a></li>
+                                    <li class="locate-tab "><a href="location.php">LOCATIONS</a></li> --}}
                                     <li class="">
                                         <div class="mob-log color-gray"><a href="{{ route('login') }}">LOGIN/SIGNUP</a>
                                         </div>
@@ -276,6 +276,13 @@
 <script>
     $(document).ready(function() {
 
+        @if (session('cart') == null || count(session('cart')['items']) == 0)
+
+            $("#checkoutBtn").ready(function() {
+                $(this).addClass('d-none')
+                console.log($(this))
+            })
+        @endif
 
         $('#checkout').on("click", function(e) {
             e.preventDefault();
@@ -337,32 +344,35 @@
                 $('#locationInputArea').removeClass("d-none")
             }
         })
+        time_calculate();
 
+        function time_calculate() {
 
-        const timeToSeconds = (timeString) => {
-            const parts = timeString.split(':');
-            return (parseInt(parts[0]) * 3600) + (parseInt(parts[1]) * 60) + parseInt(parts[2]);
-        };
+            const timeToSeconds = (timeString) => {
+                const parts = timeString.split(':');
+                return (parseInt(parts[0]) * 3600) + (parseInt(parts[1]) * 60) + parseInt(parts[2]);
+            };
 
-        var LunchTimeFrom = timeToSeconds($('.dish-cart-lunch-time').attr("data-lunch-time-from"));
-        var LunchTimeTo = timeToSeconds($('.dish-cart-lunch-time').attr("data-lunch-time-to"));
+            var LunchTimeFrom = timeToSeconds($('.dish-cart-lunch-time').attr("data-lunch-time-from"));
+            var LunchTimeTo = timeToSeconds($('.dish-cart-lunch-time').attr("data-lunch-time-to"));
 
-        var now = new Date();
-        var currentSeconds = (now.getHours() * 3600) + (now.getMinutes() * 60) + now.getSeconds();
+            var now = new Date();
+            var currentSeconds = (now.getHours() * 3600) + (now.getMinutes() * 60) + now.getSeconds();
 
-        if (currentSeconds < LunchTimeFrom || currentSeconds > LunchTimeTo) {
-
-            $('.dish-cart-lunch-time').prop("disabled", true);
-        } else {
-            var attr = $('.dish-cart-lunch-time').attr("data-cart")
-            if (attr == 'Y') {
+            if (currentSeconds < LunchTimeFrom || currentSeconds > LunchTimeTo) {
 
                 $('.dish-cart-lunch-time').prop("disabled", true);
-
-
             } else {
-                $('.dish-cart-lunch-time').prop("disabled", false);
+                var attr = $('.dish-cart-lunch-time').attr("data-cart")
+                if (attr == 'Y') {
 
+                    $('.dish-cart-lunch-time').prop("disabled", true);
+
+
+                } else {
+                    $('.dish-cart-lunch-time').prop("disabled", false);
+
+                }
             }
 
         }
@@ -473,13 +483,17 @@
                 url: "{{ route('cart.index') }}",
                 success: function(response) {
                     $("#cart-main-container").html(response.cartHtml)
+
+
+                    if ($('.select-cart-area').length == 0) {
+                        $('#checkoutBtn').remove()
+                    }
                 }
             })
         @endif
 
 
-        var selectCartArea = $('.select-cart-area');
-        console.log(selectCartArea)
+
 
 
 
@@ -566,13 +580,9 @@
         $(document).on("click", ".ingredients-popup-cls-btn", function() {
             $('.ingredients-popup-wrap').removeClass("active")
 
-
         })
 
         function cartStore(type, id, quantity) {
-
-
-
 
             $.ajax({
                 type: "POST",
@@ -587,12 +597,42 @@
                     if (response.status) {
                         $("#cart-main-container").html(response.cartHtml)
 
+                        if ($("#cart-main-container").find('.ingredients-checkbox').is(
+                                ":checked")) {
+
+                            var checkbox = $("#cart-main-container").find(
+                                ".ingredients-checkbox[data-check='1']")
+
+                            if (checkbox.length > 0) {
+
+                                var sideline = $(checkbox).attr("data-sideline");
+                                var sidelineName = $(checkbox).attr("name");
+
+                                $(`.ingredients-checkbox[name=${sidelineName}]`).prop("checked",
+                                    false)
+                                $(checkbox).prop("checked", true)
 
 
+                                var checkedValue = $(checkbox).val();
+                                var productId = $(checkbox).attr("data-id")
+                                var optionType = $(checkbox).attr("data-typeoption");
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "{{ route('cart.store') }}",
+                                    data: {
+                                        _token: "{{ csrf_token() }}",
+                                        product_id: productId,
+                                        option: checkedValue,
+                                        sideline: sideline,
+                                        optiontype: optionType
+                                    },
+                                })
+                            }
+                        }
                     }
 
-                    // console.log(response)
-                    // console.log(response)
+
                     var proId = response.button
                     proId = proId.split("-")[1]
                     $('.button-' + proId).prop("disabled", true);
@@ -619,11 +659,19 @@
 
                     $('.button-' + productId).prop("disabled", false);
 
+                    time_calculate()
+
                     cartCount();
                 }
 
             })
             selectCartArea.remove();
+
+            // console.log($('#checkoutBtn'))
+
+            if ($('.select-cart-area').length == 0) {
+                $('#checkoutBtn').addClass('d-none');
+            }
 
 
         })
