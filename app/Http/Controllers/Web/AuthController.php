@@ -8,6 +8,7 @@ use App\Http\Requests\StoreRegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -40,6 +41,18 @@ class AuthController extends Controller
 
         Auth::login($user);
         return redirect()->route('index');
+    }
+
+    public function google_auth()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function google_callback()
+    {
+        $user = Socialite::driver('google')->user();
+
+        dd($user);
     }
 
     public function logout()

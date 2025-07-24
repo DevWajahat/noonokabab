@@ -613,7 +613,7 @@
                     <h1 class="explorer-margin">Sign Up</h1>
                     <div class="social-container">
                         <a href="#" class="social"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
+                        <a href="{{ route('google.auth') }}" class="social"><i class="fa-brands fa-google"></i></a>
                     </div>
                     <p class="emailregistration text-black mb-3">or Create Account</p>
                     <input class="input-fields-form" type="text" name="name" placeholder="Name" />

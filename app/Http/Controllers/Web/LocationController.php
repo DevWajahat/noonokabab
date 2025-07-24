@@ -18,6 +18,7 @@ class LocationController extends Controller
         $location = [
             'branch' => [$branch],
             'type' => $request->type,
+            'address' => $request->address,
             'route' => $route
         ];
 

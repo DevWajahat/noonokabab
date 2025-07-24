@@ -16,54 +16,76 @@
             <div class="container-two">
                 <div class="row">
                     <div class="col-12">
-                        <form action="">
+                        <form action="{{ route('dine.store') }}" method="post">
+                            @csrf
                             <div class="contact-input-area">
                                 <div class="row">
                                     <div class="col-12 col-lg-6">
                                         <div class="client-input">
                                             <label class="pay-detail-sb-title">NAME</label>
-                                            <input class="card-field-input" name="" placeholder="" type="text">
+                                            <input class="card-field-input @error('name') is-invalid @enderror" name="name" placeholder="" type="text">
+
+                                            @error('name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-6">
                                         <div class="client-input">
                                             <label class="pay-detail-sb-title">PHONE NUMBER</label>
-                                            <input class="card-field-input" name="" placeholder="" type="number">
+                                            <input class="card-field-input @error('phone') is-invalid @enderror" name="phone" placeholder="" type="number">
+                                            @error('phone')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-6">
                                         <div class="client-input">
                                             <label class="pay-detail-sb-title">E-MAIL ADDRESS</label>
-                                            <input class="card-field-input" name="" placeholder="" type="email">
+                                            <input class="card-field-input @error('email') is-invalid @enderror" name="email" placeholder="" type="email">
+                                            @error('email')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-6">
                                         <div class="client-input">
                                             <label class="pay-detail-sb-title">PERSONS</label>
-                                            <input class="card-field-input" name="" placeholder="" type="number">
+                                            <input class="card-field-input @error('person') is-invalid @enderror" name="person" placeholder="" type="number">
+
+                                            @error('person')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-6">
                                         <div class="client-input">
                                             <label class="pay-detail-sb-title">VENUE</label>
-                                            <select class="card-field-input form-select"
+                                            <select class="card-field-input form-select" name="venue"
                                                 aria-label="Default select example">
-                                                <option value=""></option>
-                                                <option value="3 PERSON">3 PERSON</option>
-                                                <option value="4 PERSON">4 PERSON</option>
-                                                <option value="5 PERSON">5 PERSON</option>
+                                                @forelse ($branches as $branch)
+                                                    <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                                                @empty
+                                                @endforelse
                                             </select>
+                                            @error('venue')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-6">
                                         <div class="client-input">
                                             <label class="pay-detail-sb-title">DATE</label>
-                                            <input class="card-field-input" name="" placeholder="" type="date">
+                                            <input class="card-field-input @error('date') is-invalid @enderror" name="date" placeholder="" type="date">
+                                            @error('date')
+                                            <span class="text-danger">{{ $message }}</span>
+                                                <span class="text-danger"></span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="submit-btn text-center">
-                                            <button class="mt-4" type="button">BOOK NOW</button>
+                                            <button class="mt-4" type="submit">BOOK NOW</button>
                                         </div>
                                     </div>
                                 </div>
@@ -73,12 +95,11 @@
                 </div>
             </div>
         </section>
-        <x-subscribe-email/>
+        <x-subscribe-email />
     </main>
 @endsection
 
 @push('scripts')
-
     <script>
         document.getElementById('free-qoute').addEventListener('change', function() {
             var quoteForms = document.querySelectorAll('.free-quo');

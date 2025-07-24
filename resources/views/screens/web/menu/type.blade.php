@@ -41,10 +41,13 @@
                                     {{-- <li class=""><button type="button" class="order-via-btn">ORDER VIA</button>
                                     </li>
                                     <li class="locate-tab "><a href="location.php">LOCATIONS</a></li> --}}
+                                    @auth
+                                        @else
                                     <li class="">
                                         <div class="mob-log color-gray"><a href="{{ route('login') }}">LOGIN/SIGNUP</a>
                                         </div>
                                     </li>
+                                    @endauth
 
 
                                 </ul>
@@ -202,9 +205,13 @@
                     </div>
                 </div>
                 <div class=" col-lg-2 col-2 ">
-                    <div class="login-btn">
-                        <a href="{{ route('login') }}">LOGIN/SIGNUP</a>
-                    </div>
+                    @auth
+                        @else
+                        <div class="login-btn">
+                            <a href="{{ route('login') }}">LOGIN/SIGNUP</a>
+                        </div>
+
+                    @endauth
                 </div>
 
             </div>
@@ -646,7 +653,8 @@
 
 
                     var proId = response.button
-                    proId = proId.split("-")[1]
+                    proId = proId.split("-")
+                    proId = proId[1]
                     $('.button-' + proId).prop("disabled", true);
                 }
             })

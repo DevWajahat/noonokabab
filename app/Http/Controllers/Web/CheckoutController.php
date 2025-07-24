@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ingredient;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,10 +22,11 @@ class CheckoutController extends Controller
         $cart = session()->get('cart');
         // dd($request->all());
 
-        $user = auth()->user();
+        $user = auth()->user() == null ? null : auth()->user()->id;
 
-        $order =  $user->orders()->create([
+        $order =  Order::create([
             'name' => $request->name,
+            'user_id' => $user,
             'phone' => $request->phone_number,
             'time' => $request->timeSchedule,
             'schedule' => $request->schedule_date,

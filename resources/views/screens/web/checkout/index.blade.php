@@ -112,12 +112,12 @@
                                                                 <span
                                                                     class="select-dish-price price-{{ $item['product']['id'] }}">${{ $item['product_total'] }}</span>
                                                             </div>
-                                                            <div class="dish-delete-btn-area">
+                                                            {{-- <div class="dish-delete-btn-area"> --}}
                                                                 <button type="button" class="dish-qty-btn dish-dlt-btn"
                                                                     data-id="{{ $item['product']['id'] }}">
                                                                     <i class="fa-solid fa-trash"></i>
                                                                 </button>
-                                                            </div>
+                                                            {{-- </div> --}}
                                                         </div>
                                                     </div>
                                                 @empty
@@ -160,7 +160,8 @@
                                                         <select class="form-select card-field-input"
                                                             aria-label="Default select example" id="scheduleDate"
                                                             name="schedule_date">
-                                                            <option value="" class="today" selected="">
+                                                            <option value="{{ Carbon\Carbon::now() }}" id="currentDate" class="today"
+                                                                selected="">
                                                                 Today
                                                             </option>
                                                         </select>
@@ -198,13 +199,13 @@
                                                             placeholder="Delivery Address" type="text"
                                                             name="Delivery_Address" id="">
                                                         <span class="required-error"></span>
-                                                        <div
+                                                        {{-- <div
                                                             class="d-flex justify-content-start align-items-center gap-2 mt-3">
                                                             <input class="save-add-input" type="checkbox"
                                                                 name="save_address" id="save-address">
                                                             <label class="checkbox-label" for="save-address">Save
                                                                 address to my addresses</label>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-lg-12 col-xl-12 col-xxl-6 address-fields">
@@ -217,13 +218,13 @@
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="card-fields">
-                                                        <div
+                                                        {{-- <div
                                                             class="d-flex justify-content-start align-items-center gap-2 mb-2">
                                                             <input class="save-add-input" type="checkbox"
                                                                 name="Gratuity" id="Gratuity-check">
                                                             <label class="checkbox-label"
                                                                 for="Gratuity-check"><b>Gratuity ($)</b></label>
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="position-relative">
                                                             <div
                                                                 class="Gratuity-area justifycontent-center align-items-center">
@@ -252,14 +253,14 @@
                                                                     <option value="23">23%</option>
                                                                     <option value="24">24%</option>
                                                                 </select>
-                                                                <input class="card-field-input"
+                                                                {{-- <input class="card-field-input"
                                                                     placeholder="or enter your own" type="number"
                                                                     name="gratuity_price" step=".01"
                                                                     id="Gratuity_input">
                                                             </div>
                                                             <input class="card-field-input text-white" disabled
                                                                 type="text" id="gratuity-cash"
-                                                                value="Will tip in cash">
+                                                                value="Will tip in cash"> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -297,15 +298,12 @@
                                                 <span class="billing-price"><strong>$</strong><span
                                                         id="billingPrice">{{ isset(session('cart')['subtotal']) ? session('cart')['subtotal'] : '' }}</span></span>
                                             </div>
-                                            {{-- <div class="billing-inner-area">
-                                                <span class="billing-title">Tax</span>
-                                                <span class="billing-price">$40</span>
-                                            </div> --}}
-                                            <div class="billing-inner-area gratuity-price-area">
+
+                                            {{-- <div class="billing-inner-area gratuity-price-area">
                                                 <span class="billing-title">Gratuity (Thank You!)</span>
                                                 <span class="billing-price"><strong>$</strong><span
                                                         id="gratuityprice"></span></span>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <div
                                             class="pay-btn-area d-flex justify-content-between align-items-center gap-3">
@@ -380,6 +378,11 @@
 <script>
     $(document).ready(function() {
 
+      var currentDate = $('#currentDate').val();
+        currentDate = currentDate.split(" ")[0]
+        // console.log(currentDate)
+        $('#currentDate').val(currentDate)
+
 
         var timeDropDown = $('#timeSchedule')
 
@@ -452,7 +455,7 @@
         }
 
 
-        $(document).on("click", ".dish-dlt-btn ", function() {
+        $(document).on("click", ".dish-dlt-btn", function() {
             $(this).parents(".selected-dishes").remove()
             var productId = $(this).attr("data-id")
             $.ajax({
@@ -464,7 +467,8 @@
                     console.log(response.cart.subtotal)
                     $('#totalPrice').html(response.cart.subtotal)
 
-                    if($(".selected-dishes").length == 0){
+                    console.log(response.cart.items)
+                    if (response.cart.items.length == 0) {
                         window.location.href = "{{ route('index') }}"
                     }
                 }

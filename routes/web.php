@@ -24,12 +24,15 @@ use App\Http\Controllers\Web\LocationController;
 use App\Http\Controllers\Web\MenuController;
 use App\Http\Controllers\Web\StoryController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('contact', [ContactController::class, 'index'])->name('contact');
+Route::post('contact/store', [ContactController::class, 'store'])->name('contact.store');
 Route::get('specials', [SpecialController::class, 'index'])->name('specials');
 Route::get('catering', [CateringController::class, 'index'])->name('catering');
 Route::get('dine-in', [DineController::class, 'index'])->name('dine');
+Route::post('dine-in/store', [DineController::class, 'store'])->name('dine.store');
 
 Route::controller(StoryController::class)->group(function () {
     Route::get('story', 'index')->name('story');
@@ -69,6 +72,15 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
     Route::get('logout', 'logout')->name('logout');
     Route::post('register', 'register')->name('register')->middleware('guest');
+    Route::get('/auth/redirect', function () {
+        return Socialite::driver('google')->redirect();
+    })->name('google.auth');
+
+    Route::get('/auth/callback', function () {
+        $user = Socialite::driver('google')->user();
+
+        // $user->token
+    })->name('google.callback');
 });
 
 Route::post('location', [LocationController::class, 'index'])->name('location');
@@ -138,15 +150,11 @@ Route::prefix('admin')->name('admin.')->middleware('CheckAdmin')->group(function
         Route::get('edit/{id}', 'edit')->name('edit');
         Route::post('update/{id}', 'update')->name('update');
     });
-
-
-
-
 });
-    Route::prefix('admin')->name('admin.')->middleware('guest')->controller(AdminAuthController::class)->group(function () {
-        Route::get('register', 'register_view')->name('register');
-        Route::post('register', 'register');
-        Route::get('login', 'login_view')->name('login');
-        Route::post('login', 'login');
-        Route::get('logout','logout')->name('logout');
-    });
+Route::prefix('admin')->name('admin.')->middleware('guest')->controller(AdminAuthController::class)->group(function () {
+    Route::get('register', 'register_view')->name('register');
+    Route::post('register', 'register');
+    Route::get('login', 'login_view')->name('login');
+    Route::post('login', 'login');
+    Route::get('logout', 'logout')->name('logout');
+});

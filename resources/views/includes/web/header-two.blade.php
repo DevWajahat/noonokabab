@@ -105,7 +105,7 @@
                         </div>
                     @endauth
                     <div class="header-links ">
-                        <a href="{{ route('checkout') }}"><i class="fa-solid fa-basket-shopping"></i></a>
+                        <a href="#" id="checkout"><i class="fa-solid fa-basket-shopping"></i></a>
                         <span id="cartItemValue">0</span>
                     </div>
                     <div class="header-links">

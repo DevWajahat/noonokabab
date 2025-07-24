@@ -53,7 +53,7 @@
                     <span class="text-danger errorRestaurant" style="color:red"></span>
                     <div class="location-input-area" id="locationInputArea">
                         <input placeholder="Enter your location" class="pickupSelect location-select" type="text"
-                            name="" id="cordinate" data-location="takeout">
+                            name="" id="cordinate" value="{{ session('location')['address'] }}" data-location="takeout" >
                         <button id="getLocation" type="button" class="current-location-btn">
                             <i class="fa-solid fa-location-dot"></i>
                         </button>
@@ -176,6 +176,7 @@
             e.preventDefault()
             var restaurantSelect = $('.restaurantSelect').find(":selected").val()
             var locationType = $('.location-btns.active').attr("data-view");
+            var address = $('#cordinate').val()
             console.log(locationType)
 
 
@@ -209,7 +210,7 @@
                             })
                             cartCount();
                             window.location.reload()
-                            orderRoute(restaurantSelect, locationType)
+                            orderRoute(restaurantSelect, locationType,address)
                         }
                     });
                 @else
@@ -221,13 +222,13 @@
                         }
                     })
                     cartCount();
-                    orderRoute(restaurantSelect, locationType)
+                    orderRoute(restaurantSelect, locationType,address)
                 @endif
 
 
 
             } else {
-                orderRoute(restaurantSelect, locationType)
+                orderRoute(restaurantSelect, locationType,address)
 
             }
         })
@@ -244,10 +245,10 @@
 
         }
 
-        function orderRoute(restaurant, location) {
+        function orderRoute(restaurant, location, address) {
 
 
-            if (parseInt($('.location-select').val())) {
+            if (parseInt($('.location-select').val()) && address != '') {
 
 
                 $.ajax({
@@ -257,11 +258,13 @@
                         _token: "{{ csrf_token() }}",
                         location: restaurant,
                         type: location,
+                        address: address
 
                     },
                     success: function(response) {
 
                         console.log(response)
+                         $('.errorRestaurant').remove()
 
                         $('.orderRoute').attr("href", response.location.route)
                         $('.location-popup-wrap').removeClass('active')
@@ -284,9 +287,12 @@
             var restaurantSelect = $('.restaurantSelect').find(':selected').val()
             var pickupSelect = $('.pickupSelect').find(':selected').val()
 
+            var address = $('#cordinate').val();
+
+            console.log(address)
 
 
-            if (parseInt($('.location-select').val())) {
+            if (parseInt($('.location-select').val()) && address !==  '') {
                 var type = $('.location-select').attr("data-content")
                 console.log(type)
 
@@ -297,11 +303,14 @@
                         _token: "{{ csrf_token() }}",
                         location: restaurantSelect,
                         type: type,
+                        address: address
 
                     },
                     success: function(response) {
 
                         console.log(response)
+
+                        $('.errorRestaurant').remove()
 
                         $('.orderRoute').attr("href", response.location.route)
                         $('.location-popup-wrap').removeClass('active')
@@ -310,6 +319,8 @@
                 })
             } else {
                 $('.errorRestaurant').html('Required Value');
+                $('.location-popup-wrap').addClass('active')
+
             }
 
         })
