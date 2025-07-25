@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\CheckAdminAuthentication;
 use App\Http\Middleware\CheckCart;
+use App\Http\Middleware\CheckUserLogin;
 use App\Http\Middleware\OrderMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'CheckAdmin' => CheckAdminAuthentication::class,
             'checkCart' => CheckCart::class,
             'CheckLocation' => OrderMiddleware::class,
+            'CheckUser' => CheckUserLogin::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

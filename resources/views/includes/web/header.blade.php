@@ -95,7 +95,7 @@
                                                     </div>
                                                     @auth
                                                         <div class="header-links ">
-                                                            <a href="#"><i class="fa-solid fa-user"></i>{{ auth()->user()->first_name }}</a>
+                                                            <a href="{{ route('user.index') }}"><i class="fa-solid fa-user"></i>{{ auth()->user()->first_name }}</a>
                                                         </div>
                                                         <div class="header-links ">
                                                             <a href="{{ route('logout') }}"><i class="fa fa-sign-out"

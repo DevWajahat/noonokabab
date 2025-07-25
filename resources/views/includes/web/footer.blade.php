@@ -53,7 +53,7 @@
                     <span class="text-danger errorRestaurant" style="color:red"></span>
                     <div class="location-input-area" id="locationInputArea">
                         <input placeholder="Enter your location" class="pickupSelect location-select" type="text"
-                            name="" id="cordinate" value="{{ session('location')['address'] }}" data-location="takeout" >
+                            name="" id="cordinate" value="{{session('location') !== null ? session('location')['address'] : '' }}" data-location="takeout" >
                         <button id="getLocation" type="button" class="current-location-btn">
                             <i class="fa-solid fa-location-dot"></i>
                         </button>

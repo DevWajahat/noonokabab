@@ -10,7 +10,8 @@ use App\Http\Controllers\Admin\MenuController as AdminMenuController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\SidelineController;
 use App\Http\Controllers\Admin\UserController;
-
+use App\Http\Controllers\User\IndexController as UserIndexController;
+use App\Http\Controllers\User\OrderController as UserOrderController;
 use App\Http\Controllers\Web\SpecialController;
 use App\Http\Controllers\Web\AboutController;
 use App\Http\Controllers\Web\AuthController;
@@ -33,6 +34,7 @@ Route::get('specials', [SpecialController::class, 'index'])->name('specials');
 Route::get('catering', [CateringController::class, 'index'])->name('catering');
 Route::get('dine-in', [DineController::class, 'index'])->name('dine');
 Route::post('dine-in/store', [DineController::class, 'store'])->name('dine.store');
+
 
 Route::controller(StoryController::class)->group(function () {
     Route::get('story', 'index')->name('story');
@@ -72,6 +74,11 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
     Route::get('logout', 'logout')->name('logout');
     Route::post('register', 'register')->name('register')->middleware('guest');
+    Route::get('forgot-password', 'forgot_password_view')->name('forgot_password_view');
+    Route::post('forgot-password/post', 'forgotPasswordPost')->name('forgot_password_post');
+    Route::get('/view/{token}', 'resetpasswordView')->name('password.reset');
+    Route::post('/', 'resetpassword')->name('password.update');
+
     Route::get('/auth/redirect', function () {
         return Socialite::driver('google')->redirect();
     })->name('google.auth');
@@ -81,6 +88,9 @@ Route::controller(AuthController::class)->group(function () {
 
         // $user->token
     })->name('google.callback');
+
+
+    Route::get('reset-password', 'reset-password')->name('reset.password');
 });
 
 Route::post('location', [LocationController::class, 'index'])->name('location');
@@ -151,10 +161,18 @@ Route::prefix('admin')->name('admin.')->middleware('CheckAdmin')->group(function
         Route::post('update/{id}', 'update')->name('update');
     });
 });
+
 Route::prefix('admin')->name('admin.')->middleware('guest')->controller(AdminAuthController::class)->group(function () {
     Route::get('register', 'register_view')->name('register');
     Route::post('register', 'register');
     Route::get('login', 'login_view')->name('login');
     Route::post('login', 'login');
     Route::get('logout', 'logout')->name('logout');
+});
+
+
+Route::prefix('user')->name('user.')->middleware('CheckUser')->group(function () {
+    Route::get('/', [UserIndexController::class, 'index'])->name('index');
+    Route::get('orders', [UserOrderController::class, 'index'])->name('orders');
+    Route::get('order/details/{id}', [UserOrderController::class, 'details'])->name('orders.details');
 });
